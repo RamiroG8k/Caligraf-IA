@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, ScrollView } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
 
@@ -24,8 +23,36 @@ export default function HomeScreen() {
           />
         </View>
       </View>
-      <Text style={[styles.title, { color: '#707070'}, {fontSize: 26}]}>Last anlyses</Text>
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <Text style={[styles.title, { color: '#707070'}, {fontSize: 26}]}>Last Analyses</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+
+        <View style={[styles.card]}>
+          <View style={{height: '40%'}}>
+            <Image style= {{flex: 1, width: '100%', borderTopRightRadius: 25, borderTopLeftRadius: 25}}    
+              source={require('../assets/images/example.jpeg')}
+              />
+          </View>
+          <View style={{height: '60%', width: '100%', padding: 10, backgroundColor: 'rgba(52, 52, 52, 0)',}}>
+            <Text style={[{fontSize: 10 }, {marginBottom: 3}, {color: '#ACACAC'}]}>5 minutes</Text>
+            <Text style={[{fontWeight: 'bold' }, {marginBottom: 5}, {color: '#172A3A'}]}>Title Example</Text>
+            <Text style={[{fontSize: 12}, {color: '#ACACAC'}]}>Lorem ipsum dolor sit, sed etsed do </Text>
+          </View>
+        </View>
+        
+        <View style={[styles.card]}>
+          <View style={{height: '40%'}}>
+            <Image style= {{flex: 1, width: '100%', borderTopRightRadius: 25, borderTopLeftRadius: 25}}    
+              source={require('../assets/images/example.jpeg')}
+              />
+          </View>
+          <View style={{height: '60%', width: '100%', padding: 10, backgroundColor: 'rgba(52, 52, 52, 0)',}}>
+            <Text style={[{fontSize: 10 }, {marginBottom: 3}, {color: '#ACACAC'}]}>5 minutes</Text>
+            <Text style={[{fontWeight: 'bold' }, {marginBottom: 5}, {color: '#172A3A'}]}>Title Example</Text>
+            <Text style={[{fontSize: 12}, {color: '#ACACAC'}]}>Lorem ipsum dolor sit, sed etsed do </Text>
+          </View>
+        </View>
+
+      </View>
     </View>
   );
 }
@@ -52,7 +79,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   infoCard: {
-    height: '20%',
+    height: 120,
     borderRadius: 25,
     flexDirection: 'row',
     backgroundColor: '#F5F5F5',
@@ -68,5 +95,12 @@ const styles = StyleSheet.create({
   img: {
     width: '60%',
     backgroundColor: 'rgba(52, 52, 52, 0)',
+  },
+  card: {
+    width: 165,
+    height: 165,
+    borderRadius: 25,
+    flexDirection: 'column',
+    backgroundColor: '#F5F5F5',
   }
 });
