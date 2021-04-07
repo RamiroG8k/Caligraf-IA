@@ -13,6 +13,10 @@ export type TabHomeParamList = {
   TabHomeScreen: undefined;
 };
 
+export type TabProfileParamList = {
+  TabProfileScreen: undefined;
+};
+
 export type TabOneParamList = {
   TabOneScreen: undefined;
 };

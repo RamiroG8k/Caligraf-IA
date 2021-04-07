@@ -7,10 +7,12 @@ import { StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import HomeScreen from '../screens/HomeScreen';
 
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabHomeParamList } from '../types';
+import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+
+
+import { BottomTabParamList, TabOneParamList, TabProfileParamList, TabHomeParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -37,7 +39,7 @@ export default function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={TabTwoNavigator}
+        component={TabProfileNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-bar-chart-outline" color={color} />,
         }}
@@ -82,17 +84,17 @@ function TabOneNavigator() {
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const TabProfileStack = createStackNavigator<TabProfileParamList>();
 
-function TabTwoNavigator() {
+function TabProfileNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <TabProfileStack.Navigator>
+      <TabProfileStack.Screen
+        name="TabProfileScreen"
+        component={ProfileScreen}
+        options={{ headerTitle: 'Profile & Stats' }}
       />
-    </TabTwoStack.Navigator>
+    </TabProfileStack.Navigator>
   );
 }
 

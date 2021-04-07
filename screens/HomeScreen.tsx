@@ -45,7 +45,7 @@ export default function HomeScreen() {
       <View style={styles.infoCard}>
         <View style={styles.info}>
           <Text style={[{ fontWeight: 'bold' }, { marginBottom: 5 }, { color: '#172A3A' }]}>Title Example</Text>
-          <Text style={[{ fontSize: 12 }, { color: '#ACACAC' }]}>Lorem ipsum dolor sit, sed do eiusmod tempor etsed do </Text>
+          <Text style={[{ fontSize: 12 }, { color: '#ACACAC' }, { flex: 1 }]}>Lorem ipsum dolor sit, sed do eiusmod tempor etsed do </Text>
           <Text style={[{ fontSize: 10 }, { marginTop: 10 }, { color: '#ACACAC' }]}>5 minutes session</Text>
         </View>
         <View style={styles.img}>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   infoCard: {
-    height: 120,
+    height: '20%',
     borderRadius: 25,
     flexDirection: 'row',
     backgroundColor: '#F5F5F5',
