@@ -62,7 +62,7 @@ function TabHomeNavigator() {
       <TabHomeStack.Screen
         name="TabHomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: 'Caligraf IA' }}
+        // options={{ headerShown: false }}
       />
     </TabHomeStack.Navigator>
   );
