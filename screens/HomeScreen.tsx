@@ -40,7 +40,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Week Info</Text>
       <Text style={styles.subtitle}>General stats, Tips & Tricks</Text>
-      <View style={styles.separator} lightColor="#707070" darkColor="#5C5C5C" />
+      <View style={styles.separator} lightColor="#E6E6E6" darkColor="#5C5C5C" />
       <Text style={[styles.title, { color: '#508CA4' }, { fontSize: 26 }]}>Reminder</Text>
       <View style={styles.infoCard}>
         <View style={styles.info}>
@@ -55,7 +55,7 @@ export default function HomeScreen() {
         </View>
       </View>
       <Text style={[styles.title, { color: '#508CA4' }, { fontSize: 26 }]}>Last Analyses</Text>
-      <FlatList data={formatData(DATA, columns)} keyExtractor={item => item.id} renderItem={Card} numColumns={columns} style={{ flex: 1 }} />
+      <FlatList data={formatData(DATA, columns)} keyExtractor={item => item.id} renderItem={Card} numColumns={columns} style={{ flex: 1, margin:-10 }}/>
       {/* <Card /> */}
     </View>
   );
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    paddingBottom: 0,
   },
   title: {
     fontSize: 30,
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginVertical: 15,
+    marginLeft: 10,
     height: 1,
     width: '80%',
   },

@@ -23,10 +23,19 @@ export function Card() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        margin: 10,
         aspectRatio: 1,
         borderRadius: 25,
         flexDirection: 'column',
         backgroundColor: '#F5F5F5',
+        shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 0,
+        // },
+        // shadowOpacity: 0.10,
+        // shadowRadius: 3.5,
+        // elevation: 3,
     },
     imgContainer: {
         height: '40%'
