@@ -6,52 +6,46 @@ import { StyleSheet } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
 
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import TabTwoScreen from '../screens/TabTwoScreen';
 
 
-import { BottomTabParamList, TabOneParamList, TabProfileParamList, TabHomeParamList } from '../types';
+import { BottomTabParamList, TabProfileParamList, TabHomeParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+    const colorScheme = useColorScheme();
 
-  return (
-    <BottomTab.Navigator
-      initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].primary }}>
-      <BottomTab.Screen
-        name="TabHome"
-        component={TabHomeNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-home-outline" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera-outline" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="TabProfile"
-        component={TabProfileNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-bar-chart-outline" color={color} />,
-        }}
-      />
-    </BottomTab.Navigator>
-  );
+    return (
+        <BottomTab.Navigator
+            initialRouteName="TabHome"
+            tabBarOptions={{ activeTintColor: Colors[colorScheme].primary}}>
+            <BottomTab.Screen
+                name="TabHome"
+                component={TabHomeNavigator}
+                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="ios-home-outline" color={color} />, }}
+            />
+            <BottomTab.Screen
+                name="TabTwo"
+                component={TabTwoNavigator}
+                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera-outline" color={color} />, }}
+            />
+            <BottomTab.Screen
+                name="TabProfile"
+                component={TabProfileNavigator}
+                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="ios-bar-chart-outline" color={color} />, }}
+            />
+        </BottomTab.Navigator>
+    );
 }
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-  return <Ionicons size={30} style={styles.icon} {...props} />;
+    return <Ionicons size={30} style={styles.icon} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -59,49 +53,49 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 const TabHomeStack = createStackNavigator<TabHomeParamList>();
 
 function TabHomeNavigator() {
-  return (
-    <TabHomeStack.Navigator>
-      <TabHomeStack.Screen
-        name="TabHomeScreen"
-        component={HomeScreen}
-        options={{ headerTitle: 'Home', headerTitleAlign: 'center' }}
-        // options={{ headerShown: false }}
-      />
-    </TabHomeStack.Navigator>
-  );
+    return (
+        <TabHomeStack.Navigator>
+            <TabHomeStack.Screen
+                name="TabHomeScreen"
+                component={HomeScreen}
+                options={{ headerTitle: 'Home', headerTitleAlign: 'center' }}
+            // options={{ headerShown: false }}
+            />
+        </TabHomeStack.Navigator>
+    );
 }
 
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const TabTwoStack = createStackNavigator<TabTwoParamList>();
 
-function TabOneNavigator() {
-  return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
-      />
-    </TabOneStack.Navigator>
-  );
+function TabTwoNavigator() {
+    return (
+        <TabTwoStack.Navigator>
+            <TabTwoStack.Screen
+                name="TabTwoScreen"
+                component={TabTwoScreen}
+                options={{ headerTitle: 'Analize' }}
+            />
+        </TabTwoStack.Navigator>
+    );
 }
 
 const TabProfileStack = createStackNavigator<TabProfileParamList>();
 
 function TabProfileNavigator() {
-  return (
-    <TabProfileStack.Navigator>
-      <TabProfileStack.Screen
-        name="TabProfileScreen"
-        component={ProfileScreen}
-        options={{ headerTitle: 'Profile & Stats' }}
-      />
-    </TabProfileStack.Navigator>
-  );
+    return (
+        <TabProfileStack.Navigator>
+            <TabProfileStack.Screen
+                name="TabProfileScreen"
+                component={ProfileScreen}
+                options={{ headerTitle: 'Profile & Stats' }}
+            />
+        </TabProfileStack.Navigator>
+    );
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    padding: 5,
-    marginBottom: -3,
-  }
+    icon: {
+        padding: 5,
+        marginBottom: -3,
+    }
 })
