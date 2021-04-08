@@ -17,16 +17,16 @@ export default function App() {
     const Welcome = () => {
         return (
             <SafeAreaProvider style={{ flex: 1, paddingHorizontal: '10%', paddingVertical: '15%', alignItems: 'center', justifyContent: 'flex-end' }}>
-                <View style={{}}>
-                    <View style={{ marginVertical: '20%', aspectRatio: 1, borderRadius: 25, width: '100%' }}>
+                <View style={{ backgroundColor: 'transparent' }}>
+                    <View style={{ marginVertical: '20%', aspectRatio: 1, borderRadius: 25, width: '100%', backgroundColor: 'transparent' }}>
                         <Image style={{ flex: 1, width: '100%', borderRadius: 25 }}
                             source={require('./assets/images/ill.png')} />
                     </View>
-                    <View style={{}}>
+                    <View style={{backgroundColor: 'transparent'}}>
                         <Text style={{ fontWeight: 'bold', fontSize: 32, textAlign: 'center', marginBottom: 15 }}>Caligraf IA analysis Assessment.</Text>
                         <Text style={{ fontSize: 18, textAlign: 'center', lineHeight: 25, color: '#7A7A7A' }}>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: '30%' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: '30%', backgroundColor: 'transparent' }}>
                         <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('REGISTER')} style={styles.button}>
                             <Text style={{ fontSize: 16, textAlign: 'center', fontWeight: 'bold', color: '#383838' }}>Register</Text>
                         </TouchableHighlight>
@@ -42,22 +42,22 @@ export default function App() {
     const LogIn = () => {
         return (
             <SafeAreaProvider style={{ flex: 1, padding: 35, alignItems: 'center' }}>
-                <View style={{ flex: 1, width: '100%' }}>
+                <View style={{ flex: 1, width: '100%', backgroundColor: 'transparent' }}>
                     <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('BACK')} style={styles.icon}>
                         <AntDesign name="back" size={30} color="black" />
                     </TouchableHighlight>
-                    <View style={{}}>
+                    <View style={{ backgroundColor: 'transparent' }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 36, marginBottom: 15 }}>Let's sign you in.</Text>
                         <Text style={{ fontSize: 28, color: '#7A7A7A' }}>Welcome back.</Text>
                         <Text style={{ fontSize: 28, color: '#7A7A7A' }}>You've been missed!.</Text>
                     </View>
 
-                    <View style={{ marginVertical: '20%' }}>
+                    <View style={{ marginVertical: '20%', backgroundColor: 'transparent' }}>
                         <TextInput style={{...styles.input}} placeholder='Phone, email or username'/>
                         <TextInput style={{...styles.input}} placeholder='Password'/>
                     </View>
 
-                    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                    <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: 'transparent' }}>
                         <Text style={{ fontSize: 16, textAlign: 'center', margin: 20, color: '#7A7A7A' }}>Don't have an account? <Text style={{ fontWeight: 'bold' }}>Register.</Text></Text>
                         <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('REGISTER')} style={[styles.button, { width: '100%', justifyContent: 'center' }]}>
                             <Text style={{ fontSize: 16, textAlign: 'center', fontWeight: 'bold', color: '#383838' }}>Sign In</Text>
@@ -71,7 +71,7 @@ export default function App() {
     if (!isLoadingComplete) {
         return null;
     } else {
-        // return (LogIn());
+        return (LogIn());
         return (Welcome());
         return (
             <SafeAreaProvider>
