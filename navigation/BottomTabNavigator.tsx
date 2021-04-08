@@ -38,7 +38,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="TabProfile"
         component={TabProfileNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-bar-chart-outline" color={color} />,

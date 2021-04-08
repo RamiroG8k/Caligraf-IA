@@ -65,9 +65,9 @@ export default function ProfileScreen() {
                     <View style={styles.icon}>
                         <Ionicons size={30} name="ios-home-outline" />
                     </View>
-                    <View style={{ backgroundColor: 'transparent', padding: 10, flex: 1}}>
+                    <View style={{ backgroundColor: 'transparent', flex: 1, marginLeft: 10}}>
                         <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Title</Text>
-                        <Text style={{ fontSize: 14 }}>Lorem ipsum dolor sit a asddam msdsmka asomsd km asoas as</Text>
+                        <Text style={{ fontSize: 14 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
 
     },
     card: {
-        paddingVertical: 10,
-        paddingHorizontal: 30,
+        paddingVertical: 20,
+        paddingHorizontal: 15,
         backgroundColor: '#F5F5F5',
         borderRadius: 20,
     },
@@ -145,5 +145,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 10
     }
 });
