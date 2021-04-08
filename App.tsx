@@ -7,7 +7,7 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 
 import { Text, View } from './components/Themed';
-import { Image, TouchableHighlight, StyleSheet, Dimensions } from 'react-native';
+import { Image, TouchableHighlight, StyleSheet, Dimensions, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function App() {
@@ -43,7 +43,7 @@ export default function App() {
         return (
             <SafeAreaProvider style={{ flex: 1, padding: 35, alignItems: 'center' }}>
                 <View style={{ flex: 1, width: '100%' }}>
-                    <TouchableHighlight onPress={() => alert('BACK')} style={styles.icon}>
+                    <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('BACK')} style={styles.icon}>
                         <AntDesign name="back" size={30} color="black" />
                     </TouchableHighlight>
                     <View style={{}}>
@@ -52,8 +52,9 @@ export default function App() {
                         <Text style={{ fontSize: 28, color: '#7A7A7A' }}>You've been missed!.</Text>
                     </View>
 
-                    <View>
-
+                    <View style={{ marginVertical: '20%' }}>
+                        <TextInput style={{...styles.input}} placeholder='Phone, email or username'/>
+                        <TextInput style={{...styles.input}} placeholder='Password'/>
                     </View>
 
                     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -70,7 +71,7 @@ export default function App() {
     if (!isLoadingComplete) {
         return null;
     } else {
-        return (LogIn());
+        // return (LogIn());
         // return (Welcome());
         return (
             <SafeAreaProvider>
@@ -96,5 +97,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 20,
+    },
+    input: {
+        height: 55,
+        paddingHorizontal: 15,
+        borderRadius: 15,
+        marginBottom: 15,
+        borderColor: '#ACACAC',
+        borderWidth: 1,
+        backgroundColor: '#E6E6E6'
     }
 })
