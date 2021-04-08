@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
         width: '40%',
         color: 'black',
         justifyContent: 'center',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
+        backgroundColor: 'transparent',
     },
     imgContainer: {
         height: '100%',
         width: '60%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
+        backgroundColor: 'transparent',
     },
     img: {
         flex: 1,

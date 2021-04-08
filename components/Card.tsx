@@ -28,14 +28,6 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         flexDirection: 'column',
         backgroundColor: '#F5F5F5',
-        shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 0,
-        // },
-        // shadowOpacity: 0.10,
-        // shadowRadius: 3.5,
-        // elevation: 3,
     },
     imgContainer: {
         height: '40%'
@@ -50,7 +42,7 @@ const styles = StyleSheet.create({
         height: '60%',
         width: '100%',
         padding: 10,
-        backgroundColor: 'rgba(52, 52, 52, 0)',
+        backgroundColor: 'transparent',
     },
     tags: {
         fontSize: 10,

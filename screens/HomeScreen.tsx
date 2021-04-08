@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, ScrollView, FlatList, Image } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
@@ -34,14 +34,26 @@ const columns: number = 2;
 export default function HomeScreen() {
     const formatData = (data: Array<any>, columns: number): Array<any> => {
         while (data.length % columns) {
-            data.push({ id: null, title: null, time: null, image: 'https://pbs.twimg.com/profile_images/497135574243766273/zNjKQH4r.png' });
+            data.push({ empty: true, image: 'https://pbs.twimg.com/profile_images/497135574243766273/zNjKQH4r.png' });
         }
         return data;
     };
 
-    const renderCard = (item: any) => {
+    const emptyCard = (image: string): any => {
         return (
-            <Card {...item}/>
+            <View style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
+                <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
+                    source={{ uri: image }} />
+            </View>
+        );
+    };
+
+    const renderCard = (item: any) => {
+        if (item.empty) {
+            return(emptyCard(item.image));
+        }
+        return (
+            <Card {...item} />
         );
     };
 
@@ -58,7 +70,6 @@ export default function HomeScreen() {
             <FlatList scrollEnabled={false} data={formatData(DATA, columns)}
                 keyExtractor={item => item.id} numColumns={columns}
                 style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
-            {/* <Card /> */}
             <View style={{ alignItems: 'center', marginTop: 30, marginBottom: 60 }}>
                 <Text>Coming Soon...</Text>
             </View>
