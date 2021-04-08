@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, ScrollView, FlatList, Image } from 'react-native';
+import { StyleSheet, ScrollView, FlatList, Image, TouchableHighlight } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
@@ -41,10 +41,10 @@ export default function HomeScreen() {
 
     const emptyCard = (): any => {
         return (
-            <View style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
+            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('ADD')} style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
                 <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
-                    source={require('../assets/images/Plus.jpg')} />
-            </View>
+                    source={require('../assets/images/Plus2.jpg')} />
+            </TouchableHighlight>
         );
     };
 

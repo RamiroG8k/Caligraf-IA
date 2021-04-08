@@ -72,7 +72,7 @@ export default function App() {
         return null;
     } else {
         // return (LogIn());
-        // return (Welcome());
+        return (Welcome());
         return (
             <SafeAreaProvider>
                 <Navigation colorScheme={colorScheme} />
