@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Image, ScrollView, Dimensions, TouchableHighlight, Pressable } from 'react-native';
+import { StyleSheet, Image, ScrollView, Dimensions, TouchableHighlight } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -26,18 +26,9 @@ const DATA = [
     }
 ];
 
-const columns: number = 2;
-
 export default function ProfileScreen() {
-    const formatData = (data: Array<any>, columns: number): Array<any> => {
-        while (data.length % columns) {
-            data.push({ empty: true });
-        }
-        return data;
-    }
-
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.pSection}>
                 <View style={[styles.pPicture, { marginTop: '10%' }]}>
                     <View style={styles.pPictureBorder}>
@@ -61,7 +52,27 @@ export default function ProfileScreen() {
             </View>
             <View>
                 <Text style={styles.title}>Stats</Text>
-                <TouchableOpacity onPress={() => alert('CLICK') } style={[styles.card, { flexDirection: 'row' }, { alignItems: 'center'}]}>
+                <TouchableOpacity activeOpacity={0.4} onPress={() => alert('CLICK') } style={styles.card}>
+                    <View style={styles.icon}>
+                        <Ionicons size={30} name="ios-home-outline" />
+                    </View>
+                    <View style={{ backgroundColor: 'transparent', flex: 1, marginLeft: 10}}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Title</Text>
+                        <Text style={{ fontSize: 14 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity activeOpacity={0.4} onPress={() => alert('CLICK') } style={styles.card}>
+                    <View style={styles.icon}>
+                        <Ionicons size={30} name="ios-home-outline" />
+                    </View>
+                    <View style={{ backgroundColor: 'transparent', flex: 1, marginLeft: 10}}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Title</Text>
+                        <Text style={{ fontSize: 14 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt u</Text>
+                    </View>
+                </TouchableOpacity>
+                
+                <TouchableOpacity activeOpacity={0.4} onPress={() => alert('CLICK') } style={styles.card}>
                     <View style={styles.icon}>
                         <Ionicons size={30} name="ios-home-outline" />
                     </View>
@@ -71,8 +82,10 @@ export default function ProfileScreen() {
                     </View>
                 </TouchableOpacity>
             </View>
-
-        </View>
+            <View style={{ alignItems: 'center', marginTop: 30, marginBottom: 60, backgroundColor: 'transparent' }}>
+                <Text>Coming Soon...</Text>
+            </View>
+        </ScrollView>
     );
 }
 
@@ -81,6 +94,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         paddingBottom: 0,
+        backgroundColor: 'white'
     },
     pSection: {
         alignItems: 'center',
@@ -115,13 +129,16 @@ const styles = StyleSheet.create({
         color: '#6CB286',
     },
     stats: {
-
+        
     },
     card: {
+        alignItems: 'center',
+        flexDirection: 'row', 
         paddingVertical: 20,
         paddingHorizontal: 15,
         backgroundColor: '#F5F5F5',
         borderRadius: 20,
+        marginBottom: 15,
     },
     buttonGroup: {
         marginTop: 20,

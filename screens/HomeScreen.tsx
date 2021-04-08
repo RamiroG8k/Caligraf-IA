@@ -34,23 +34,23 @@ const columns: number = 2;
 export default function HomeScreen() {
     const formatData = (data: Array<any>, columns: number): Array<any> => {
         while (data.length % columns) {
-            data.push({ empty: true, image: 'https://pbs.twimg.com/profile_images/497135574243766273/zNjKQH4r.png' });
+            data.push({ empty: true });
         }
         return data;
     };
 
-    const emptyCard = (image: string): any => {
+    const emptyCard = (): any => {
         return (
             <View style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
                 <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
-                    source={{ uri: image }} />
+                    source={require('../assets/images/Plus.jpg')} />
             </View>
         );
     };
 
     const renderCard = (item: any) => {
         if (item.empty) {
-            return(emptyCard(item.image));
+            return(emptyCard());
         }
         return (
             <Card {...item} />
@@ -62,7 +62,7 @@ export default function HomeScreen() {
             <Text style={[styles.strongText, styles.title]}>Week Info</Text>
             <Text style={styles.info}>General stats, Tips & Tricks</Text>
             <View style={styles.separator} lightColor="#E6E6E6" darkColor="#5C5C5C" />
-            <View style={{ marginBottom: 20 }}>
+            <View style={{ marginBottom: 20, backgroundColor: 'transparent' }}>
                 <Text style={[styles.strongText, styles.subtitle]}>Reminder</Text>
                 <Banner />
             </View>
@@ -70,7 +70,7 @@ export default function HomeScreen() {
             <FlatList scrollEnabled={false} data={formatData(DATA, columns)}
                 keyExtractor={item => item.id} numColumns={columns}
                 style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
-            <View style={{ alignItems: 'center', marginTop: 30, marginBottom: 60 }}>
+            <View style={{ alignItems: 'center', marginTop: 30, marginBottom: 60, backgroundColor: 'transparent' }}>
                 <Text>Coming Soon...</Text>
             </View>
         </ScrollView>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         paddingBottom: 0,
+        backgroundColor: 'white'
     },
     strongText: {
         marginLeft: 10,
