@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { Text, View } from '../components/Themed';
 import { Image, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View } from '../components/Themed';
 
 const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
     return (

@@ -8,9 +8,10 @@ import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture
 
 export default function LoginScreen({ navigation }: { navigation: any }, props: any) {
     return (
+        <SafeAreaProvider>
             <SafeAreaView style={{ alignItems: 'center' }}>
                 <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
-                    <View style={{ flex: 1, width: '100%' }}>
+                    <View style={{ flex: 1, backgroundColor: 'transparent' }}>
                         <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
                             <AntDesign name="back" size={30} color="black" />
                         </TouchableOpacity>
@@ -27,13 +28,14 @@ export default function LoginScreen({ navigation }: { navigation: any }, props: 
 
                         <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: 'transparent' }}>
                             <Text style={{ fontSize: 16, textAlign: 'center', margin: 20, color: '#7A7A7A' }}>Don't have an account? <Text style={{ fontWeight: 'bold' }}>Register.</Text></Text>
-                            <TouchableOpacity onPress={() => alert('REGISTER')} style={[styles.button, { width: '100%', justifyContent: 'center' }]}>
+                            <TouchableOpacity onPress={() => navigation.navigate('MainScreen')} style={[styles.button, { width: '100%', justifyContent: 'center' }]}>
                                 <Text style={{ fontSize: 16, textAlign: 'center', fontWeight: 'bold', color: '#383838' }}>Sign In</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
             </SafeAreaView>
+        </SafeAreaProvider>
     );
 };
 

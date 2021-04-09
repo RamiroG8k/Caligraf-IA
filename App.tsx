@@ -9,10 +9,18 @@ import Navigation from './navigation';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import { AppLoading } from 'expo';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
+
+const MainTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: 'white'
+    },
+};
 
 export default function App() {
     const isLoadingComplete = useCachedResources();
@@ -22,13 +30,23 @@ export default function App() {
         return null;
     }
 
+    const MainComponent = () => {
+        return (
+            <SafeAreaProvider>
+                <Navigation  colorScheme={colorScheme} />
+                <StatusBar />
+            </SafeAreaProvider>
+        );
+    }
+
     return (
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="Welcome" component={WelcomeScreen} />
-                    <Stack.Screen name="Login" component={LoginScreen} />
-                    <Stack.Screen name="Register" component={LoginScreen} />
-                </Stack.Navigator>
-            </NavigationContainer>
+        <NavigationContainer independent={true} theme={MainTheme}>
+            <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Welcome" component={WelcomeScreen} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="Register" component={LoginScreen} />
+                <Stack.Screen name="MainScreen" component={MainComponent} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
