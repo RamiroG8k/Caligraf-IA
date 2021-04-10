@@ -11,6 +11,8 @@ import LoginScreen from './screens/LoginScreen';
 import { AppLoading } from 'expo';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import BottomTabNavigator from './navigation/BottomTabNavigator';
+import RegisterScreen from './screens/RegisterScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,20 +35,25 @@ export default function App() {
     const MainComponent = () => {
         return (
             <SafeAreaProvider>
-                <Navigation  colorScheme={colorScheme} />
+                <Navigation colorScheme={colorScheme} />
                 <StatusBar />
             </SafeAreaProvider>
         );
     }
 
     return (
+
         <NavigationContainer independent={true} theme={MainTheme}>
             <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Register" component={LoginScreen} />
-                <Stack.Screen name="MainScreen" component={MainComponent} />
+                <Stack.Screen name="Register" component={RegisterScreen} />
+                {/* <Stack.Screen name="MainScreen" component={MainComponent} /> */}
             </Stack.Navigator>
         </NavigationContainer>
+
+        // <NavigationContainer independent={true} theme={MainTheme}>
+        //     <BottomTabNavigator />
+        // </NavigationContainer>
     );
 }

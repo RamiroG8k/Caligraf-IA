@@ -6,21 +6,21 @@ import { Text, View } from '../components/Themed';
 
 const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
     return (
-        <SafeAreaProvider style={{ flex: 1, padding: '10%', alignItems: 'center', justifyContent: 'flex-end' }}>
+        <SafeAreaProvider style={{ flex: 1, padding: '10%', alignItems: 'center' }}>
             <SafeAreaView>
                 <View style={styles.imgContainer}>
                     <Image style={styles.img}
                         source={require('../assets/images/ill.png')} />
                 </View>
-                <View style={{ backgroundColor: 'transparent' }}>
+                <View>
                     <Text style={styles.title}>Caligraf IA analysis Assessment.</Text>
                     <Text style={styles.subtitle}>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: '30%', backgroundColor: 'transparent' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginVertical: '30%' }}>
                     <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.button, { backgroundColor: '#E0E0E0' }]} >
                         <Text style={[styles.btnText, { color: '#383838' }]}>Register</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Login')} style={[styles.button, { backgroundColor: '#383838' }]}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Login')} style={[styles.button, { backgroundColor: '#869EDB' }]}>
                         <Text style={[styles.btnText, { color: '#FFFFFF' }]}>Sign In</Text>
                     </TouchableOpacity>
                 </View>
@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
         borderRadius: 25,
         width: '100%',
-        backgroundColor: 'transparent',
     },
     img: {
         flex: 1,
         width: '100%',
     },
     title: {
+        color: '#385EBC',
         fontWeight: 'bold',
         fontSize: 32,
         textAlign: 'center',
