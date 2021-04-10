@@ -32,28 +32,21 @@ export default function App() {
         return null;
     }
 
-    const MainComponent = () => {
-        return (
-            <SafeAreaProvider>
-                <Navigation colorScheme={colorScheme} />
-                <StatusBar />
-            </SafeAreaProvider>
-        );
-    }
+    // return (
+    //     <SafeAreaProvider>
+    //         <Navigation colorScheme={colorScheme} />
+    //         {/* <StatusBar /> */}
+    //     </SafeAreaProvider>
+    // );
 
     return (
-
         <NavigationContainer independent={true} theme={MainTheme}>
             <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Register" component={RegisterScreen} />
-                {/* <Stack.Screen name="MainScreen" component={MainComponent} /> */}
+                <Stack.Screen name="MainScreen" component={Navigation} />
             </Stack.Navigator>
         </NavigationContainer>
-
-        // <NavigationContainer independent={true} theme={MainTheme}>
-        //     <BottomTabNavigator />
-        // </NavigationContainer>
     );
 }
