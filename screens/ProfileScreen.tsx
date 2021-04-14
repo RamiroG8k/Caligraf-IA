@@ -50,7 +50,7 @@ export default function ProfileScreen() {
                     </View>
                 </View>
             </View>
-            <View>
+            <View style={{ backgroundColor: 'transparent' }}>
                 <Text style={styles.title}>Stats</Text>
                 <TouchableOpacity activeOpacity={0.4} onPress={() => alert('CLICK') } style={styles.card}>
                     <View style={styles.icon}>
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     },
     pSection: {
         alignItems: 'center',
+        backgroundColor: 'transparent',
     },
     pPicture: {
         borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     pInfo: {
+        backgroundColor: 'transparent',
         alignItems: 'center',
         paddingTop: '5%',
         margin: '10%',
