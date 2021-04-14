@@ -3,13 +3,18 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StyleSheet, TextInput, Dimensions, Keyboard, SafeAreaView } from 'react-native';
+import { StyleSheet, TextInput, Dimensions, Keyboard, SafeAreaView, ActivityIndicator } from 'react-native';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useState } from 'react';
+
+// Instances
+import { loginInstance } from '../services/instances';
 
 const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [userFlag, setUserFlag] = useState(false);
 
     const emailHandler = (text: string) => {
         setEmail(text);
@@ -21,28 +26,22 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
 
     const handleForm = () => {
         if (email && password) {
-            getCredentials({email, password});
+            getCredentials();
             return;
         }
         alert('Please Verify your info');
     };
 
-    const getCredentials = (form: any) => {
-        fetch("https://edp-api.herokuapp.com/auth/login",
-            {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(form)
-            }
-        ).then((response: any) => {
-            response.json();
-        }).then((data: any) => {
-            console.log(data);
-        }).catch((error: any) => {
-            alert(error.message)
-        })
+    const getCredentials = async () => {
+        setUserFlag(true);
+        await loginInstance.post('/auth/login', {email, password})
+            .then((response: any) => {
+                alert(`Hi ${response.data.user.name}!`)
+                // console.log(response.data);
+            }).catch((error: any) => {
+                alert(error.message);
+            });
+            setUserFlag(false);
     };
 
     return (
@@ -71,12 +70,14 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
                         </View>
                     </View>
 
+                    { userFlag ? <ActivityIndicator size="large" color="tomato" style={{ marginBottom: '-10%' }}></ActivityIndicator> : null }
+
                     <View style={{ padding: 10, marginTop: '25%' }}>
                         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                             <Text style={styles.info}>Don't have an account? <Text style={styles.label}> Register.</Text></Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={handleForm} style={styles.button}>
-                            <Text style={[styles.label, { textAlign: 'center' }]}>Sign In</Text>
+                            <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Sign In</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
         padding: 15,
         width: '100%',
         justifyContent: 'center',
-        backgroundColor: '#E6E6E6',
+        backgroundColor: '#869EDB',
         borderRadius: 15,
     },
     icon: {
