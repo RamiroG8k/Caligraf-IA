@@ -17,7 +17,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
                         </TouchableOpacity>
                         <View>
                             <Text style={styles.title}>Create Account.</Text>
-                            <Text style={styles.subtitle}>Sign up to get Started!.</Text>
+                            <Text style={styles.subtitle}>Sign up to get Started.</Text>
                         </View>
                     </View>
 
@@ -25,16 +25,16 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={[styles.formGroup, { width: '48%' }]}>
                                 <Text style={[styles.label, { marginLeft: 5 }]}>Name</Text>
-                                <TextInput style={styles.input} placeholder='Phone, email or username' />
+                                <TextInput style={styles.input}/>
                             </View>
                             <View style={[styles.formGroup, { width: '48%' }]}>
                                 <Text style={[styles.label, { marginLeft: 5 }]}>Last Name</Text>
-                                <TextInput style={styles.input} placeholder='Phone, email or username' />
+                                <TextInput style={styles.input}/>
                             </View>
                         </View>
                         <View style={styles.formGroup}>
                             <Text style={[styles.label, { marginLeft: 5 }]}>Your Email</Text>
-                            <TextInput style={styles.input} placeholder='Phone, email or username' />
+                            <TextInput style={styles.input} placeholder='username@example.com' />
                         </View>
                         <View style={styles.formGroup}>
                             <Text style={[styles.label, { marginLeft: 5 }]}>Password</Text>

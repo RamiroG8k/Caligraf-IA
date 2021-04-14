@@ -17,7 +17,7 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
                     <Text style={styles.subtitle}>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginVertical: '30%' }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.button, { backgroundColor: '#E0E0E0' }]} >
+                    <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.button, { backgroundColor: '#E6E6E6' }]} >
                         <Text style={[styles.btnText, { color: '#383838' }]}>Register</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Login')} style={[styles.button, { backgroundColor: '#869EDB' }]}>
