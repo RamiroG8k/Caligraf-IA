@@ -5,41 +5,81 @@ import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, TextInput, Dimensions, Keyboard, SafeAreaView } from 'react-native';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { useState } from 'react';
 
 const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const emailHandler = (text: string) => {
+        setEmail(text);
+    };
+
+    const pwdHandler = (text: string) => {
+        setPassword(text);
+    };
+
+    const handleForm = () => {
+        if (email && password) {
+            getCredentials({email, password});
+            return;
+        }
+        alert('Please Verify your info');
+    };
+
+    const getCredentials = (form: any) => {
+        fetch("https://edp-api.herokuapp.com/auth/login",
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form)
+            }
+        ).then((response: any) => {
+            response.json();
+        }).then((data: any) => {
+            console.log(data);
+        }).catch((error: any) => {
+            alert(error.message)
+        })
+    };
+
     return (
         <SafeAreaProvider style={{ flex: 1, margin: '10%', alignItems: 'center' }}>
             <SafeAreaView>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} >
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
-                        <AntDesign name="back" size={30} color="black" />
-                    </TouchableOpacity>
                     <View>
-                        <Text style={styles.title}>Let's sign you in.</Text>
-                        <Text style={styles.subtitle}>Welcome back.</Text>
-                        <Text style={styles.subtitle}>You've been missed!.</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
+                            <AntDesign name="back" size={30} color="black" />
+                        </TouchableOpacity>
+                        <View>
+                            <Text style={styles.title}>Let's sign you in.</Text>
+                            <Text style={styles.subtitle}>Welcome back.</Text>
+                            <Text style={styles.subtitle}>You've been missed!.</Text>
+                        </View>
                     </View>
-                </View>
 
-                <View style={{ marginVertical: 50 }}>
-                    <View style={styles.formGroup}>
-                        <Text style={[styles.label, { marginLeft: 5 }]}>Your Email</Text>
-                        <TextInput style={styles.input} placeholder='Phone, email or username' />
+                    <View style={{ marginVertical: 50 }}>
+                        <View style={styles.formGroup}>
+                            <Text style={[styles.label, { marginLeft: 5 }]}>Your Email</Text>
+                            <TextInput onChangeText={emailHandler} style={styles.input} placeholder='Phone, email or username' />
+                        </View>
+                        <View style={styles.formGroup}>
+                            <Text style={[styles.label, { marginLeft: 5 }]}>Password</Text>
+                            <TextInput onChangeText={pwdHandler} style={styles.input} secureTextEntry={true} placeholder='* * * * * * * *' />
+                        </View>
                     </View>
-                    <View style={styles.formGroup}>
-                        <Text style={[styles.label, { marginLeft: 5 }]}>Password</Text>
-                        <TextInput style={styles.input} secureTextEntry={true} placeholder='* * * * * * * *' />
+
+                    <View style={{ padding: 10, marginTop: '25%' }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                            <Text style={styles.info}>Don't have an account? <Text style={styles.label}> Register.</Text></Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleForm} style={styles.button}>
+                            <Text style={[styles.label, { textAlign: 'center' }]}>Sign In</Text>
+                        </TouchableOpacity>
                     </View>
-                </View>
-                <View style={{ padding: 10, marginTop: '25%' }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                        <Text style={styles.info}>Don't have an account? <Text style={styles.label}> Register.</Text></Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('MainScreen')} style={styles.button}>
-                        <Text style={[styles.label, { textAlign: 'center' }]}>Sign In</Text>
-                    </TouchableOpacity>
-                </View>
+
                 </TouchableWithoutFeedback>
             </SafeAreaView>
         </SafeAreaProvider>
