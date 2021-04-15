@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import { Text, View } from '../components/Themed';
 import { AntDesign } from '@expo/vector-icons';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StyleSheet, TextInput, Dimensions, Keyboard, SafeAreaView, ActivityIndicator } from 'react-native';
-import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { StyleSheet, Dimensions, Keyboard, ActivityIndicator } from 'react-native';
+import { ScrollView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useState } from 'react';
 
 // Instances
 import { loginInstance } from '../services/instances';
+import { InputField } from '../components/InputField';
 
 const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
     const [email, setEmail] = useState('');
@@ -34,56 +34,47 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
 
     const getCredentials = async () => {
         setUserFlag(true);
-        await loginInstance.post('/auth/login', {email, password})
+        await loginInstance.post('/auth/login', { email, password })
             .then((response: any) => {
                 alert(`Hi ${response.data.user.name}!`)
                 // console.log(response.data);
             }).catch((error: any) => {
                 alert(error.message);
             });
-            setUserFlag(false);
+        setUserFlag(false);
     };
 
     return (
-        <SafeAreaProvider style={{ flex: 1, margin: '10%', alignItems: 'center' }}>
-            <SafeAreaView>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} >
+        <TouchableWithoutFeedback style={{ padding: '10%' }} onPress={Keyboard.dismiss} accessible={false} >
+            <ScrollView style={{ width: '100%' }}>
+                <View>
+                    <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
+                        <AntDesign name="back" size={30} color="black" />
+                    </TouchableOpacity>
                     <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
-                            <AntDesign name="back" size={30} color="black" />
-                        </TouchableOpacity>
-                        <View>
-                            <Text style={styles.title}>Let's sign you in.</Text>
-                            <Text style={styles.subtitle}>Welcome back.</Text>
-                            <Text style={styles.subtitle}>You've been missed!.</Text>
-                        </View>
+                        <Text style={styles.title}>Let's sign you in.</Text>
+                        <Text style={styles.subtitle}>Welcome back.</Text>
+                        <Text style={styles.subtitle}>You've been missed!.</Text>
                     </View>
+                </View>
+                <View style={{ marginVertical: '15%' }}>
+                    <InputField label="Your Email" placeholder="email@example.com" />
+                    <InputField label="Password" secure={true} placeholder="* * * * * * * *" />
+                </View>
 
-                    <View style={{ marginVertical: 50 }}>
-                        <View style={styles.formGroup}>
-                            <Text style={[styles.label, { marginLeft: 5 }]}>Your Email</Text>
-                            <TextInput onChangeText={emailHandler} style={styles.input} placeholder='Phone, email or username' />
-                        </View>
-                        <View style={styles.formGroup}>
-                            <Text style={[styles.label, { marginLeft: 5 }]}>Password</Text>
-                            <TextInput onChangeText={pwdHandler} style={styles.input} secureTextEntry={true} placeholder='* * * * * * * *' />
-                        </View>
-                    </View>
+                <ActivityIndicator size="large" color="#869EDB" style={{ marginBottom: '-10%' }}></ActivityIndicator>
+                {userFlag ? <ActivityIndicator size="large" color="#869EDB" style={{ marginBottom: '-10%' }}></ActivityIndicator> : null}
 
-                    { userFlag ? <ActivityIndicator size="large" color="tomato" style={{ marginBottom: '-10%' }}></ActivityIndicator> : null }
-
-                    <View style={{ padding: 10, marginTop: '25%' }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                            <Text style={styles.info}>Don't have an account? <Text style={styles.label}> Register.</Text></Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={handleForm} style={styles.button}>
-                            <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Sign In</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                </TouchableWithoutFeedback>
-            </SafeAreaView>
-        </SafeAreaProvider>
+                <View style={{ marginVertical: '30%'}}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                        <Text style={styles.info}>Don't have an account? <Text style={[styles.label, { fontFamily: 'Montserrat-Bold' }]}> Register.</Text></Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleForm} style={styles.button}>
+                        <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Sign In</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        </TouchableWithoutFeedback>
     );
 };
 
@@ -105,32 +96,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginVertical: 20,
     },
-    input: {
-        height: 55,
-        paddingHorizontal: 15,
-        borderRadius: 15,
-        marginBottom: 15,
-        borderColor: '#E6E6E6',
-        borderWidth: 1,
-        backgroundColor: '#F5F5F5',
-        marginTop: 5,
-    },
     label: {
         fontSize: 16,
-        fontWeight: 'bold',
         color: '#383838',
-    },
-    formGroup: {
-        marginBottom: 10,
     },
     title: {
-        color: '#383838',
-        fontWeight: 'bold',
+        fontFamily: 'Montserrat-Bold',
         fontSize: 36,
         marginBottom: 15,
     },
     subtitle: {
-        fontSize: 28,
+        fontSize: 26,
         color: '#7A7A7A',
     },
     info: {

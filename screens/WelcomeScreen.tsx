@@ -4,7 +4,7 @@ import { Text, View } from '../components/Themed';
 
 const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
     return (
-        <View style={{ flex: 1, padding: '10%', alignItems: 'center' }}>
+        <View style={{ flex: 1, padding: '10%', alignItems: 'center', justifyContent: 'space-between'}}>
             <View style={styles.imgContainer}>
                 <Image style={styles.img}
                     source={require('../assets/images/ill.png')} />
@@ -42,18 +42,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 16,
         color: '#385EBC',
-        fontSize: 32,
+        fontSize: 30,
     },
     subtitle: {
         fontFamily: 'Montserrat',
         textAlign: 'center',
         color: '#7A7A7A',
         lineHeight: 25,
-        fontSize: 18,
+        fontSize: 16,
     },
     buttonGroup: {
         justifyContent: 'space-around',
-        marginVertical: '10%',
+        marginVertical: '5%',
         flexDirection: 'row',
     },
     button: {
