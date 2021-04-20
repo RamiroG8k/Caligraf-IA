@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Text, View } from '../components/Themed';
 import { AntDesign } from '@expo/vector-icons';
 import { StyleSheet, Dimensions, Keyboard, ActivityIndicator } from 'react-native';
-import { ScrollView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useState } from 'react';
 
 // Instances
@@ -34,46 +34,44 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
 
     const getCredentials = async () => {
         setUserFlag(true);
+
         await loginInstance.post('/auth/login', { email, password })
             .then((response: any) => {
-                alert(`Hi ${response.data.user.name}!`)
-                // console.log(response.data);
+                // alert(`Hi ${response.data.user.name}!`)
+                navigation.navigate('Root')
             }).catch((error: any) => {
-                alert(error.message);
+                alert(error.response.data.message);
             });
         setUserFlag(false);
     };
 
     return (
         <TouchableWithoutFeedback style={{ padding: '10%' }} onPress={Keyboard.dismiss} accessible={false} >
-            <ScrollView style={{ width: '100%' }}>
+            <View>
+                <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
+                    <AntDesign name="back" size={30} color="black" />
+                </TouchableOpacity>
                 <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
-                        <AntDesign name="back" size={30} color="black" />
-                    </TouchableOpacity>
-                    <View>
-                        <Text style={styles.title}>Let's sign you in.</Text>
-                        <Text style={styles.subtitle}>Welcome back.</Text>
-                        <Text style={styles.subtitle}>You've been missed!.</Text>
-                    </View>
+                    <Text style={styles.title}>Let's sign you in.</Text>
+                    <Text style={styles.subtitle}>Welcome back.</Text>
+                    <Text style={styles.subtitle}>You've been missed!.</Text>
                 </View>
-                <View style={{ marginVertical: '15%' }}>
-                    <InputField label="Your Email" placeholder="email@example.com" />
-                    <InputField label="Password" secure={true} placeholder="* * * * * * * *" />
-                </View>
+            </View>
+            <View style={{ marginVertical: '15%' }}>
+                <InputField change={emailHandler} label="Your Email" placeholder="email@example.com" />
+                <InputField change={pwdHandler} label="Password" secureTextEntry={true} placeholder="* * * * * * * *" />
+            </View>
 
-                <ActivityIndicator size="large" color="#869EDB" style={{ marginBottom: '-10%' }}></ActivityIndicator>
-                {userFlag ? <ActivityIndicator size="large" color="#869EDB" style={{ marginBottom: '-10%' }}></ActivityIndicator> : null}
+            {userFlag ? <ActivityIndicator size="large" color="#869EDB" style={{ marginBottom: '-10%' }}></ActivityIndicator> : null}
 
-                <View style={{ marginVertical: '30%'}}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                        <Text style={styles.info}>Don't have an account? <Text style={[styles.label, { fontFamily: 'Montserrat-Bold' }]}> Register.</Text></Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleForm} style={styles.button}>
-                        <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Sign In</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
+            <View style={{ marginVertical: '30%' }}>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                    <Text style={styles.info}>Don't have an account? <Text style={[styles.label, { fontFamily: 'Montserrat-Bold' }]}> Register.</Text></Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleForm} style={styles.button}>
+                    <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Sign In</Text>
+                </TouchableOpacity>
+            </View>
         </TouchableWithoutFeedback>
     );
 };

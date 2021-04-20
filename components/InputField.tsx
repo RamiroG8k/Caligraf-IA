@@ -1,20 +1,30 @@
 import * as React from 'react';
 
 import { StyleSheet } from 'react-native';
-import { Text, TextInput, View, InputProps } from './Themed';
+import { View, Text, TextInput, InputProps } from './Themed';
+import { FieldError } from 'react-hook-form';
 
-export function InputField(props: any): any {
+interface Props extends InputProps {
+    name?: string;
+    label?: string;
+    change: any;
+    error?: FieldError | undefined;
+}
+
+export function InputField(props: Props): any {
+    const { label, error, ...inputProps } = props;
+
     return (
-        <View style={styles.formGroup}>
-            <Text style={styles.label}>{props.label}</Text>
-            <TextInput style={styles.input} secureTextEntry={props.secure} placeholder={props.placeholder ? props.placeholder : null}/>
+        <View style={styles.container}>
+            {label && <Text style={styles.label}>{label}</Text>}
+            <TextInput onChangeText={props.change} autoCapitalize="none" style={styles.input} {...inputProps}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    formGroup: {
-        
+    container: {
+
     },
     label: {
         fontSize: 16,
@@ -24,8 +34,10 @@ const styles = StyleSheet.create({
     input: {
         height: 55,
         borderRadius: 15,
-        borderWidth: 1,
         marginBottom: 15,
         paddingHorizontal: 15,
     },
+    textError: {
+
+    }
 });
