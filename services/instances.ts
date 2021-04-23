@@ -7,3 +7,4 @@ export const loginInstance = Axios.create({
         'Content-Type': 'application/json',
     }
 });
+
