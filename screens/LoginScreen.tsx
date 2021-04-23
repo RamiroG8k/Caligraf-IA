@@ -37,8 +37,8 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
 
         await loginInstance.post('/auth/login', { email, password })
             .then((response: any) => {
-                // alert(`Hi ${response.data.user.name}!`)
-                navigation.navigate('Root')
+                alert(`Hi ${response.data.user.name}!`)
+                // navigation.navigate('Root')
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });
