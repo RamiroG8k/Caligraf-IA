@@ -31,7 +31,7 @@ const DATA = [
 
 const columns: number = 2;
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }: { navigation: any }, props: any) {
     const formatData = (data: Array<any>, columns: number): Array<any> => {
         while (data.length % columns) {
             data.push({ empty: true });
@@ -41,7 +41,7 @@ export default function HomeScreen() {
 
     const emptyCard = (): any => {
         return (
-            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('ADD')} style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
+            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => navigation.navigate('TabTwoScreen')} style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
                 <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
                     source={require('../assets/images/Plus2.jpg')} />
             </TouchableHighlight>
@@ -58,7 +58,7 @@ export default function HomeScreen() {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Text style={[styles.strongText, styles.title]}>Week Info</Text>
             <Text style={styles.info}>General stats, Tips & Tricks</Text>
             <View style={styles.separator} lightColor="#E6E6E6" darkColor="#5C5C5C" />
@@ -79,22 +79,21 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 20,
+        padding: '5%',
+        paddingTop: '20%',
         paddingBottom: 0,
-        backgroundColor: 'white'
     },
     strongText: {
         marginLeft: 10,
-        marginBottom: 15,
-        fontWeight: 'bold',
+        marginBottom: 12,
+        fontFamily: 'Montserrat-Bold',
     },
     title: {
-        fontSize: 30,
+        fontSize: 32,
         color: Colors.light.primary,
     },
     subtitle: {
-        fontSize: 26,
+        fontSize: 28,
         color: Colors.light.secondary,
     },
     info: {

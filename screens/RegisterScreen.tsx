@@ -43,7 +43,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
     return (
         <TouchableWithoutFeedback style={{ padding: '10%' }} onPress={Keyboard.dismiss} accessible={false} >
             <View style={{ marginBottom: '10%' }}>
-                <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.icon}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.icon}>
                     <AntDesign name="back" size={30} color="black" />
                 </TouchableOpacity>
                 <View>

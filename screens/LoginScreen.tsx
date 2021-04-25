@@ -1,17 +1,18 @@
+// Common Modules
 import * as React from 'react';
 import { useState } from 'react';
-import { AntDesign } from '@expo/vector-icons';
-
-import { Text, View } from '../components/Themed';
 import { StyleSheet, Dimensions, Keyboard, ActivityIndicator } from 'react-native';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
+// Components
+import { Text, View } from '../components/Themed';
+import { InputField } from '../components/InputField';
 // Instances
 import { loginInstance } from '../services/instances';
-import { InputField } from '../components/InputField';
-
-// Form imports
+// Hooks
 import { useForm, Controller } from 'react-hook-form';
+// Others
+import { AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type FormData = {
     email: string;
@@ -30,8 +31,8 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
     const getCredentials = async (form: FormData) => {
         setUserFlag(true);
         await loginInstance.post('/auth/login', form)
-            .then((response: any) => {
-                alert(`Hi ${response.data.user.name}!`)
+            .then(async (response: any) => {
+                await AsyncStorage.setItem('@token', response.data.token);
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });
@@ -42,7 +43,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
         <TouchableWithoutFeedback style={{ padding: '10%' }} onPress={Keyboard.dismiss} accessible={false} >
             <View style={{ marginBottom: '10%' }}>
                 <View style={styles.icon}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Welcome')} style={styles.touchable}>
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.touchable}>
                         <AntDesign name="back" size={30} color="black" />
                     </TouchableOpacity>
                 </View>
@@ -95,7 +96,6 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * 0.15,
         height: Dimensions.get('window').width * 0.15,
         backgroundColor: '#F5F5F5',
-
         marginVertical: 20,
     },
     inputContainer: {

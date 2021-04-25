@@ -22,7 +22,7 @@ export default function BottomTabNavigator() {
     return (
         <BottomTab.Navigator
             initialRouteName="TabHome"
-            tabBarOptions={{ activeTintColor: Colors[colorScheme].primary}}>
+            tabBarOptions={{ activeTintColor: Colors[colorScheme].primary }}>
             <BottomTab.Screen
                 name="TabHome"
                 component={TabHomeNavigator}
@@ -58,8 +58,8 @@ function TabHomeNavigator() {
             <TabHomeStack.Screen
                 name="TabHomeScreen"
                 component={HomeScreen}
-                options={{ headerTitle: 'Home', headerTitleAlign: 'center' }}
-            // options={{ headerShown: false }}
+                // options={{ headerTitle: 'Home', headerTitleAlign: 'center' }}
+                options={{ headerShown: false }}
             />
         </TabHomeStack.Navigator>
     );
@@ -73,7 +73,8 @@ function TabTwoNavigator() {
             <TabTwoStack.Screen
                 name="TabTwoScreen"
                 component={TabTwoScreen}
-                options={{ headerTitle: 'Analize' }}
+                options={{ headerShown: false }}
+            // options={{ headerTitle: 'Analize' }}
             />
         </TabTwoStack.Navigator>
     );
