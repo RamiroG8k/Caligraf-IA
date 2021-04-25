@@ -88,7 +88,8 @@ function TabProfileNavigator() {
             <TabProfileStack.Screen
                 name="TabProfileScreen"
                 component={ProfileScreen}
-                options={{ headerTitle: 'Profile & Stats' }}
+                options={{ headerShown: false }}
+                // options={{ headerTitle: 'Profile & Stats' }}
             />
         </TabProfileStack.Navigator>
     );

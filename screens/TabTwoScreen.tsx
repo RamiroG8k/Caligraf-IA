@@ -27,7 +27,7 @@ const DATA = [
 
 export default function TabTwoScreen() {
 
-    const tipsToShoot: any = DATA.map((item: any) => {
+    const tipsToShot: any = DATA.map((item: any) => {
         return (
             <InfoCard icon={item.icon} phrase={item.text} />
         );
@@ -41,7 +41,7 @@ export default function TabTwoScreen() {
             </View>
             <View style={styles.tipsContainer}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {tipsToShoot}
+                    {tipsToShot}
                 </ScrollView>
             </View>
             <View style={{ marginVertical: '5%' }}>
