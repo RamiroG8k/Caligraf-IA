@@ -2,8 +2,8 @@ import * as React from 'react';
 import { StyleSheet, Image, ScrollView, TouchableHighlight } from 'react-native';
 
 import { Text, View } from '../components/Themed';
-import Layout from '../constants/Layout';
 import StatsCard from '../components/StatsCard';
+import Layout from '../constants/Layout';
 
 const DATA = [
     {
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#E6E6E6',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 15,
         padding: 12,
         margin: 10,
         width: '45%',

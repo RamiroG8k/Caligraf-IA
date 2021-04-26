@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 
 import { Text, View } from '../components/Themed';
 import InfoCard from '../components/InfoCard';
 import Layout from '../constants/Layout';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
 
 const DATA = [
     {
@@ -25,7 +25,7 @@ const DATA = [
     },
 ];
 
-export default function TabTwoScreen() {
+export default function AnalizeScreen() {
 
     const tipsToShot: any = DATA.map((item: any) => {
         return (

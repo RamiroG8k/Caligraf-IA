@@ -9,10 +9,9 @@ import useColorScheme from '../hooks/useColorScheme';
 
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import AnalizeScreen from '../screens/AnalizeScreen';
 
-
-import { BottomTabParamList, TabProfileParamList, TabHomeParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, TabProfileParamList, TabHomeParamList, TabAnallizeNavigator } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -20,23 +19,16 @@ export default function BottomTabNavigator() {
     const colorScheme = useColorScheme();
 
     return (
-        <BottomTab.Navigator
-            initialRouteName="TabHome"
+        <BottomTab.Navigator initialRouteName="Home"
             tabBarOptions={{ activeTintColor: Colors[colorScheme].primary }}>
-            <BottomTab.Screen
-                name="TabHome"
-                component={TabHomeNavigator}
-                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="ios-home-outline" color={color} />, }}
+            <BottomTab.Screen name="Home" component={TabHomeNavigator}
+                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="home-outline" color={color} /> }}
             />
-            <BottomTab.Screen
-                name="TabTwo"
-                component={TabTwoNavigator}
-                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera-outline" color={color} />, }}
+            <BottomTab.Screen name="Analyze" component={TabAnalizeNavigator}
+                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="camera-outline" color={color} /> }}
             />
-            <BottomTab.Screen
-                name="TabProfile"
-                component={TabProfileNavigator}
-                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="ios-bar-chart-outline" color={color} />, }}
+            <BottomTab.Screen name="Profile" component={TabProfileNavigator}
+                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="bar-chart-outline" color={color} /> }}
             />
         </BottomTab.Navigator>
     );
@@ -55,27 +47,19 @@ const TabHomeStack = createStackNavigator<TabHomeParamList>();
 function TabHomeNavigator() {
     return (
         <TabHomeStack.Navigator>
-            <TabHomeStack.Screen
-                name="TabHomeScreen"
-                component={HomeScreen}
-                // options={{ headerTitle: 'Home', headerTitleAlign: 'center' }}
-                options={{ headerShown: false }}
-            />
+            <TabHomeStack.Screen name="TabHomeScreen"
+                component={HomeScreen} options={{ headerShown: false }} />
         </TabHomeStack.Navigator>
     );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const TabTwoStack = createStackNavigator<TabAnallizeNavigator>();
 
-function TabTwoNavigator() {
+function TabAnalizeNavigator() {
     return (
         <TabTwoStack.Navigator>
-            <TabTwoStack.Screen
-                name="TabTwoScreen"
-                component={TabTwoScreen}
-                options={{ headerShown: false }}
-            // options={{ headerTitle: 'Analize' }}
-            />
+            <TabTwoStack.Screen name="TabTwoScreen"
+                component={AnalizeScreen} options={{ headerShown: false }} />
         </TabTwoStack.Navigator>
     );
 }
@@ -85,19 +69,14 @@ const TabProfileStack = createStackNavigator<TabProfileParamList>();
 function TabProfileNavigator() {
     return (
         <TabProfileStack.Navigator>
-            <TabProfileStack.Screen
-                name="TabProfileScreen"
-                component={ProfileScreen}
-                options={{ headerShown: false }}
-                // options={{ headerTitle: 'Profile & Stats' }}
-            />
+            <TabProfileStack.Screen name="TabProfileScreen"
+                component={ProfileScreen} options={{ headerShown: false }} />
         </TabProfileStack.Navigator>
     );
 }
 
 const styles = StyleSheet.create({
     icon: {
-        padding: 5,
-        marginBottom: -3,
+        marginBottom: -10,
     }
 })
