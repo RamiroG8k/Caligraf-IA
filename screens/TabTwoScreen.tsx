@@ -29,7 +29,7 @@ export default function TabTwoScreen() {
 
     const tipsToShot: any = DATA.map((item: any) => {
         return (
-            <InfoCard icon={item.icon} phrase={item.text} />
+            <InfoCard key={item.id} icon={item.icon} phrase={item.text} />
         );
     });
 

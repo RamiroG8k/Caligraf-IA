@@ -30,7 +30,7 @@ export default function ProfileScreen() {
 
     const availableStats: any = DATA.map((item: any) => {
         return (
-            <StatsCard icon={item.icon} title={item.title} phrase={item.text} />
+            <StatsCard key={item.id} icon={item.icon} title={item.title} phrase={item.text} />
         );
     });
 

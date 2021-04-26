@@ -1,20 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
+import { Text, View } from '../components/Themed';
 
 const Card = (props: any) => {
     return (
         <View style={styles.container}>
             <View style={styles.imgContainer}>
-                <Image style={styles.img}
-                    source={{uri: props.image }}
-                />
+                <Image style={styles.img} source={{uri: props.image }} />
             </View>
-            <View style={styles.info}>
-                <View style={styles.tags}>
-                    <Text>{props.time} minutes</Text>
+            <View style={styles.infoContainer}>
+                <View style={styles.tagsContainer}>
+                    <View style={styles.tag}>
+                        <Text style={{ fontSize: 10 }}>{props.time} minutes</Text>
+                    </View>
                 </View>
-                <Text style={[{ fontWeight: 'bold' }, { marginBottom: 5 }, { color: '#172A3A' }]}>{props.title}</Text>
-                <Text style={[{ fontSize: 12 }, { color: '#ACACAC' }]}>Lorem ipsum dolor sit, sed etsed do </Text>
+                <Text style={[{ fontFamily: 'Montserrat-Bold' }, { marginBottom: 5 }]}>{props.title}</Text>
+                <Text style={{ fontSize: 12, color: '#999999' }}>Lorem ipsum dolor sit, sed etsed do </Text>
             </View>
         </View>
     );
@@ -25,29 +26,28 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 10,
         aspectRatio: 1,
-        borderRadius: 25,
+        borderRadius: 25, 
+        overflow: 'hidden',
         flexDirection: 'column',
-        backgroundColor: '#F5F5F5',
     },
     imgContainer: {
         height: '40%'
     },
     img: {
         flex: 1,
-        width: '100%',
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
     },
-    info: {
+    infoContainer: {
         height: '60%',
-        width: '100%',
         padding: 10,
-        backgroundColor: 'transparent',
     },
-    tags: {
-        fontSize: 10,
+    tagsContainer: {
         marginBottom: 3,
-        color: '#ACACAC',
+    },
+    tag: {
+        borderRadius: 25,
+        paddingVertical: 2,
+        paddingHorizontal: 5,
+        backgroundColor: 'tomato'
     }
 });
 
