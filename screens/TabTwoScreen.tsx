@@ -34,17 +34,17 @@ export default function TabTwoScreen() {
     });
 
     return (
-        <View style={styles.container}>
-            <View style={{ marginVertical: '5%' }}>
+        <View transparent={true} style={styles.container}>
+            <View transparent={true} style={{ marginVertical: '5%' }}>
                 <Text style={[styles.strongText, styles.title]}>Getting Started</Text>
                 <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
             </View>
-            <View style={styles.tipsContainer}>
+            <View transparent={true} style={styles.tipsContainer}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {tipsToShot}
                 </ScrollView>
             </View>
-            <View style={{ marginVertical: '5%' }}>
+            <View transparent={true} style={{ marginVertical: '5%' }}>
                 <Text style={[styles.strongText, styles.subtitle]}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>

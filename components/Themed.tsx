@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { Text as DefaultText, View as DefaultView, TextInput as DefaultTextInput } from 'react-native';
+import {
+    Text as DefaultText,
+    View as DefaultView,
+    TextInput as DefaultTextInput
+} from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -11,16 +15,13 @@ export function useThemeColor(
     const theme = useColorScheme();
     const colorFromProps = props[theme];
 
-    if (colorFromProps) {
-        return colorFromProps;
-    } else {
-        return Colors[theme][colorName];
-    }
+    return colorFromProps ? colorFromProps : Colors[theme][colorName];
 }
 
 type ThemeProps = {
     lightColor?: string;
     darkColor?: string;
+    transparent?: boolean;
 };
 
 export type TextProps = ThemeProps & DefaultText['props'];
@@ -38,12 +39,13 @@ export function TextInput(props: InputProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
     const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+
     return <DefaultTextInput style={[{ backgroundColor, color, fontFamily: 'Montserrat' }, style]} {...otherProps} />;
 }
 
 export function View(props: ViewProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
-    const backgroundColor = useThemeColor({ light: darkColor, dark: lightColor }, 'background')
+    const backgroundColor = props.transparent ? 'transparent' : useThemeColor({ light: lightColor, dark: darkColor }, 'background')
 
     return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }

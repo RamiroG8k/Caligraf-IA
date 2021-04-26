@@ -10,7 +10,7 @@ const Card = (props: any) => {
             </View>
             <View style={styles.infoContainer}>
                 <View style={styles.tagsContainer}>
-                    <View lightColor="#474747" darkColor="#E0E0E0" style={styles.tag}>
+                    <View lightColor="#E0E0E0" darkColor="#474747" style={styles.tag}>
                         <Text style={{ fontSize: 10 }}>{props.time} %</Text>
                     </View>
                 </View>

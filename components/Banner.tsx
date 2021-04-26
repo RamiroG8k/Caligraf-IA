@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { Text, View } from '../components/Themed';
 
-export function Banner() {
+const Banner = (props: any) => {
     return (
         <View style={styles.container}>
             <View style={[styles.infoContainer, { justifyContent: 'space-between' } ]}>
@@ -41,3 +41,5 @@ const styles = StyleSheet.create({
         width: '100%',
     }
 });
+
+export default Banner;

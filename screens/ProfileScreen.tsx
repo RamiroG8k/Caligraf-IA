@@ -36,16 +36,16 @@ export default function ProfileScreen() {
 
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-            <View style={{ alignItems: 'center' }}>
+            <View transparent={true} style={{ alignItems: 'center' }}>
                 <View style={[styles.picture, { marginTop: '10%' }]}>
                     <View style={styles.pictureBorder}>
                         <Image style={styles.picture} source={require('../assets/images/profile.jpg')} />
                     </View>
                 </View>
-                <View style={{ alignItems: 'center', margin: '10%' }}>
+                <View transparent={true} style={{ alignItems: 'center', margin: '10%' }}>
                     <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>@Username</Text>
                     <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>first.example@hotmail.com</Text>
-                    <View style={styles.buttonGroup}>
+                    <View transparent={true} style={styles.buttonGroup}>
                         <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('Log out')} style={styles.button}>
                             <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Log Out</Text>
                         </TouchableHighlight>
@@ -55,14 +55,14 @@ export default function ProfileScreen() {
                     </View>
                 </View>
             </View>
-            <View>
-                <View style={{ marginVertical: '5%' }}>
+            <View transparent={true}>
+                <View transparent={true} style={{ marginVertical: '5%' }}>
                     <Text style={styles.title}>Stats</Text>
                     <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
                 </View>
                 {availableStats}
             </View>
-            <View style={{ alignItems: 'center', marginTop: 10, marginBottom: '30%' }}>
+            <View transparent={true} style={{ alignItems: 'center', marginTop: 10, marginBottom: '30%' }}>
                 <Text>Coming Soon...</Text>
             </View>
         </ScrollView>

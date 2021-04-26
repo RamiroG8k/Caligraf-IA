@@ -4,7 +4,7 @@ import { StyleSheet, ScrollView, FlatList, Image, TouchableHighlight } from 'rea
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
 import Card from '../components/Card';
-import { Banner } from '../components/Banner';
+import Banner from '../components/Banner';
 
 const DATA = [
     {
@@ -32,6 +32,7 @@ const DATA = [
 const columns: number = 2;
 
 export default function HomeScreen({ navigation }: { navigation: any }, props: any) {
+
     const formatData = (data: Array<any>, columns: number): Array<any> => {
         while (data.length % columns) {
             data.push({ empty: true });
@@ -41,7 +42,7 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
 
     const emptyCard = (): any => {
         return (
-            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => navigation.navigate('TabTwoScreen')} style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
+            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => navigation.navigate('TabTwo')} style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
                 <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
                     source={require('../assets/images/Plus2.jpg')} />
             </TouchableHighlight>
@@ -49,28 +50,35 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
     };
 
     const renderCard = (item: any) => {
-        if (item.empty) {
-            return(emptyCard());
-        }
-        return (
-            <Card {...item} />
-        );
+        return item.empty ? emptyCard() : <Card {...item} />
     };
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            <Text style={[styles.strongText, styles.title]}>Week Info</Text>
-            <Text style={styles.info}>General stats, Tips & Tricks</Text>
-            <View style={styles.separator} lightColor="#E6E6E6" darkColor="#5C5C5C" />
-            <View style={{ marginBottom: 20, backgroundColor: 'transparent' }}>
-                <Text style={[styles.strongText, styles.subtitle]}>Reminder</Text>
+            <View transparent={true}>
+                <View transparent={true} style={{ marginVertical: '5%' }}>
+                    <Text style={styles.title}>Week Info</Text>
+                    <Text style={styles.info}>General stats, Tips & Tricks</Text>
+                </View>
+                <View style={styles.separator} lightColor="#E6E6E6" darkColor="#5C5C5C" />
+            </View>
+            <View transparent={true}>
+                <View transparent={true} style={{ marginVertical: '5%' }}>
+                    <Text style={styles.subtitle}>Reminder</Text>
+                    <Text style={styles.info}>General stats, Tips & Tricks</Text>
+                </View>
                 <Banner />
             </View>
-            <Text style={[styles.strongText, styles.subtitle]}>Last Analyses</Text>
-            <FlatList scrollEnabled={false} data={formatData(DATA, columns)}
-                keyExtractor={item => item.id} numColumns={columns}
-                style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
-            <View style={{ alignItems: 'center', marginTop: 30, marginBottom: 60, backgroundColor: 'transparent' }}>
+            <View transparent={true}>
+                <View transparent={true} style={{ marginVertical: '5%' }}>
+                    <Text style={styles.subtitle}>Last Analyses</Text>
+                    <Text style={styles.info}>General stats, Tips & Tricks</Text>
+                </View>
+                <FlatList scrollEnabled={false} data={formatData(DATA, columns)}
+                    keyExtractor={item => item.id} numColumns={columns}
+                    style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
+            </View>
+            <View transparent={true} style={{ alignItems: 'center', marginTop: '10%', marginBottom: '30%' }}>
                 <Text>Coming Soon...</Text>
             </View>
         </ScrollView>
@@ -83,17 +91,18 @@ const styles = StyleSheet.create({
         paddingTop: '20%',
         paddingBottom: 0,
     },
-    strongText: {
+    title: {
+        fontSize: 32,
         marginLeft: 10,
         marginBottom: 12,
         fontFamily: 'Montserrat-Bold',
-    },
-    title: {
-        fontSize: 32,
         color: Colors.light.primary,
     },
     subtitle: {
-        fontSize: 28,
+        fontSize: 26,
+        marginLeft: 10,
+        marginBottom: 12,
+        fontFamily: 'Montserrat-Bold',
         color: Colors.light.secondary,
     },
     info: {
@@ -101,9 +110,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     separator: {
-        marginVertical: 15,
         marginLeft: 10,
-        height: 1,
         width: '80%',
+        height: 1,
     },
 });
