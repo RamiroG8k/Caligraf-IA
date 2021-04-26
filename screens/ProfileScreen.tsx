@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, Image, ScrollView, TouchableHighlight } from 'react-native';
+import { StyleSheet, Image, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import StatsCard from '../components/StatsCard';
 import Layout from '../constants/Layout';
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DATA = [
     {
@@ -27,12 +29,37 @@ const DATA = [
 ];
 
 export default function ProfileScreen() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [userInfo, setUserInfo] = useState<Object | null | any>(null);
 
     const availableStats: any = DATA.map((item: any) => {
         return (
             <StatsCard key={item.id} icon={item.icon} title={item.title} phrase={item.text} />
         );
     });
+
+    const toTitleCase = (phrase: string) => {
+        return phrase
+            .toLowerCase()
+            .split(' ')
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
+
+    useEffect(() => {
+        AsyncStorage.getItem('info').then((info: any) => {
+            setUserInfo(JSON.parse(info));
+            setIsLoading(false);
+        });
+    }, [])
+
+    if (isLoading) {
+        return (
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#BCDCC8" style={{ marginVertical: '15%' }}></ActivityIndicator>
+            </View>
+        );
+    }
 
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
@@ -43,8 +70,8 @@ export default function ProfileScreen() {
                     </View>
                 </View>
                 <View transparent={true} style={{ alignItems: 'center', margin: '10%' }}>
-                    <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>@Username</Text>
-                    <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>first.example@hotmail.com</Text>
+                    <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>{toTitleCase(userInfo.name)}</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>{userInfo.email}</Text>
                     <View transparent={true} style={styles.buttonGroup}>
                         <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('Log out')} style={styles.button}>
                             <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Log Out</Text>

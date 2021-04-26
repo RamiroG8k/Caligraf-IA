@@ -34,9 +34,8 @@ const ShotScreen = ({ navigation }: { navigation: any }, props: any) => {
         );
     }
 
-    const handlePhraseScanned = async (picture: any) => {
-
-    };
+    // const handlePhraseScanned = async (picture: any) => {
+    // };
 
     const takeShot = async () => {
         const photo = await ref.current.takePictureAsync()

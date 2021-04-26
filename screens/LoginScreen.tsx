@@ -32,7 +32,8 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
         setUserFlag(true);
         await loginInstance.post('/auth/login', form)
             .then(async (response: any) => {
-                await AsyncStorage.setItem('@token', response.data.token);
+                await AsyncStorage.setItem('token', response.data.token);
+                await AsyncStorage.setItem('info', JSON.stringify(response.data.user));
                 navigation.navigate('Root');
             }).catch((error: any) => {
                 alert(error.response.data.message);
