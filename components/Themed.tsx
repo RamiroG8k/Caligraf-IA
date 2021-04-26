@@ -38,13 +38,12 @@ export function TextInput(props: InputProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
     const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
-    // TODO: Create accent colors for focus 
     return <DefaultTextInput style={[{ backgroundColor, color, fontFamily: 'Montserrat' }, style]} {...otherProps} />;
 }
 
 export function View(props: ViewProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
-    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+    const backgroundColor = useThemeColor({ light: darkColor, dark: lightColor }, 'background')
 
     return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }

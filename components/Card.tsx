@@ -10,12 +10,14 @@ const Card = (props: any) => {
             </View>
             <View style={styles.infoContainer}>
                 <View style={styles.tagsContainer}>
-                    <View style={styles.tag}>
-                        <Text style={{ fontSize: 10 }}>{props.time} minutes</Text>
+                    <View lightColor="#474747" darkColor="#E0E0E0" style={styles.tag}>
+                        <Text style={{ fontSize: 10 }}>{props.time} %</Text>
                     </View>
                 </View>
-                <Text style={[{ fontFamily: 'Montserrat-Bold' }, { marginBottom: 5 }]}>{props.title}</Text>
-                <Text style={{ fontSize: 12, color: '#999999' }}>Lorem ipsum dolor sit, sed etsed do </Text>
+                <View>
+                    <Text style={[{ fontFamily: 'Montserrat-Bold' }, { marginBottom: 5 }]}>{props.title}</Text>
+                    <Text style={{ fontSize: 12, color: '#999999' }}>Lorem ipsum dolor sit, sed etsed do </Text>
+                </View>
             </View>
         </View>
     );
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         paddingVertical: 2,
         paddingHorizontal: 5,
-        backgroundColor: 'tomato'
+        width: '30%',
     }
 });
 
