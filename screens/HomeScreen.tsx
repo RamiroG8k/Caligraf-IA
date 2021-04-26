@@ -42,7 +42,7 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
 
     const emptyCard = (): any => {
         return (
-            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => navigation.navigate('TabTwo')} style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
+            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => navigation.navigate('Analyze')} style={{ flex: 1, margin: 10, aspectRatio: 1, borderRadius: 25 }}>
                 <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
                     source={require('../assets/images/Plus2.jpg')} />
             </TouchableHighlight>

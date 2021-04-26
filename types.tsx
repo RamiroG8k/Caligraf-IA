@@ -17,7 +17,8 @@ export type TabHomeParamList = {
 };
 
 export type TabAnallizeNavigator = {
-    TabTwoScreen: undefined;
+    AnalizeScreen: undefined;
+    CameraScreen: undefined;
 };
 
 export type TabProfileParamList = {

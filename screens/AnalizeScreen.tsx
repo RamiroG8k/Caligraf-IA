@@ -25,7 +25,7 @@ const DATA = [
     },
 ];
 
-export default function AnalizeScreen() {
+export default function AnalizeScreen({ navigation }: { navigation: any }, props: any) {
 
     const tipsToShot: any = DATA.map((item: any) => {
         return (
@@ -48,7 +48,7 @@ export default function AnalizeScreen() {
                 <Text style={[styles.strongText, styles.subtitle]}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen')}>
                 <Ionicons size={150} name="camera-outline" color="#CFA9DB" />
                 <Text style={[styles.strongText, styles.subtitle]}>¡Tap Here!</Text>
             </TouchableOpacity>

@@ -1,16 +1,21 @@
+// Common
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
 
+// Hooks
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
+// Screens
 import HomeScreen from '../screens/HomeScreen';
+import ShotScreen from '../screens/ShotScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import AnalizeScreen from '../screens/AnalizeScreen';
 
+// ParamsList
 import { BottomTabParamList, TabProfileParamList, TabHomeParamList, TabAnallizeNavigator } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -42,36 +47,36 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabHomeStack = createStackNavigator<TabHomeParamList>();
+const HomeStack = createStackNavigator<TabHomeParamList>();
 
 function TabHomeNavigator() {
     return (
-        <TabHomeStack.Navigator>
-            <TabHomeStack.Screen name="TabHomeScreen"
+        <HomeStack.Navigator>
+            <HomeStack.Screen name="TabHomeScreen"
                 component={HomeScreen} options={{ headerShown: false }} />
-        </TabHomeStack.Navigator>
+        </HomeStack.Navigator>
     );
 }
 
-const TabTwoStack = createStackNavigator<TabAnallizeNavigator>();
+const AnalizeStack = createStackNavigator<TabAnallizeNavigator>();
 
 function TabAnalizeNavigator() {
     return (
-        <TabTwoStack.Navigator>
-            <TabTwoStack.Screen name="TabTwoScreen"
-                component={AnalizeScreen} options={{ headerShown: false }} />
-        </TabTwoStack.Navigator>
+        <AnalizeStack.Navigator initialRouteName="AnalizeScreen" screenOptions={{ headerShown: false }}>
+            <AnalizeStack.Screen name="AnalizeScreen" component={AnalizeScreen} />
+            <AnalizeStack.Screen name="CameraScreen" component={ShotScreen} />
+        </AnalizeStack.Navigator>
     );
 }
 
-const TabProfileStack = createStackNavigator<TabProfileParamList>();
+const ProfileStack = createStackNavigator<TabProfileParamList>();
 
 function TabProfileNavigator() {
     return (
-        <TabProfileStack.Navigator>
-            <TabProfileStack.Screen name="TabProfileScreen"
+        <ProfileStack.Navigator>
+            <ProfileStack.Screen name="TabProfileScreen"
                 component={ProfileScreen} options={{ headerShown: false }} />
-        </TabProfileStack.Navigator>
+        </ProfileStack.Navigator>
     );
 }
 
