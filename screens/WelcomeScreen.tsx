@@ -4,17 +4,17 @@ import { Text, View } from '../components/Themed';
 
 const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.imgContainer}>
+        <View transparent={true} style={styles.container}>
+            <View transparent={true} style={styles.imgContainer}>
                 <Image style={styles.img}
                     source={require('../assets/images/ill.png')} />
             </View>
-            <View>
+            <View transparent={true}>
                 <Text style={styles.title}>Caligraf IA analysis Assessment.</Text>
                 <Text style={styles.subtitle}>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
             </View>
-            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                <View style={styles.buttonGroup}>
+            <View transparent={true} style={{ flex: 1, justifyContent: 'flex-end' }}>
+                <View transparent={true} style={styles.buttonGroup}>
                     <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.button, { backgroundColor: '#E6E6E6' }]} >
                         <Text style={[styles.btnText, { color: '#383838' }]}>Sign Up</Text>
                     </TouchableOpacity>

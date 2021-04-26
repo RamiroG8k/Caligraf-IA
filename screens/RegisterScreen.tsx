@@ -42,39 +42,39 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
 
     return (
         <TouchableWithoutFeedback style={{ padding: '10%' }} onPress={Keyboard.dismiss} accessible={false} >
-            <View style={{ marginBottom: '10%' }}>
+            <View transparent={true} style={{ marginBottom: '10%' }}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.icon}>
                     <AntDesign name="back" size={30} color="black" />
                 </TouchableOpacity>
-                <View>
+                <View transparent={true} >
                     <Text style={styles.title}>Create Account</Text>
                     <Text style={styles.subtitle}>{`Sign up to get \nStarted`}</Text>
                 </View>
             </View>
-            <View style={{ height: '45%' }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={[styles.inputContainer, { width: '48%' }]}>
+            <View transparent={true} style={{ height: '45%' }}>
+                <View transparent={true} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View transparent={true} style={[styles.inputContainer, { width: '48%' }]}>
                         <Controller control={control} name="name" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
                             <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Name *" />)} />
                         {errors.name && <Text style={styles.error}>Required.</Text>}
                     </View>
-                    <View style={[styles.inputContainer, { width: '48%' }]}>
+                    <View transparent={true} style={[styles.inputContainer, { width: '48%' }]}>
                         <Controller control={control} name="lastName" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
                             <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Last Name *" />)} />
                         {errors.lastName && <Text style={styles.error}>Required.</Text>}
                     </View>
                 </View>
-                <View style={styles.inputContainer}>
+                <View transparent={true} style={styles.inputContainer}>
                     <Controller control={control} name="email" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
                         <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your email *" placeholder="username@example.com" />)} />
                     {errors.email && <Text style={styles.error}>Email is required.</Text>}
                 </View>
-                <View style={styles.inputContainer}>
+                <View transparent={true} style={styles.inputContainer}>
                     <Controller control={control} name="password" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
                         <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Password *" secureTextEntry={true} placeholder="* * * * * * * *" />)} />
                     {errors.password && <Text style={styles.error}>Password is required.</Text>}
                 </View>
-                <View>
+                <View transparent={true}>
                     <Text style={{ fontSize: 12, textAlign: 'center', color: '#7A7A7A' }}>
                         Creating an account means you're okay with our
                     <Text style={{ fontFamily: 'Montserrat-Bold' }}> Terms of Service</Text> and our
@@ -83,7 +83,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
                 </View>
             {userFlag && <ActivityIndicator size="large" color="#869EDB"></ActivityIndicator>}
             </View>
-            <View style={{ marginTop: '10%' }}>
+            <View transparent={true} style={{ marginTop: '10%' }}>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.info}>
                     <Text style={{ fontSize: 16, textAlign: 'center' }}>Already have an account? <Text style={{ fontFamily: 'Montserrat-Bold' }}> Log In.</Text></Text>
                 </TouchableOpacity>

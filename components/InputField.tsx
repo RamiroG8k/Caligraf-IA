@@ -14,7 +14,7 @@ export function InputField(props: Props): any {
     const { label, error, ...inputProps } = props;
 
     return (
-        <View>
+        <View transparent={true}>
             {label && <Text style={styles.label}>{label}</Text>}
             <TextInput onChangeText={props.change} autoCapitalize="none" style={styles.input} {...inputProps}/>
         </View>

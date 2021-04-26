@@ -33,6 +33,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
         await loginInstance.post('/auth/login', form)
             .then(async (response: any) => {
                 await AsyncStorage.setItem('@token', response.data.token);
+                navigation.navigate('Root');
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });
@@ -41,31 +42,31 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
 
     return (
         <TouchableWithoutFeedback style={{ padding: '10%' }} onPress={Keyboard.dismiss} accessible={false} >
-            <View style={{ marginBottom: '10%' }}>
-                <View style={styles.icon}>
+            <View transparent={true} style={{ marginBottom: '10%' }}>
+                <View transparent={true} style={styles.icon}>
                     <TouchableOpacity onPress={() => navigation.goBack()} style={styles.touchable}>
                         <AntDesign name="back" size={30} color="black" />
                     </TouchableOpacity>
                 </View>
-                <View>
+                <View transparent={true}>
                     <Text style={styles.title}>Let's sign you in</Text>
                     <Text style={styles.subtitle}>{`Welcome back,\nYou've been missed!`}</Text>
                 </View>
             </View>
-            <View style={{ height: '45%' }}>
-                <View style={styles.inputContainer}>
+            <View transparent={true} style={{ height: '45%' }}>
+                <View transparent={true} style={styles.inputContainer}>
                     <Controller control={control} name="email" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
                         <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your Email" placeholder="email@example.com" />)} />
                     {errors.email && <Text style={styles.error}>Email is required.</Text>}
                 </View>
-                <View style={styles.inputContainer}>
+                <View transparent={true} style={styles.inputContainer}>
                     <Controller control={control} name="password" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
                         <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Password" secureTextEntry={true} placeholder="* * * * * * * *" />)} />
                     {errors.password && <Text style={styles.error}>Password is required.</Text>}
                 </View>
                 {userFlag && <ActivityIndicator size="large" color="#869EDB" style={{ marginVertical: '15%' }}></ActivityIndicator>}
             </View>
-            <View style={{ marginTop: '10%' }}>
+            <View transparent={true} style={{ marginTop: '10%' }}>
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.info}>Don't have an account? <Text style={[styles.label, { fontFamily: 'Montserrat-Bold' }]}> Register.</Text></Text>
                 </TouchableOpacity>
