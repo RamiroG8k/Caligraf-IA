@@ -80,7 +80,7 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
                     style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
             </View>
             <BottomDetails visible={false}>
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <View transparent={true} style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Text>INFO</Text>
                 </View>
             </BottomDetails>

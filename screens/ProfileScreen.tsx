@@ -38,7 +38,7 @@ export default function ProfileScreen() {
         );
     });
 
-    const toTitleCase = (phrase: string) => {
+    const toTitleCase = (phrase: string): string => {
         return phrase
             .toLowerCase()
             .split(' ')

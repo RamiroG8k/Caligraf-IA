@@ -4,8 +4,8 @@ import { Text, View } from '../Themed';
 
 const BottomDetails = (props: any) => {
     return (
-        <View style={{ height: 100, justifyContent: 'center', alignItems: 'center' }}>
-            <View style={{ height: 10 }}>
+        <View transparent={true} style={{ height: '10%', justifyContent: 'center', alignItems: 'center' }}>
+            <View transparent={true}>
                 {props.children}
             </View>
         </View>
@@ -13,11 +13,6 @@ const BottomDetails = (props: any) => {
 };
 
 const styles = StyleSheet.create({
-    modal: {
-        // marginTop: '30%', // This is the important style you need to set
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
 });
 
 export default BottomDetails;
