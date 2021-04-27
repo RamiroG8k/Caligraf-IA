@@ -4,7 +4,7 @@ import { Text, View } from '../components/Themed';
 
 const Card = (props: any) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity onPress={props.onPress} style={styles.container}>
             <View style={styles.imgContainer}>
                 <Image style={styles.img} source={{uri: props.image }} />
             </View>

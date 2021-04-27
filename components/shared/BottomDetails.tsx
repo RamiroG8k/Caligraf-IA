@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, View } from '../Themed';
+import { View } from '../Themed';
 
 const BottomDetails = (props: any) => {
     return (
