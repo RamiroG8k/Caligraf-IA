@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         borderWidth: 5,
         borderColor: '#383838',
+        overflow: 'hidden',
     },
     camera: {
         width: (Layout.window.width * 0.65) - 10,

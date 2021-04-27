@@ -62,37 +62,39 @@ export default function ProfileScreen() {
     }
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-            <View transparent={true} style={{ alignItems: 'center' }}>
-                <View style={[styles.picture, { marginTop: '10%' }]}>
-                    <View style={styles.pictureBorder}>
-                        <Image style={styles.picture} source={require('../assets/images/profile.jpg')} />
+        <View transparent={true}>
+            <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+                <View transparent={true} style={{ alignItems: 'center' }}>
+                    <View style={[styles.picture, { marginTop: '10%' }]}>
+                        <View style={styles.pictureBorder}>
+                            <Image style={styles.picture} source={require('../assets/images/profile.jpg')} />
+                        </View>
+                    </View>
+                    <View transparent={true} style={{ alignItems: 'center', margin: '10%' }}>
+                        <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>{toTitleCase(userInfo.name)}</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>{userInfo.email}</Text>
+                        <View transparent={true} style={styles.buttonGroup}>
+                            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('Log out')} style={styles.button}>
+                                <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Log Out</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight underlayColor="#94C7A7" onPress={() => alert('Edit')} style={[styles.button, { backgroundColor: '#BCDCC8' }]}>
+                                <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Edit</Text>
+                            </TouchableHighlight>
+                        </View>
                     </View>
                 </View>
-                <View transparent={true} style={{ alignItems: 'center', margin: '10%' }}>
-                    <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>{toTitleCase(userInfo.name)}</Text>
-                    <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>{userInfo.email}</Text>
-                    <View transparent={true} style={styles.buttonGroup}>
-                        <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('Log out')} style={styles.button}>
-                            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Log Out</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="#94C7A7" onPress={() => alert('Edit')} style={[styles.button, { backgroundColor: '#BCDCC8' }]}>
-                            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Edit</Text>
-                        </TouchableHighlight>
+                <View transparent={true}>
+                    <View transparent={true} style={{ marginVertical: '5%' }}>
+                        <Text style={styles.title}>Stats</Text>
+                        <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
                     </View>
+                    {availableStats}
                 </View>
-            </View>
-            <View transparent={true}>
-                <View transparent={true} style={{ marginVertical: '5%' }}>
-                    <Text style={styles.title}>Stats</Text>
-                    <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
+                <View transparent={true} style={{ alignItems: 'center', marginTop: 10, marginBottom: '30%' }}>
+                    <Text>Coming Soon...</Text>
                 </View>
-                {availableStats}
-            </View>
-            <View transparent={true} style={{ alignItems: 'center', marginTop: 10, marginBottom: '30%' }}>
-                <Text>Coming Soon...</Text>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 
