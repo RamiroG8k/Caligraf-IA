@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
 
 const Card = (props: any) => {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             <View style={styles.imgContainer}>
                 <Image style={styles.img} source={{uri: props.image }} />
             </View>
@@ -19,7 +19,7 @@ const Card = (props: any) => {
                     <Text style={{ fontSize: 12, color: '#999999' }}>Lorem ipsum dolor sit, sed etsed do </Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

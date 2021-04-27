@@ -5,6 +5,7 @@ import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
 import Card from '../components/Card';
 import Banner from '../components/Banner';
+import BottomDetails from '../components/shared/BottomDetails';
 
 const DATA = [
     {
@@ -78,6 +79,11 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
                     keyExtractor={item => item.id} numColumns={columns}
                     style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
             </View>
+            <BottomDetails visible={false}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Text>INFO</Text>
+                </View>
+            </BottomDetails>
             <View transparent={true} style={{ alignItems: 'center', marginTop: '10%', marginBottom: '30%' }}>
                 <Text>Coming Soon...</Text>
             </View>

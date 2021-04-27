@@ -32,7 +32,8 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
     const setCredentials = async (form: FormData) => {
         await loginInstance.post('/user', form)
             .then((response: any) => {
-                alert(`Hi ${response.data.user.name}!`)
+                // TODO: manage response
+                alert(`Hi ${response.data.name}!`)
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });
