@@ -1,6 +1,7 @@
 import Axios from 'axios';
 
-export const loginInstance = Axios.create({ 
+export const loginInstance = Axios.create({
+
     baseURL:'https://edp-api.herokuapp.com',
     headers: {
         'Accept': 'application/json',

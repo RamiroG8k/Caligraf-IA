@@ -51,7 +51,7 @@ export default function ProfileScreen() {
             setUserInfo(JSON.parse(info));
             setIsLoading(false);
         });
-    }, [])
+    }, []); 
 
     if (isLoading) {
         return (
