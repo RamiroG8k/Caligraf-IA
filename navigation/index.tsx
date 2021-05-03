@@ -14,6 +14,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Custom Theme
 const MainTheme = {
@@ -38,9 +39,15 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
 
+let user: any;
+
+AsyncStorage.getItem('info').then((response: any) => {
+    user = response;
+});
+
 function RootNavigator() {
     return (
-        <Stack.Navigator initialRouteName="Root" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={user ? "Root" : "Welcome"} screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Welcome" component={WelcomeScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />

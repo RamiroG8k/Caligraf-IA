@@ -54,6 +54,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
                     <Text style={styles.subtitle}>{`Welcome back,\nYou've been missed!`}</Text>
                 </View>
             </View>
+            
             <View transparent={true} style={{ height: '45%' }}>
                 <View transparent={true} style={styles.inputContainer}>
                     <Controller control={control} name="email" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
@@ -67,6 +68,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
                 </View>
                 {userFlag && <ActivityIndicator size="large" color="#869EDB" style={{ marginVertical: '15%' }}></ActivityIndicator>}
             </View>
+
             <View transparent={true} style={{ marginTop: '10%' }}>
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.info}>Don't have an account? <Text style={[styles.label, { fontFamily: 'Montserrat-Bold' }]}> Register.</Text></Text>

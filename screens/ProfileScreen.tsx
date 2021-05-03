@@ -6,6 +6,9 @@ import StatsCard from '../components/StatsCard';
 import Layout from '../constants/Layout';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { loginInstance } from '../services/instances';
+
+import * as Util from '../utils/util-functions';
 
 const DATA = [
     {
@@ -28,7 +31,7 @@ const DATA = [
     },
 ];
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }: { navigation: any }) {
     const [isLoading, setIsLoading] = useState(true);
     const [userInfo, setUserInfo] = useState<Object | null | any>(null);
 
@@ -38,28 +41,44 @@ export default function ProfileScreen() {
         );
     });
 
-    const toTitleCase = (phrase: string): string => {
-        return phrase
-            .toLowerCase()
-            .split(' ')
-            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    };
-
     useEffect(() => {
+        // Get user Info
         AsyncStorage.getItem('info').then((info: any) => {
-            setUserInfo(JSON.parse(info));
+            if (info !== null) {
+                setUserInfo(JSON.parse(info));
+                setIsLoading(false);
+                fetchMetrics();
+                return;
+            }
+            setUserInfo({ name: 'Undefined', email: 'No logged in' })
             setIsLoading(false);
+        }).catch((error: any) => {
+            console.log(error);
         });
-    }, []); 
+    }, []);
+    
+    const fetchMetrics = async () => { 
+        console.log('FETCHING');
+                           
+        await loginInstance.get(`/metric/user/${userInfo._id}`)
+            .then((response: any) => {
+                console.log(response.data);
+            }
+        );
+    };
 
     if (isLoading) {
         return (
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ActivityIndicator size="large" color="#BCDCC8" style={{ marginVertical: '15%' }}></ActivityIndicator>
             </View>
         );
     }
+
+    const Logout = () => {
+        AsyncStorage.clear();
+        navigation.navigate('Welcome');
+    };
 
     return (
         <View transparent={true}>
@@ -71,10 +90,10 @@ export default function ProfileScreen() {
                         </View>
                     </View>
                     <View transparent={true} style={{ alignItems: 'center', margin: '10%' }}>
-                        <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>{toTitleCase(userInfo.name)}</Text>
+                        <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>{Util.toTitleCase(userInfo.name)}</Text>
                         <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>{userInfo.email}</Text>
                         <View transparent={true} style={styles.buttonGroup}>
-                            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => alert('Log out')} style={styles.button}>
+                            <TouchableHighlight underlayColor="#CCCCCC" onPress={Logout} style={styles.button}>
                                 <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Log Out</Text>
                             </TouchableHighlight>
                             <TouchableHighlight underlayColor="#94C7A7" onPress={() => alert('Edit')} style={[styles.button, { backgroundColor: '#BCDCC8' }]}>
