@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     icon: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'tomato',
         padding: 5,
     }
 });

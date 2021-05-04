@@ -35,19 +35,13 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
     const [isLoading, setIsLoading] = useState(true);
     const [userInfo, setUserInfo] = useState<Object | null | any>(null);
 
-    const availableStats: any = DATA.map((item: any) => {
-        return (
-            <StatsCard key={item.id} icon={item.icon} title={item.title} phrase={item.text} />
-        );
-    });
-
     useEffect(() => {
         // Get user Info
         AsyncStorage.getItem('info').then((info: any) => {
             if (info !== null) {
                 setUserInfo(JSON.parse(info));
                 setIsLoading(false);
-                fetchMetrics();
+                fetchMetrics(userInfo._id);
                 return;
             }
             setUserInfo({ name: 'Undefined', email: 'No logged in' })
@@ -56,15 +50,19 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
             console.log(error);
         });
     }, []);
-    
-    const fetchMetrics = async () => { 
-        console.log('FETCHING');
-                           
-        await loginInstance.get(`/metric/user/${userInfo._id}`)
+
+    const availableStats: any = DATA.map((item: any) => {
+        return (
+            <StatsCard key={item.id} icon={item.icon} title={item.title} phrase={item.text} />
+        );
+    });
+
+    const fetchMetrics = async (userID: string) => {
+        await loginInstance.get(`/metric/user/${userID}`)
             .then((response: any) => {
                 console.log(response.data);
             }
-        );
+            );
     };
 
     if (isLoading) {
