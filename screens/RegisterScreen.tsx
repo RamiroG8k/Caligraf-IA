@@ -8,7 +8,7 @@ import { StyleSheet, Dimensions, Keyboard, ActivityIndicator } from 'react-nativ
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { useForm, Controller } from 'react-hook-form';
-import { loginInstance } from '../services/instances';
+import { apiInstance } from '../services/instances';
 
 type FormData = {
     name: string;
@@ -30,7 +30,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
     };
 
     const setCredentials = async (form: FormData) => {
-        await loginInstance.post('/user', form)
+        await apiInstance.post('/user', form)
             .then((response: any) => {
                 // TODO: manage response
                 alert(`Hi ${response.data.name}!`)

@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const loginInstance = Axios.create({
+export const apiInstance = Axios.create({
     baseURL:'https://edp-api.herokuapp.com',
     headers: {
         'Accept': 'application/json',

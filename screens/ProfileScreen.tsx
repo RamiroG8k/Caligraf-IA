@@ -1,57 +1,44 @@
 import * as React from 'react';
 import { StyleSheet, Image, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
-
+// Common
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { apiInstance } from '../services/instances';
+import { useEffect, useState } from 'react';
+// Components
 import { Text, View } from '../components/Themed';
 import StatsCard from '../components/StatsCard';
-import Layout from '../constants/Layout';
-import { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { loginInstance } from '../services/instances';
-
+// Util
 import * as Util from '../utils/util-functions';
-
-const DATA = [
-    {
-        id: 1,
-        title: "Meta data 0",
-        icon: "information-circle-outline",
-        text: "Lorem ipsum dolor sit amet, consectetur adip sample"
-    },
-    {
-        id: 2,
-        title: "Meta data 1",
-        icon: "scan-outline",
-        text: "Lorem ipsum dolor sit amet, consectetur adip sample"
-    },
-    {
-        id: 3,
-        title: "Meta data 2",
-        icon: "camera-reverse-outline",
-        text: "Lorem ipsum dolor sit amet, consectetur adip sample"
-    },
-];
+import Layout from '../constants/Layout';
 
 export default function ProfileScreen({ navigation }: { navigation: any }) {
-    const [loading, setLoading] = useState(true);
-    const [userInfo, setUserInfo] = useState<Object | null | any>({ name: 'Undefined', email: 'No logged in' });
+    const [loading, setLoading] = useState<boolean>(true);
+    const [userInfo, setUserInfo] = useState<Object | null | any>(null);
     const [metrics, setMetrics] = useState<Array<object> | null | any>([]);
 
     useEffect(() => {
-        // Get user Info
         AsyncStorage.getItem('info').then((response: any) => {
             if (response !== null) {
-                setUserInfo(JSON.parse(response));
                 fetchMetrics(JSON.parse(response)._id);
+                setUserInfo(JSON.parse(response));
                 setLoading(false);
                 return;
             }
         }).catch((error: any) => {
-            console.log('ERROR ASYNC: ', error);
+            console.log('ERROR IN ASYNC STORAGE: ', error);
         });
     }, []);
 
+    if (loading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#BCDCC8"></ActivityIndicator>
+            </View>
+        );
+    }
+
     const fetchMetrics: any = async (userID: number) => {
-        await loginInstance.get(`/metric/user/${userID}`).then(
+        await apiInstance.get(`/metric/user/${userID}`).then(
             (response: any) => {
                 setMetrics(response.data.content);
             }
@@ -59,14 +46,6 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
             console.log('ERROR: ', error);
         });
     };
-
-    if (loading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" color="#BCDCC8" style={{ marginVertical: '15%' }}></ActivityIndicator>
-            </View>
-        );
-    }
 
     const availableMetrics: any = metrics.map((item: any) => {
         return (

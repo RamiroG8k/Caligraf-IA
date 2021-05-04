@@ -1,10 +1,11 @@
+// Common
 import React, { useState } from 'react';
-
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { View, Text, TextInput, InputProps } from './Themed';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+// Util
 import { FieldError } from 'react-hook-form';
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface Props extends InputProps {
     label?: string;
@@ -13,22 +14,25 @@ interface Props extends InputProps {
 }
 
 export function InputField(props: Props): any {
-    const [visibility, setVisibility] = useState(false);
+    const { label, change, error, secureTextEntry, ...inputProps } = props;
+    const [secret, setSecret] = useState<boolean>(secureTextEntry ? true : false);
     const [icon, setIcon] = useState<string | any>('eye-outline');
-    const { label, error, secureTextEntry, ...inputProps } = props;
 
-    const toggleVisibility = () => {
+    const toggleVisibility = (): void => {
         setIcon(icon === 'eye-outline' ? 'eye-off-outline' : 'eye-outline');
-        setVisibility(!visibility);
+        setSecret(!secret);
     };
 
     return (
-        <View transparent={true}>
-            {label && <Text style={styles.label}>{label}</Text>}
-            <TextInput onChangeText={props.change} secureTextEntry={visibility} autoCapitalize="none" style={styles.input} {...inputProps} />
-            {secureTextEntry && <TouchableOpacity onPress={() => toggleVisibility()} style={styles.icon}>
-                <Ionicons size={30} name={icon} />
-            </TouchableOpacity>}
+        <View transparent={true} style={{ zIndex: 0 }}>
+            <View transparent={true} style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+                {label && <Text style={styles.label}>{label}</Text>}
+                {secureTextEntry && <TouchableOpacity onPress={toggleVisibility} style={styles.touchable}>
+                    <Text>{ secret ? 'show ' : 'hide ' }</Text>
+                    <Ionicons size={20} name={icon} />
+                </TouchableOpacity>}
+            </View>
+            <TextInput onChangeText={change} secureTextEntry={secret} style={styles.input} {...inputProps} />
         </View>
     );
 }
@@ -37,16 +41,17 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         marginLeft: 10,
-        marginBottom: 10,
+        marginBottom: 5,
     },
     input: {
-        height: 55,
-        borderRadius: 15,
         paddingHorizontal: 15,
+        borderRadius: 15,
+        height: 55,
     },
-    icon: {
+    touchable: {
+        paddingHorizontal: 10,
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 5,
     }
 });

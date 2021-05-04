@@ -7,7 +7,7 @@ import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture
 import { Text, View } from '../components/Themed';
 import { InputField } from '../components/InputField';
 // Instances
-import { loginInstance } from '../services/instances';
+import { apiInstance } from '../services/instances';
 // Hooks
 import { useForm, Controller } from 'react-hook-form';
 // Others
@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
 
     const getCredentials = async (form: FormData) => {
         setUserFlag(true);
-        await loginInstance.post('/auth/login', form)
+        await apiInstance.post('/auth/login', form)
             .then(async (response: any) => {
                 await AsyncStorage.setItem('token', response.data.token);
                 await AsyncStorage.setItem('info', JSON.stringify(response.data.user));
