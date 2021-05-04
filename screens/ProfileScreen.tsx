@@ -32,40 +32,38 @@ const DATA = [
 ];
 
 export default function ProfileScreen({ navigation }: { navigation: any }) {
-    const [isLoading, setIsLoading] = useState(true);
-    const [userInfo, setUserInfo] = useState<Object | null | any>(null);
+    const [loading, setLoading] = useState(true);
+    const [userInfo, setUserInfo] = useState<Object | null | any>({ name: 'Undefined', email: 'No logged in' });
+    const [metrics, setMetrics] = useState<Array<object> | null | any>([]);
 
     useEffect(() => {
         // Get user Info
-        AsyncStorage.getItem('info').then((info: any) => {
-            if (info !== null) {
-                setUserInfo(JSON.parse(info));
-                setIsLoading(false);
-                fetchMetrics(userInfo._id);
+        AsyncStorage.getItem('info').then((response: any) => {
+            if (response !== null) {
+                setUserInfo(JSON.parse(response));
+                fetchMetrics(userInfo._id)
+                setLoading(false);
                 return;
             }
-            setUserInfo({ name: 'Undefined', email: 'No logged in' })
-            setIsLoading(false);
         }).catch((error: any) => {
-            console.log(error);
+            console.log('ERROR ASYNC: ', error);
         });
     }, []);
 
-    const availableStats: any = DATA.map((item: any) => {
-        return (
-            <StatsCard key={item.id} icon={item.icon} title={item.title} phrase={item.text} />
-        );
-    });
+    const fetchMetrics: any = async (userID: number) => {
+        console.log('FETCHING METRICS...');
+        AsyncStorage.getItem('token').then(console.log);
 
-    const fetchMetrics = async (userID: string) => {
-        await loginInstance.get(`/metric/user/${userID}`)
-            .then((response: any) => {
-                console.log(response.data);
+        await loginInstance.get(`/metric/user/${userID}`).then(
+            (response: any) => {
+                setMetrics(response.data.content);
             }
-            );
+        ).catch((error: any) => {
+            console.log('ERROR: ', error);
+        });
     };
 
-    if (isLoading) {
+    if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <ActivityIndicator size="large" color="#BCDCC8" style={{ marginVertical: '15%' }}></ActivityIndicator>
@@ -73,9 +71,31 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
         );
     }
 
+    const availableMetrics: any = metrics.map((item: any) => {
+        return (
+            <StatsCard key={item._id} icon="attach-outline"
+                title={new Date(item.date).toLocaleString('es-MX', { weekday: 'long', year: 'numeric', month: 'short', day: '2-digit' })} phrase={item.phrase.data} />
+        );
+    });
+
+    // async function fetchMetrics(userID: string) {
+    //     console.log('FETCHING METRICS...');
+
+    //     await loginInstance.get(`/metric/user/${userID}`).then(
+    //         (response: any) => {
+    //             console.log(response.data.content);
+    //             setMetrics(response.data.content);
+    //             // availableMetrics(response.data.content);
+    //         }
+    //     );
+    // };
+
     const Logout = () => {
         AsyncStorage.clear();
-        navigation.navigate('Welcome');
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Welcome' }],
+        });
     };
 
     return (
@@ -105,7 +125,7 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
                         <Text style={styles.title}>Stats</Text>
                         <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
                     </View>
-                    {availableStats}
+                    {availableMetrics}
                 </View>
                 <View transparent={true} style={{ alignItems: 'center', marginTop: 10, marginBottom: '30%' }}>
                     <Text>Coming Soon...</Text>
@@ -133,7 +153,6 @@ const styles = StyleSheet.create({
         borderRadius: Math.round(Layout.window.width + Layout.window.height) / 2,
         width: Layout.window.width * 0.55,
         height: Layout.window.width * 0.55,
-        backgroundColor: '#E6E6E6',
         justifyContent: 'center',
         alignItems: 'center',
     },
