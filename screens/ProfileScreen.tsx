@@ -41,7 +41,7 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
         AsyncStorage.getItem('info').then((response: any) => {
             if (response !== null) {
                 setUserInfo(JSON.parse(response));
-                fetchMetrics(userInfo._id)
+                fetchMetrics(JSON.parse(response)._id);
                 setLoading(false);
                 return;
             }
@@ -51,9 +51,6 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
     }, []);
 
     const fetchMetrics: any = async (userID: number) => {
-        console.log('FETCHING METRICS...');
-        AsyncStorage.getItem('token').then(console.log);
-
         await loginInstance.get(`/metric/user/${userID}`).then(
             (response: any) => {
                 setMetrics(response.data.content);
@@ -73,22 +70,10 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
 
     const availableMetrics: any = metrics.map((item: any) => {
         return (
-            <StatsCard key={item._id} icon="attach-outline"
-                title={new Date(item.date).toLocaleString('es-MX', { weekday: 'long', year: 'numeric', month: 'short', day: '2-digit' })} phrase={item.phrase.data} />
+            <StatsCard key={item._id} title={Util.toMinString(item.phrase.data)}
+                icon="attach-outline" phrase={Util.toLocalDate(item.date)} />
         );
     });
-
-    // async function fetchMetrics(userID: string) {
-    //     console.log('FETCHING METRICS...');
-
-    //     await loginInstance.get(`/metric/user/${userID}`).then(
-    //         (response: any) => {
-    //             console.log(response.data.content);
-    //             setMetrics(response.data.content);
-    //             // availableMetrics(response.data.content);
-    //         }
-    //     );
-    // };
 
     const Logout = () => {
         AsyncStorage.clear();

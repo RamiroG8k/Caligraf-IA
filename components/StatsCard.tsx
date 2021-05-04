@@ -10,7 +10,7 @@ const StatsCard = (props: any) => {
         <View style={styles.card}>
             <TouchableOpacity activeOpacity={0.4} onPress={() => alert('CLICK')} style={{ alignItems: 'center', flexDirection: 'row' }}>
                 <View style={styles.icon}>
-                    <Ionicons size={30} name={props.icon} />
+                    <Ionicons size={35} name={props.icon} />
                 </View>
                 <View transparent={true} style={{ flex: 1, marginLeft: 10 }}>
                     <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>{props.title}</Text>
