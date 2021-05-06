@@ -1,12 +1,13 @@
-import * as React from 'react';
-import { useState } from 'react';
+// Common
+import React, { useState } from 'react';
+import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, ScrollView, Platform } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons';
-
+// Components
 import { Text, View } from '../components/Themed';
 import { InputField } from '../components/InputField';
-import { StyleSheet, Dimensions, Keyboard, ActivityIndicator } from 'react-native';
-import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
+// Others
+import Layout from '../constants/Layout';
 import { useForm, Controller } from 'react-hook-form';
 import { apiInstance } from '../services/instances';
 
@@ -17,14 +18,12 @@ type FormData = {
     password: string;
 };
 
-const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
+const RegisterScreen = ({ navigation }: { navigation: any }) => {
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
-    const [userFlag, setUserFlag] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = (data: any) => {
-        console.log(data);
-        
-        setUserFlag(!userFlag);
+        setLoading(!loading);
         setCredentials(data);
         return;
     };
@@ -32,67 +31,81 @@ const RegisterScreen = ({ navigation }: { navigation: any }, props: any) => {
     const setCredentials = async (form: FormData) => {
         await apiInstance.post('/user', form)
             .then((response: any) => {
-                // TODO: manage response
-                alert(`Hi ${response.data.name}!`)
+                navigation.navigate('/Login');
+                alert(`Account created ${response.data.name}!\nTry to use your new Credentials`)
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });
-        setUserFlag(false);
+        setLoading(false);
     };
 
 
     return (
-        <TouchableWithoutFeedback style={{ padding: '10%' }} onPress={Keyboard.dismiss} accessible={false} >
-            <View transparent={true} style={{ marginBottom: '10%' }}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.icon}>
-                    <AntDesign name="back" size={30} color="black" />
-                </TouchableOpacity>
-                <View transparent={true} >
-                    <Text style={styles.title}>Create Account</Text>
-                    <Text style={styles.subtitle}>{`Sign up to get \nStarted`}</Text>
-                </View>
-            </View>
-            <View transparent={true} style={{ height: '45%' }}>
-                <View transparent={true} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View transparent={true} style={[styles.inputContainer, { width: '48%' }]}>
-                        <Controller control={control} name="name" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
-                            <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Name *" />)} />
-                        {errors.name && <Text style={styles.error}>Required.</Text>}
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined} keyboardVerticalOffset={0}>
+            <ScrollView style={{ flex: 1, padding: '10%' }}>
+                {/* Title Section */}
+                <View transparent={true} style={{ justifyContent: 'flex-end' }}>
+                    <View transparent={true} style={{ marginBottom: '10%' }}>
+                        <View style={styles.icon}>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <AntDesign name="back" size={30} />
+                            </TouchableOpacity>
+                        </View>
+                        <View transparent={true} >
+                            <Text style={styles.title}>Create Account</Text>
+                            <Text style={styles.subtitle}>{`Sign up to get \nStarted`}</Text>
+                        </View>
                     </View>
-                    <View transparent={true} style={[styles.inputContainer, { width: '48%' }]}>
-                        <Controller control={control} name="lastName" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
-                            <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Last Name *" />)} />
-                        {errors.lastName && <Text style={styles.error}>Required.</Text>}
-                    </View>
-                </View>
-                <View transparent={true} style={styles.inputContainer}>
-                    <Controller control={control} name="email" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
-                        <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your email *" placeholder="username@example.com" />)} />
-                    {errors.email && <Text style={styles.error}>Email is required.</Text>}
-                </View>
-                <View transparent={true} style={styles.inputContainer}>
-                    <Controller control={control} name="password" rules={{ required: true }} defaultValue="" render={({ field: { onChange, onBlur, value } }) => (
-                        <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Password *" secureTextEntry={true} placeholder="* * * * * * * *" />)} />
-                    {errors.password && <Text style={styles.error}>Password is required.</Text>}
-                </View>
-                <View transparent={true}>
-                    <Text style={{ fontSize: 12, textAlign: 'center', color: '#7A7A7A' }}>
-                        Creating an account means you're okay with our
+                    {/* END: Title Section */}
+
+                    {/* Form Section */}
+                    <View transparent={true} style={{ height: '45%' }}>
+                        <View transparent={true} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View transparent={true} style={[styles.inputContainer, { width: '48%' }]}>
+                                <Controller control={control} name="name" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                                    <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Name *" />)} />
+                                {errors.name && <Text style={styles.error}>Required.</Text>}
+                            </View>
+                            <View transparent={true} style={[styles.inputContainer, { width: '48%' }]}>
+                                <Controller control={control} name="lastName" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                                    <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Last Name *" />)} />
+                                {errors.lastName && <Text style={styles.error}>Required.</Text>}
+                            </View>
+                        </View>
+                        <View transparent={true} style={styles.inputContainer}>
+                            <Controller control={control} name="email" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                                <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your email *" placeholder="username@example.com" />)} />
+                            {errors.email && <Text style={styles.error}>Email is required.</Text>}
+                        </View>
+                        <View transparent={true} style={styles.inputContainer}>
+                            <Controller control={control} name="password" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                                <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Password *" secureTextEntry={true} placeholder="* * * * * * * *" />)} />
+                            {errors.password && <Text style={styles.error}>Password is required.</Text>}
+                        </View>
+                        <View transparent={true}>
+                            <Text style={{ fontSize: 12, textAlign: 'center', color: '#7A7A7A' }}>
+                                Creating an account means you're okay with our
                     <Text style={{ fontFamily: 'Montserrat-Bold' }}> Terms of Service</Text> and our
                     <Text style={{ fontFamily: 'Montserrat-Bold' }}> Privacy Policy</Text>
-                    </Text>
+                            </Text>
+                        </View>
+                        {loading && <ActivityIndicator size="large" color="#869EDB"></ActivityIndicator>}
+                    </View>
+                    {/* END: Form Section */}
+
+                    {/* Footer */}
+                    <View transparent={true} style={{ marginTop: '10%' }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.info}>
+                            <Text style={{ fontSize: 16, textAlign: 'center' }}>Already have an account? <Text style={{ fontFamily: 'Montserrat-Bold' }}> Log In.</Text></Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button}>
+                            <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            {userFlag && <ActivityIndicator size="large" color="#869EDB"></ActivityIndicator>}
-            </View>
-            <View transparent={true} style={{ marginTop: '10%' }}>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.info}>
-                    <Text style={{ fontSize: 16, textAlign: 'center' }}>Already have an account? <Text style={{ fontFamily: 'Montserrat-Bold' }}> Log In.</Text></Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button}>
-                    <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Sign Up</Text>
-                </TouchableOpacity>
-            </View>
-        </TouchableWithoutFeedback>
+                {/* END: Footer */}
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 };
 
@@ -107,9 +120,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         borderRadius: 15,
-        width: Dimensions.get('window').width * 0.15,
-        height: Dimensions.get('window').width * 0.15,
-        backgroundColor: '#F5F5F5',
+        width: Layout.window.width * 0.15,
+        height: Layout.window.width * 0.15,
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 20,
