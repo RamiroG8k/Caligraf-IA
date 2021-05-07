@@ -1,8 +1,8 @@
 // Common
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabBarOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Hooks
@@ -23,9 +23,22 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 export default function BottomTabNavigator() {
     const colorScheme = useColorScheme();
 
+    const options: BottomTabBarOptions = {
+        activeTintColor: Colors[colorScheme].primary,
+        showLabel: false,
+        style: {
+            alignItems: 'center',
+            height: Platform.OS === 'ios' ? 75 : 60,
+            borderTopRightRadius: 30,
+            borderTopLeftRadius: 30,
+            paddingVertical: 10,
+            ...styles.shadow
+        }
+    };
+
     return (
         <BottomTab.Navigator initialRouteName="Home"
-            tabBarOptions={{ activeTintColor: Colors[colorScheme].primary }}>
+            tabBarOptions={options}>
             <BottomTab.Screen name="Home" component={TabHomeNavigator}
                 options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "home" : "home-outline" } color={color} /> }}
             />
@@ -40,7 +53,7 @@ export default function BottomTabNavigator() {
 }
 
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-    return <Ionicons size={30} style={styles.icon} {...props} />;
+    return <Ionicons size={35} {...props} />;
 }
 
 const HomeStack = createStackNavigator<TabHomeParamList>();
@@ -77,7 +90,14 @@ function TabProfileNavigator() {
 }
 
 const styles = StyleSheet.create({
-    icon: {
-        marginBottom: -10,
+    shadow: {
+        shadowColor: '#383838',
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.15,
+        shadowRadius: 4.5,
+        elevation: 10,
     }
 })
