@@ -8,7 +8,6 @@ export const toTitleCase = (phrase: string): string => {
 };
 
 export const toMinString = (phrase: string): string => {
-    console.log('PHRASE LEN: ', phrase.length);
     if (phrase.length > 13) {
         return phrase.slice(0, 10) + '...';
     }

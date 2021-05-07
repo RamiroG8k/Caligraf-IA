@@ -5,13 +5,14 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 const InfoCard = (props: any) => {
+    const { icon, phrase } = props;
     return (
         <View style={styles.tip}>
             <View style={styles.icon}>
-                <Ionicons size={45} name={props.icon}/>
+                <Ionicons size={45} name={icon}/>
             </View>
             <View style={styles.info}>
-                <Text style={{ width: '100%', }}>{props.phrase}</Text>
+                <Text style={{ width: '100%', }}>{phrase}</Text>
             </View>
         </View>
     );

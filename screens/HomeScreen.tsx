@@ -12,28 +12,7 @@ import Layout from '../constants/Layout';
 import MetricDetails from '../components/shared/MetricDetails';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DATA = [
-    {
-        id: "6",
-        title: "SABOR MORENO",
-        time: 5,
-        image: "https://images.pexels.com/photos/7260632/pexels-photo-7260632.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-    },
-    {
-        id: "7",
-        title: "0 MESTRE PUB",
-        time: 6,
-        image:
-            "https://images.pexels.com/photos/261763/pexels-photo-261763.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-    },
-    {
-        id: "8",
-        title: "GRILL 54 CHEF",
-        time: 10,
-        image:
-            "https://images.pexels.com/photos/760709/pexels-photo-760709.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-    }
-];
+import { DummyMetrics } from '../utils/dummy-data';
 
 const columns: number = 2;
 
@@ -102,7 +81,7 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
                         <Text style={styles.subtitle}>Last Analyses</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
                     </View>
-                    <FlatList scrollEnabled={false} data={formatData(DATA, columns)}
+                    <FlatList scrollEnabled={false} data={formatData(DummyMetrics, columns)}
                         keyExtractor={item => item.id} numColumns={columns}
                         style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
                 </View>

@@ -1,6 +1,6 @@
+// Common
 import * as React from 'react';
 import { StyleSheet, Image, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
-// Common
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiInstance } from '../services/instances';
 import { useEffect, useState } from 'react';
@@ -11,22 +11,28 @@ import StatsCard from '../components/StatsCard';
 import * as Util from '../utils/util-functions';
 import Layout from '../constants/Layout';
 
+type User = {
+    name: string;
+    email: string;
+};
+
 export default function ProfileScreen({ navigation }: { navigation: any }) {
     const [loading, setLoading] = useState<boolean>(true);
-    const [userInfo, setUserInfo] = useState<Object | null | any>(null);
-    const [metrics, setMetrics] = useState<Array<object> | null | any>([]);
+    const [userInfo, setUserInfo] = useState<User>({ name: 'Unassigned', email: 'example@email.com' });
+    const [metrics, setMetrics] = useState<Array<Object>>([]);
 
     useEffect(() => {
         AsyncStorage.getItem('info').then((response: any) => {
             if (response !== null) {
-                fetchMetrics(JSON.parse(response)._id);
                 setUserInfo(JSON.parse(response));
-                setLoading(false);
+                fetchMetrics(JSON.parse(response)._id);
                 return;
             }
         }).catch((error: any) => {
-            console.log('ERROR IN ASYNC STORAGE: ', error);
+            console.warn('ERROR IN ASYNC STORAGE: ', error);
         });
+
+        setLoading(false);
     }, []);
 
     if (loading) {
@@ -37,22 +43,29 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
         );
     }
 
-    const fetchMetrics: any = async (userID: number) => {
+    async function fetchMetrics(userID: number) {
         await apiInstance.get(`/metric/user/${userID}`).then(
             (response: any) => {
-                setMetrics(response.data.content);
+                response.data ? setMetrics(response.data.content) : setMetrics([]);
             }
         ).catch((error: any) => {
-            console.log('ERROR: ', error);
+            console.warn('ERROR: ', error);
         });
     };
 
-    const availableMetrics: any = metrics.map((item: any) => {
+    const availableMetrics = metrics.map((item: any): any => {
         return (
             <StatsCard key={item._id} title={Util.toMinString(item.phrase.data)}
                 icon="attach-outline" phrase={Util.toLocalDate(item.date)} />
         );
     });
+
+    const nullMetrics = (): any => {
+        return (
+            <StatsCard key={0} title="No Data" icon="sad-outline"
+                phrase="Oops, it looks like you have no metrics available" />
+        );
+    };
 
     const Logout = () => {
         AsyncStorage.clear();
@@ -89,10 +102,10 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
                         <Text style={styles.title}>Stats</Text>
                         <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
                     </View>
-                    {availableMetrics}
+                    {metrics.length ? availableMetrics : nullMetrics()}
                 </View>
-                <View transparent={true} style={{ alignItems: 'center', marginTop: 10, marginBottom: '30%' }}>
-                    <Text>Coming Soon...</Text>
+                <View transparent={true} style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
+                    <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
         </View>

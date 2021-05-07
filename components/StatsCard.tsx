@@ -1,20 +1,22 @@
+// Common
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '../components/Themed';
 import { Ionicons } from '@expo/vector-icons';
+// Others
+import { Text, View } from '../components/Themed';
 import Layout from '../constants/Layout';
 
-
 const StatsCard = (props: any) => {
+    const { title, phrase, icon } = props;
     return (
         <View style={styles.card}>
             <TouchableOpacity activeOpacity={0.4} onPress={() => alert('CLICK')} style={{ alignItems: 'center', flexDirection: 'row' }}>
                 <View style={styles.icon}>
-                    <Ionicons size={35} name={props.icon} />
+                    <Ionicons size={35} name={icon} />
                 </View>
                 <View transparent={true} style={{ flex: 1, marginLeft: 10 }}>
-                    <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>{props.title}</Text>
-                    <Text style={{ fontSize: 14 }}>{props.phrase}</Text>
+                    <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>{title}</Text>
+                    <Text style={{ fontSize: 14 }}>{phrase}</Text>
                 </View>
             </TouchableOpacity>
         </View>

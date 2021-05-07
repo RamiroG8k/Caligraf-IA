@@ -3,19 +3,20 @@ import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
 
 const Card = (props: any) => {
+    const { onPress, image, time, title } = props;
     return (
-        <TouchableOpacity onPress={props.onPress} style={styles.container}>
+        <TouchableOpacity onPress={onPress} style={styles.container}>
             <View style={styles.imgContainer}>
-                <Image style={styles.img} source={{uri: props.image }} />
+                <Image style={styles.img} source={{uri: image }} />
             </View>
             <View style={styles.infoContainer}>
                 <View style={styles.tagsContainer}>
                     <View lightColor="#E0E0E0" darkColor="#474747" style={styles.tag}>
-                        <Text style={{ fontSize: 10 }}>{props.time} %</Text>
+                        <Text style={{ fontSize: 10 }}>{time} %</Text>
                     </View>
                 </View>
                 <View>
-                    <Text style={[{ fontFamily: 'Montserrat-Bold' }, { marginBottom: 5 }]}>{props.title}</Text>
+                    <Text style={[{ fontFamily: 'Montserrat-Bold' }, { marginBottom: 5 }]}>{title}</Text>
                     <Text style={{ fontSize: 12, color: '#999999' }}>Lorem ipsum dolor sit, sed etsed do </Text>
                 </View>
             </View>

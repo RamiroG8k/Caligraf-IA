@@ -32,7 +32,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
         await apiInstance.post('/user', form)
             .then((response: any) => {
                 navigation.navigate('/Login');
-                alert(`Account created ${response.data.name}!\nTry to use your new Credentials`)
+                alert(`Account created ${response.data.name}!\n Now log using your new Credentials`)
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });

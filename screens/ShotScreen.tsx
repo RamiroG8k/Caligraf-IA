@@ -53,9 +53,11 @@ const ShotScreen = ({ navigation }: { navigation: any }, props: any) => {
                 <Text style={styles.subtitle}>
                     Try to center the phrase in frame
                 </Text>
-                <TouchableOpacity onPress={takeShot} style={styles.button}>
-                    <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>SNAP!</Text>
-                </TouchableOpacity>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity onPress={takeShot} style={styles.button}>
+                        <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>SNAP!</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -92,12 +94,13 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         overflow: 'hidden',
     },
-    button: {
-        width: '25%',
-        alignItems: 'center',
-        backgroundColor: '#F5F5F5',
-        marginVertical: '5%',
+    buttonContainer: {
         borderRadius: 15,
+        marginVertical: '5%',
+    },
+    button : {
+        alignItems: 'center',
+        justifyContent: 'center',
         padding: 15,
     }
 });

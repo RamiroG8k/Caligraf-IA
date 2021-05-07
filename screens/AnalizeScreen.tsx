@@ -1,33 +1,18 @@
+// Common
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-
+// Components
 import { Text, View } from '../components/Themed';
 import InfoCard from '../components/InfoCard';
 import Layout from '../constants/Layout';
-
-const DATA = [
-    {
-        id: 1,
-        icon: "information-circle-outline",
-        text: "Lorem ipsum dolor sit amet, consectetur adip sample"
-    },
-    {
-        id: 2,
-        icon: "scan-outline",
-        text: "Lorem ipsum dolor sit amet, consectetur adip sample"
-    },
-    {
-        id: 3,
-        icon: "camera-reverse-outline",
-        text: "Lorem ipsum dolor sit amet, consectetur adip sample"
-    },
-];
+// Others
+import { DummyTips } from '../utils/dummy-data';
 
 export default function AnalizeScreen({ navigation }: { navigation: any }, props: any) {
 
-    const tipsToShot: any = DATA.map((item: any) => {
+    const tipsToShot: any = DummyTips.map((item: any) => {
         return (
             <InfoCard key={item.id} icon={item.icon} phrase={item.text} />
         );
@@ -48,10 +33,12 @@ export default function AnalizeScreen({ navigation }: { navigation: any }, props
                 <Text style={[styles.strongText, styles.subtitle]}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen')}>
-                <Ionicons size={150} name="camera-outline" color="#CFA9DB" />
-                <Text style={[styles.strongText, styles.subtitle]}>¡Tap Here!</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen')}>
+                    <Ionicons size={150} name="camera-outline" color="#CFA9DB" />
+                    <Text style={[styles.strongText, styles.subtitle]}>¡Tap Here!</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -83,13 +70,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginLeft: 10,
     },
-    button: {
+    buttonContainer: {
         borderRadius: 25,
-        backgroundColor: '#F5F5F5',
-        width: '100%',
         // width: Layout.window.width * 0.75,
         height: Layout.window.width * 0.75,
+    },
+    button: {
+        alignItems: 'center',
         justifyContent: 'center',
-        alignItems: 'center'
+        height: '100%'
     }
 });
