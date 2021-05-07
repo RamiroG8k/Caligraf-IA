@@ -32,7 +32,7 @@ export function InputField(props: Props): any {
                     <Ionicons size={20} name={icon} />
                 </TouchableOpacity>}
             </View>
-            <TextInput onChangeText={change} secureTextEntry={secret} style={styles.input} {...inputProps} />
+            <TextInput onChangeText={change} autoCapitalize="none" secureTextEntry={secret} style={styles.input} {...inputProps} />
         </View>
     );
 }
