@@ -43,7 +43,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined} keyboardVerticalOffset={0}>
             <ScrollView style={{ flex: 1, padding: '10%' }}>
                 {/* Title Section */}
-                <View transparent={true} style={{ justifyContent: 'flex-start' }}>
+                <View transparent={true} style={{ justifyContent: 'flex-end' }}>
                     <View transparent={true} style={{ marginBottom: '10%' }}>
                         <BackButton onPress={() => navigation.goBack()} />
                         <View transparent={true} >

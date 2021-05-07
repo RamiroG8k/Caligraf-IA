@@ -27,13 +27,13 @@ export default function BottomTabNavigator() {
         <BottomTab.Navigator initialRouteName="Home"
             tabBarOptions={{ activeTintColor: Colors[colorScheme].primary }}>
             <BottomTab.Screen name="Home" component={TabHomeNavigator}
-                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="home-outline" color={color} /> }}
+                options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "home" : "home-outline" } color={color} /> }}
             />
             <BottomTab.Screen name="Analyze" component={TabAnalizeNavigator}
-                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="camera-outline" color={color} /> }}
+                options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "camera" : "camera-outline" } color={color} /> }}
             />
             <BottomTab.Screen name="Profile" component={TabProfileNavigator}
-                options={{ tabBarIcon: ({ color }) => <TabBarIcon name="bar-chart-outline" color={color} /> }}
+                options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "bar-chart" : "bar-chart-outline"} color={color} /> }}
             />
         </BottomTab.Navigator>
     );
