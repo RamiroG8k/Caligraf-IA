@@ -27,7 +27,6 @@ const Card = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 10,
         aspectRatio: 1,
         borderRadius: 25, 
         overflow: 'hidden',

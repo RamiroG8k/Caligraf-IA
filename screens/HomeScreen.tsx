@@ -1,6 +1,6 @@
 // Common
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, ScrollView, FlatList, Image, TouchableHighlight, StatusBar } from 'react-native';
+import { StyleSheet, ScrollView, Image, TouchableHighlight } from 'react-native';
 // Components
 import { Text, useThemeColor, View } from '../components/Themed';
 import Card from '../components/Card';
@@ -14,37 +14,30 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { DummyMetrics } from '../utils/dummy-data';
 
-const columns: number = 2;
-
 export default function HomeScreen({ navigation }: { navigation: any }, props: any) {
     const modalizeRef = useRef<Modalize>(null);
     const [modalContent, setModalContent] = useState<any | null>(null);
+    const [metrics, setMetrics] = useState<Array<Object>>(DummyMetrics);
 
     const renderContent = (index: number) => {
         setModalContent(<MetricDetails id={index} />);
         modalizeRef.current?.open();
     };
 
-    const formatData = (data: Array<any>, columns: number): Array<any> => {
-        while (data.length % columns) {
-            data.push({ empty: true });
-        }
-        return data;
-    };
-
-    const emptyCard = (): any => {
+    const emptyCard = (key: number): any => {
         return (
-            <TouchableHighlight underlayColor="#CCCCCC" onPress={() => navigation.navigate('Analyze')} style={styles.emptyCard}>
-                <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
-                    source={require('../assets/images/Plus2.jpg')} />
-            </TouchableHighlight>
+            <View transparent={true} style={{ width: '48%', marginVertical: 7 }}>
+                <TouchableHighlight key={key} underlayColor="#CCCCCC" onPress={() => navigation.navigate('Analyze')} style={{ aspectRatio: 1 }}>
+                    <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
+                        source={require('../assets/images/Plus2.jpg')} />
+                </TouchableHighlight>
+            </View>
         );
     };
 
-    const renderCard = (item: any) => {
-        return item.empty ? emptyCard() : <Card onPress={() => renderContent(item.id)} {...item} />
-    };
-
+    useEffect(() => {
+        setMetrics([...metrics, { empty: true }]);
+    }, []);
     // useEffect(() => {
     //     try {
     //         AsyncStorage.getAllKeys((err, keys: any) => {
@@ -58,6 +51,18 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
     //         console.log(err);
     //     }
     // }, [])
+
+    const lastMetrics = metrics.map((item: any, index: number, { length }) => {
+        if (index === length - 1) {
+            return emptyCard(0);
+        } else {
+            return (
+                <View key={item.id} transparent={true} style={{ width: '48%', marginVertical: 7 }}>
+                    <Card onPress={() => renderContent(item.id)} {...item} />
+                </View>
+            );
+        }
+    });
 
     return (
         <View transparent={true}>
@@ -81,9 +86,9 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
                         <Text style={styles.subtitle}>Last Analyses</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
                     </View>
-                    <FlatList scrollEnabled={false} data={formatData(DummyMetrics, columns)}
-                        keyExtractor={item => item.id} numColumns={columns}
-                        style={{ margin: -10 }} renderItem={({ item }) => renderCard(item)} />
+                    <View transparent={true} style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                        {metrics ? lastMetrics : emptyCard(0)}
+                    </View>
                 </View>
                 <View transparent={true} style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>

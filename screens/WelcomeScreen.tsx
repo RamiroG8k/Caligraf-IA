@@ -15,12 +15,16 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
             </View>
             <View transparent={true} style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <View transparent={true} style={styles.buttonGroup}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Register')} style={[styles.button, { backgroundColor: '#E6E6E6' }]} >
-                        <Text style={[styles.btnText, { color: '#383838' }]}>Sign Up</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Login')} style={[styles.button, { backgroundColor: '#869EDB' }]}>
-                        <Text style={[styles.btnText, { color: '#FFFFFF' }]}>Log In</Text>
-                    </TouchableOpacity>
+                    <View style={styles.button}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Register')} style={{padding: 15}}>
+                            <Text style={styles.btnText}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.button}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ backgroundColor: '#869EDB', padding: 15 }}>
+                            <Text style={[styles.btnText, { color: '#FFFFFF' }]}>Log In</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>
@@ -29,7 +33,10 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, padding: '10%', alignItems: 'center', justifyContent: 'space-between'
+        flex: 1,
+        padding: '10%',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     imgContainer: {
         width: '100%',
@@ -61,14 +68,13 @@ const styles = StyleSheet.create({
     },
     button: {
         borderRadius: 15,
-        padding: 15,
+        overflow: 'hidden',
         width: '45%',
     },
     btnText: {
         fontSize: 16,
         textAlign: 'center',
         fontFamily: 'Montserrat-Bold',
-        color: '#383838'
     },
 });
 

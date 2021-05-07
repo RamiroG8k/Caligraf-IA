@@ -1,18 +1,16 @@
 // Common Modules
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, ScrollView, Platform } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // Components
 import { Text, View } from '../components/Themed';
 import { InputField } from '../components/InputField';
+import BackButton from '../components/shared/BackButton';
 // Instances
 import { apiInstance } from '../services/instances';
 // Hooks
 import { useForm, Controller } from 'react-hook-form';
 // Others
-import Layout from '../constants/Layout';
-import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type FormData = {
@@ -47,11 +45,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
             <ScrollView style={{ flex: 1, padding: '10%' }}>
                 <View transparent={true} style={{ justifyContent: 'flex-start' }}>
                     <View transparent={true} style={{ marginBottom: '10%' }}>
-                        <View transparent={true} style={styles.icon}>
-                            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.touchable}>
-                                <AntDesign name="back" size={30} color="black" />
-                            </TouchableOpacity>
-                        </View>
+                        <BackButton onPress={() => navigation.goBack()}/>
                         <View transparent={true}>
                             <Text style={styles.title}>Let's sign you in</Text>
                             <Text style={styles.subtitle}>{`Welcome back,\nYou've been missed!`}</Text>
@@ -95,25 +89,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#869EDB',
         borderRadius: 15,
     },
-    touchable: {
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    icon: {
-        borderRadius: 15,
-        width: Layout.window.width * 0.15,
-        height: Layout.window.width * 0.15,
-        backgroundColor: '#F5F5F5',
-        marginVertical: 20,
-    },
     inputContainer: {
         marginBottom: 15,
     },
     label: {
         fontSize: 16,
         fontFamily: 'Montserrat-Bold',
-        color: '#383838',
     },
     error: {
         fontSize: 12,
@@ -128,7 +109,6 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 26,
-        color: '#7A7A7A',
     },
     info: {
         paddingHorizontal: 30,
@@ -137,7 +117,6 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         textAlign: 'center',
-        color: '#7A7A7A'
     }
 })
 

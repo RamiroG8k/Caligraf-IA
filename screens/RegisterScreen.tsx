@@ -2,12 +2,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, ScrollView, Platform } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { AntDesign } from '@expo/vector-icons';
 // Components
 import { Text, View } from '../components/Themed';
 import { InputField } from '../components/InputField';
+import BackButton from '../components/shared/BackButton';
 // Others
-import Layout from '../constants/Layout';
 import { useForm, Controller } from 'react-hook-form';
 import { apiInstance } from '../services/instances';
 
@@ -44,13 +43,9 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined} keyboardVerticalOffset={0}>
             <ScrollView style={{ flex: 1, padding: '10%' }}>
                 {/* Title Section */}
-                <View transparent={true} style={{ justifyContent: 'flex-end' }}>
+                <View transparent={true} style={{ justifyContent: 'flex-start' }}>
                     <View transparent={true} style={{ marginBottom: '10%' }}>
-                        <View style={styles.icon}>
-                            <TouchableOpacity onPress={() => navigation.goBack()}>
-                                <AntDesign name="back" size={30} />
-                            </TouchableOpacity>
-                        </View>
+                        <BackButton onPress={() => navigation.goBack()}/>
                         <View transparent={true} >
                             <Text style={styles.title}>Create Account</Text>
                             <Text style={styles.subtitle}>{`Sign up to get \nStarted`}</Text>
@@ -83,10 +78,10 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                             {errors.password && <Text style={styles.error}>Password is required.</Text>}
                         </View>
                         <View transparent={true}>
-                            <Text style={{ fontSize: 12, textAlign: 'center', color: '#7A7A7A' }}>
+                            <Text style={{ fontSize: 12, textAlign: 'center' }}>
                                 Creating an account means you're okay with our
-                    <Text style={{ fontFamily: 'Montserrat-Bold' }}> Terms of Service</Text> and our
-                    <Text style={{ fontFamily: 'Montserrat-Bold' }}> Privacy Policy</Text>
+                                <Text style={{ fontFamily: 'Montserrat-Bold' }}> Terms of Service</Text> and our
+                                <Text style={{ fontFamily: 'Montserrat-Bold' }}> Privacy Policy</Text>
                             </Text>
                         </View>
                         {loading && <ActivityIndicator size="large" color="#869EDB"></ActivityIndicator>}
@@ -118,28 +113,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#869EDB',
         borderRadius: 15,
     },
-    icon: {
-        borderRadius: 15,
-        width: Layout.window.width * 0.15,
-        height: Layout.window.width * 0.15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 20,
-    },
     input: {
         height: 55,
         paddingHorizontal: 15,
         borderRadius: 15,
         marginBottom: 15,
-        borderColor: '#E6E6E6',
         borderWidth: 1,
-        backgroundColor: '#F5F5F5',
         marginTop: 5,
     },
     label: {
         fontSize: 16,
         fontFamily: 'Montserrat-Bold',
-        color: '#383838',
     },
     error: {
         fontSize: 12,
@@ -157,7 +141,6 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 26,
-        color: '#7A7A7A',
     },
     info: {
         paddingHorizontal: 40,
@@ -166,7 +149,6 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         textAlign: 'center',
-        color: '#7A7A7A'
     }
 })
 
