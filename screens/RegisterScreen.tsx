@@ -45,7 +45,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                 {/* Title Section */}
                 <View transparent={true} style={{ justifyContent: 'flex-start' }}>
                     <View transparent={true} style={{ marginBottom: '10%' }}>
-                        <BackButton onPress={() => navigation.goBack()}/>
+                        <BackButton onPress={() => navigation.goBack()} />
                         <View transparent={true} >
                             <Text style={styles.title}>Create Account</Text>
                             <Text style={styles.subtitle}>{`Sign up to get \nStarted`}</Text>

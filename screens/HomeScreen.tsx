@@ -1,6 +1,6 @@
 // Common
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, ScrollView, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 // Components
 import { Text, useThemeColor, View } from '../components/Themed';
 import Card from '../components/Card';
@@ -26,11 +26,11 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
 
     const emptyCard = (key: number): any => {
         return (
-            <View transparent={true} style={{ width: '48%', marginVertical: 7 }}>
-                <TouchableHighlight key={key} underlayColor="#CCCCCC" onPress={() => navigation.navigate('Analyze')} style={{ aspectRatio: 1 }}>
+            <View transparent={true} key={key} style={{ width: '48%', marginVertical: 7 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('Analyze')} style={{ aspectRatio: 1 }}>
                     <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
                         source={require('../assets/images/Plus2.jpg')} />
-                </TouchableHighlight>
+                </TouchableOpacity>
             </View>
         );
     };
@@ -38,19 +38,6 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
     useEffect(() => {
         setMetrics([...metrics, { empty: true }]);
     }, []);
-    // useEffect(() => {
-    //     try {
-    //         AsyncStorage.getAllKeys((err, keys: any) => {
-    //             AsyncStorage.multiGet(keys, (err, stores: any) => {
-    //                 stores.map((result: any, i: number, store: any) => {
-    //                     console.log(`KEY: ${store[i][0]}, VAL: ${store[i][1]}`);
-    //                 });
-    //             });
-    //         });
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }, [])
 
     const lastMetrics = metrics.map((item: any, index: number, { length }) => {
         if (index === length - 1) {
