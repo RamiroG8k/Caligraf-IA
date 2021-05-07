@@ -116,7 +116,7 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
-            <Modalize modalStyle={[styles.modal, { backgroundColor: '#1F1F1F' }]}
+            <Modalize modalStyle={[styles.modal, { backgroundColor: '#F3F3F3' }]}
                 modalHeight={Layout.window.height * 0.7} ref={modalizeRef}
                 overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
                 {modalContent}

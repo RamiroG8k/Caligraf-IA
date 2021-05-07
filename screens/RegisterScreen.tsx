@@ -30,8 +30,8 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
     const setCredentials = async (form: FormData) => {
         await apiInstance.post('/user', form)
             .then((response: any) => {
-                navigation.navigate('/Login');
-                alert(`Account created ${response.data.name}!\n Now log using your new Credentials`)
+                navigation.navigate('Login');
+                alert(`Account created ${response.data.name}!\n Now log in using your new Credentials`)
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });
