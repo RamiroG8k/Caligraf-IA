@@ -7,10 +7,10 @@ import { Text, View } from '../components/Themed';
 import Layout from '../constants/Layout';
 
 const StatsCard = (props: any) => {
-    const { title, phrase, icon } = props;
+    const { title, phrase, icon, onPress } = props;
     return (
         <View style={styles.card}>
-            <TouchableOpacity activeOpacity={0.4} onPress={() => alert('CLICK')} style={{ alignItems: 'center', flexDirection: 'row' }}>
+            <TouchableOpacity activeOpacity={0.4} onPress={onPress} style={{ alignItems: 'center', flexDirection: 'row' }}>
                 <View style={styles.icon}>
                     <Ionicons size={35} name={icon} />
                 </View>
