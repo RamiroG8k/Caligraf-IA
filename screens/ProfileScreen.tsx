@@ -1,16 +1,15 @@
 // Common
-import React, { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { StyleSheet, Image, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiInstance } from '../services/instances';
+import { useEffect, useState } from 'react';
 // Components
-import { Text, useThemeColor, View } from '../components/Themed';
+import { Text, View } from '../components/Themed';
 import StatsCard from '../components/StatsCard';
-import { Modalize } from 'react-native-modalize';
 // Util
 import * as Util from '../utils/util-functions';
 import Layout from '../constants/Layout';
-import MetricDetails from '../components/shared/MetricDetails';
 
 type User = {
     name: string;
@@ -18,11 +17,9 @@ type User = {
 };
 
 export default function ProfileScreen({ navigation }: { navigation: any }) {
-    const modalizeRef = useRef<Modalize>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [userInfo, setUserInfo] = useState<User>({ name: 'Unassigned', email: 'example@email.com' });
     const [metrics, setMetrics] = useState<Array<Object>>([]);
-    const [modalContent, setModalContent] = useState<any | null>(null);
 
     useEffect(() => {
         AsyncStorage.getItem('info').then((response: any) => {
@@ -59,7 +56,7 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
     const availableMetrics = metrics.map((item: any): any => {
         return (
             <StatsCard key={item._id} title={Util.toMinString(item.phrase.data)}
-                onPress={() => renderContent(item.id)} icon="attach-outline" phrase={Util.toLocalDate(item.date)} />
+                icon="attach-outline" phrase={Util.toLocalDate(item.date)} />
         );
     });
 
@@ -68,11 +65,6 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
             <StatsCard key={0} title="No Data" icon="sad-outline"
                 phrase="Oops, it looks like you have no metrics available" />
         );
-    };
-
-    const renderContent = (index: number) => {
-        setModalContent(<MetricDetails id={index} />);
-        modalizeRef.current?.open();
     };
 
     const Logout = () => {
@@ -116,11 +108,6 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
-            <Modalize modalStyle={[styles.modal, { backgroundColor: useThemeColor({}, 'background') }]}
-                modalHeight={Layout.window.height * 0.7} ref={modalizeRef}
-                overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
-                {modalContent}
-            </Modalize>
         </View>
     );
 }
@@ -170,9 +157,5 @@ const styles = StyleSheet.create({
         padding: 12,
         margin: 10,
         width: '45%',
-    },
-    modal: {
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25
     },
 });
