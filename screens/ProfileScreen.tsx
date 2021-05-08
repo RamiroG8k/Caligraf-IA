@@ -4,7 +4,7 @@ import { StyleSheet, Image, ScrollView, TouchableHighlight, ActivityIndicator } 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiInstance } from '../services/instances';
 // Components
-import { Text, useThemeColor, View } from '../components/Themed';
+import { Text, View } from '../components/Themed';
 import StatsCard from '../components/StatsCard';
 import { Modalize } from 'react-native-modalize';
 // Util
@@ -25,15 +25,19 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
     const [metrics, setMetrics] = useState<Array<Object>>([]);
 
     useEffect(() => {
-        AsyncStorage.getItem('info').then((response: any) => {
-            if (response !== null) {
-                setUserInfo(JSON.parse(response));
-                fetchMetrics(JSON.parse(response)._id);
-                return;
+        AsyncStorage.getItem('info').then(
+            (response: any) => {
+                if (response !== null) {
+                    setUserInfo(JSON.parse(response));
+                    fetchMetrics(JSON.parse(response)._id);
+                    return;
+                }
             }
-        }).catch((error: any) => {
-            console.warn('ERROR IN ASYNC STORAGE: ', error);
-        });
+        ).catch(
+            (error: any) => {
+                console.warn('ERROR IN ASYNC STORAGE: ', error);
+            }
+        );
 
         setLoading(false);
     }, []);
