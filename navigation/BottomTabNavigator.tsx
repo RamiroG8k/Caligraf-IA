@@ -4,17 +4,14 @@ import { Platform, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BottomTabBarOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-
 // Hooks
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-
 // Screens
 import HomeScreen from '../screens/HomeScreen';
 import ShotScreen from '../screens/ShotScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import AnalizeScreen from '../screens/AnalizeScreen';
-
 // ParamsList
 import { BottomTabParamList, TabProfileParamList, TabHomeParamList, TabAnallizeNavigator } from '../types';
 
@@ -24,7 +21,8 @@ export default function BottomTabNavigator() {
     const colorScheme = useColorScheme();
 
     const options: BottomTabBarOptions = {
-        activeTintColor: Colors[colorScheme].primary,
+        activeTintColor: Colors[colorScheme].tabIconSelected,
+        inactiveTintColor: Colors[colorScheme].tabIconDefault,
         showLabel: false,
         style: {
             alignItems: 'center',
@@ -37,8 +35,7 @@ export default function BottomTabNavigator() {
     };
 
     return (
-        <BottomTab.Navigator initialRouteName="Home"
-            tabBarOptions={options}>
+        <BottomTab.Navigator initialRouteName="Home" tabBarOptions={options}>
             <BottomTab.Screen name="Home" component={TabHomeNavigator}
                 options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "home" : "home-outline" } color={color} /> }}
             />
@@ -61,8 +58,7 @@ const HomeStack = createStackNavigator<TabHomeParamList>();
 function TabHomeNavigator() {
     return (
         <HomeStack.Navigator>
-            <HomeStack.Screen name="TabHomeScreen"
-                component={HomeScreen} options={{ headerShown: false }} />
+            <HomeStack.Screen name="TabHomeScreen" component={HomeScreen} options={{ headerShown: false }} />
         </HomeStack.Navigator>
     );
 }

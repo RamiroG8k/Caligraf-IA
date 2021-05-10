@@ -2,7 +2,12 @@ import * as React from 'react';
 import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
 
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
+
 const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
+    const colorScheme = useColorScheme();
+
     return (
         <View transparent={true} style={styles.container}>
             <View transparent={true} style={styles.imgContainer}>
@@ -10,7 +15,7 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
                     source={require('../assets/images/ill.png')} />
             </View>
             <View transparent={true}>
-                <Text style={styles.title}>Caligraf IA analysis Assessment.</Text>
+                <Text style={[styles.title, { color: Colors[colorScheme].secondary }]}>Caligraf IA analysis Assessment.</Text>
                 <Text style={styles.subtitle}>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
             </View>
             <View transparent={true} style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -21,8 +26,8 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.button}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ backgroundColor: '#869EDB', padding: 15 }}>
-                            <Text style={[styles.btnText, { color: '#FFFFFF' }]}>Log In</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ backgroundColor: Colors[colorScheme].tint, padding: 15 }}>
+                            <Text style={styles.btnText}>Log In</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -51,7 +56,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         textAlign: 'center',
         marginBottom: 16,
-        color: '#385EBC',
         fontSize: 30,
     },
     subtitle: {

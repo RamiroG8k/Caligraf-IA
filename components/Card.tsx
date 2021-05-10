@@ -1,8 +1,13 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
+// Hooks
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
 
 const Card = (props: any) => {
+    const colorScheme = useColorScheme();
+
     const { onPress, image, time, title } = props;
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
@@ -11,7 +16,7 @@ const Card = (props: any) => {
             </View>
             <View style={styles.infoContainer}>
                 <View style={styles.tagsContainer}>
-                    <View lightColor="#E0E0E0" darkColor="#474747" style={styles.tag}>
+                    <View style={[styles.tag, { backgroundColor: Colors[colorScheme].tint}]}>
                         <Text style={{ fontSize: 10 }}>{time} %</Text>
                     </View>
                 </View>

@@ -10,7 +10,11 @@ import Layout from '../constants/Layout';
 // Others
 import { DummyTips } from '../utils/dummy-data';
 
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
+
 export default function AnalizeScreen({ navigation }: { navigation: any }, props: any) {
+    const colorScheme = useColorScheme();
 
     const tipsToShot: any = DummyTips.map((item: any) => {
         return (
@@ -21,7 +25,7 @@ export default function AnalizeScreen({ navigation }: { navigation: any }, props
     return (
         <View transparent={true} style={styles.container}>
             <View transparent={true} style={{ marginVertical: '5%' }}>
-                <Text style={[styles.strongText, styles.title]}>Getting Started</Text>
+                <Text style={[styles.strongText, styles.title, { color: Colors[colorScheme].primary }]}>Getting Started</Text>
                 <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
             </View>
             <View transparent={true} style={styles.tipsContainer}>
@@ -30,13 +34,13 @@ export default function AnalizeScreen({ navigation }: { navigation: any }, props
                 </ScrollView>
             </View>
             <View transparent={true} style={{ marginVertical: '5%' }}>
-                <Text style={[styles.strongText, styles.subtitle]}>Let's get into it!</Text>
+                <Text style={[styles.strongText, styles.subtitle, { color: Colors[colorScheme].secondary }]}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen')}>
-                    <Ionicons size={150} name="camera-outline" color="#CFA9DB" />
-                    <Text style={[styles.strongText, styles.subtitle]}>¡Tap Here!</Text>
+                        <Ionicons size={150} name="camera-outline" color={ Colors[colorScheme].secondary } />
+                    <Text style={[styles.strongText, styles.subtitle, { color: Colors[colorScheme].secondary }]}>¡Tap Here!</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -60,11 +64,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 32,
-        color: '#B981CC',
     },
     subtitle: {
         fontSize: 28,
-        color: '#CFA9DB',
     },
     info: {
         fontSize: 14,
