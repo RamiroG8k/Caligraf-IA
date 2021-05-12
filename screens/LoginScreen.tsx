@@ -52,7 +52,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
                     </View>
                 </View>
 
-                <View transparent={true} style={{ height: '40%' }}>
+                <View transparent={true} style={{ height: '45%' }}>
                     <View transparent={true} style={styles.inputContainer}>
                         <Controller control={control} name="email" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
                             <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your Email" placeholder="email@example.com" />)} />
@@ -66,12 +66,12 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
                     {userFlag && <ActivityIndicator size="large" color="#869EDB" style={{ marginVertical: '15%' }}></ActivityIndicator>}
                 </View>
 
-                <View transparent={true} style={{ marginTop: '15%' }}>
+                <View transparent={true} style={{ marginTop: '10%' }}>
                     <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                         <Text style={styles.info}>Don't have an account? <Text style={[styles.label, { fontFamily: 'Montserrat-Bold' }]}> Register.</Text></Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button}>
-                        <Text style={[styles.label, { textAlign: 'center', color: 'white' }]}>Log In</Text>
+                        <Text style={[styles.label, { textAlign: 'center' }]} lightColor="#FFFFFF" darkColor="#383838">Log In</Text>
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>

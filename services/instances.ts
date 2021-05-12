@@ -14,7 +14,7 @@ export const apiInstance = Axios.create(
 apiInstance.interceptors.request.use(
     async config => {
         const token = await AsyncStorage.getItem('token')
-        if (token) {
+        if (token) { 
             config.headers.Authorization = token;
         }
         return config;
