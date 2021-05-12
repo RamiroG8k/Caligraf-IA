@@ -27,7 +27,7 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
                     </View>
                     <View style={styles.button}>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ backgroundColor: Colors[colorScheme].primary, padding: 15 }}>
-                            <Text style={styles.btnText}>Log In</Text>
+                            <Text style={styles.btnText} lightColor="#FFFFFF" darkColor="#383838" >Log In</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

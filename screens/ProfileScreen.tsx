@@ -56,7 +56,7 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
                 response.data ? setMetrics(response.data.content) : setMetrics([]);
             }
         ).catch((error: any) => {
-            console.warn('ERROR: ', error);
+            console.log('ERROR: ', error);
         });
     };
 
