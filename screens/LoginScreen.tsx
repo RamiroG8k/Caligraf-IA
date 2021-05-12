@@ -1,6 +1,5 @@
 // Common Modules
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, Keyboard } from 'react-native';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 // Components
@@ -12,7 +11,6 @@ import { apiInstance } from '../services/instances';
 import { useForm, Controller } from 'react-hook-form';
 // Others
 import Layout from '../constants/Layout';
-import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackButton from '../components/shared/BackButton';
 
