@@ -4,11 +4,11 @@
         "slug": "Caligraf-IA",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/images/ia-icon.png",
+        "icon": "./assets/images/icon.png",
         "scheme": "myapp",
         "userInterfaceStyle": "automatic",
         "splash": {
-            "image": "./assets/images/ia-splash.png",
+            "image": "./assets/images/splash.png",
             "resizeMode": "contain",
             "backgroundColor": "#F5F5F5"
         },

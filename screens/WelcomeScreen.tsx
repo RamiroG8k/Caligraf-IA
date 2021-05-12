@@ -12,7 +12,7 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
         <View transparent={true} style={styles.container}>
             <View transparent={true} style={styles.imgContainer}>
                 <Image style={styles.img}
-                    source={require('../assets/images/ill.png')} />
+                    source={require('../assets/images/illustrations/1.png')} />
             </View>
             <View transparent={true}>
                 <Text style={[styles.title, { color: Colors[colorScheme].secondary }]}>Caligraf IA analysis Assessment.</Text>
@@ -26,7 +26,7 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.button}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ backgroundColor: Colors[colorScheme].tint, padding: 15 }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ backgroundColor: Colors[colorScheme].primary, padding: 15 }}>
                             <Text style={styles.btnText}>Log In</Text>
                         </TouchableOpacity>
                     </View>
