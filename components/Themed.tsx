@@ -20,17 +20,17 @@ export function useThemeColor(
     return colorFromProps ? colorFromProps : Colors[theme][colorName];
 }
 
-export type TextProps = ThemeProps & DefaultText['props'];
+export type TextProps = ThemeProps & DefaultText['props'] & { bold?: boolean };
 export type ViewProps = ThemeProps & DefaultView['props'];
 export type InputProps = ThemeProps & DefaultTextInput['props'];
 export type TouchableProps = ThemeProps & DefaultTouchable['props'] & { text: string; };
 
 export function Text(props: TextProps) {
-    const { style, light, dark, ...otherProps } = props;
+    const { style, light, dark, bold, ...otherProps } = props;
     const color = useThemeColor({ light, dark },
-        otherProps.primary ? 'primary' : otherProps.secondary ? 'secondary' : 'text')
+        otherProps.primary ? 'primary' : otherProps.secondary ? 'secondary' : 'text');
 
-    return <DefaultText style={[{ color, fontFamily: 'Montserrat' }, style]} {...otherProps} />;
+    return <DefaultText style={[{ color, fontFamily: bold ? 'Montserrat-Bold' : 'Montserrat' }, style]} {...otherProps} />;
 }
 
 export function TextInput(props: InputProps) {
@@ -43,10 +43,11 @@ export function TextInput(props: InputProps) {
 
 export function Button(props: TouchableProps) {
     const { style, light, dark, onPress, text, ...otherProps } = props;
-    const backgroundColor = useThemeColor({ light, dark }, otherProps.primary ? 'primary' : 'background')
+    const backgroundColor = useThemeColor({ light, dark }, 
+        otherProps.primary ? 'primary' : otherProps.secondary ? 'secondary' : 'background');
 
     return (
-        <DefaultTouchable onPress={onPress} {...otherProps}
+        <DefaultTouchable onPress={onPress} {...otherProps} activeOpacity={0.4}
             style={[{ borderRadius: 15, backgroundColor, padding: 14 }, style]} >
             <Text light={otherProps.primary || otherProps.secondary ? '#FFFFFF' : ''}
                 dark={otherProps.primary || otherProps.secondary ? '#383838' : ''}
@@ -55,7 +56,6 @@ export function Button(props: TouchableProps) {
             </Text>
         </DefaultTouchable>
     );
-
 }
 
 export function View(props: ViewProps) {

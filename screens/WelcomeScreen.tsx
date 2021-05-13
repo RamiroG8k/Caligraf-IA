@@ -10,7 +10,7 @@ const WelcomeScreen = ({ navigation }: { navigation: any }, props: any) => {
                     source={require('../assets/images/illustrations/1.png')} />
             </View>
             <View transparent={true} style={{ height: '30%' }}>
-                <Text secondary style={styles.title}>Caligraf IA analysis Assessment.</Text>
+                <Text secondary bold style={styles.title}>Caligraf IA analysis Assessment.</Text>
                 <Text style={styles.subtitle}>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
             </View>
             <View transparent={true}>
@@ -39,16 +39,13 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     title: {
-        fontFamily: 'Montserrat-Bold',
         textAlign: 'center',
         marginBottom: 16,
         fontSize: 30,
     },
     subtitle: {
-        fontFamily: 'Montserrat',
         textAlign: 'center',
-        color: '#7A7A7A',
-        lineHeight: 25,
+        lineHeight: 24,
         fontSize: 16,
     },
     buttonGroup: {
