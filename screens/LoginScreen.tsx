@@ -71,7 +71,7 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
                         <Text style={styles.info}>Don't have an account? <Text style={[styles.label, { fontFamily: 'Montserrat-Bold' }]}> Register.</Text></Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button}>
-                        <Text style={[styles.label, { textAlign: 'center' }]} lightColor="#FFFFFF" darkColor="#383838">Log In</Text>
+                        <Text style={[styles.label, { textAlign: 'center' }]} light="#FFFFFF" dark="#383838">Log In</Text>
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>

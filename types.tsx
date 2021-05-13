@@ -24,3 +24,11 @@ export type TabAnallizeNavigator = {
 export type TabProfileParamList = {
     TabProfileScreen: undefined;
 };
+
+export type ThemeProps = {
+    light?: string;
+    dark?: string;
+    transparent?: boolean;
+    primary?: boolean;
+    secondary?: boolean;
+};
