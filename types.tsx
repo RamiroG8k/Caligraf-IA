@@ -32,3 +32,15 @@ export type ThemeProps = {
     primary?: boolean;
     secondary?: boolean;
 };
+
+export type FormData = {
+    name: string;
+    lastName: string;
+    email: string;
+    password: string;
+};
+
+export type LoginFormData = {
+    email: string;
+    password: string;
+};
