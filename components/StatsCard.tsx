@@ -1,20 +1,19 @@
 // Common
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 // Others
-import { Text, View } from '../components/Themed';
+import { Icon, Text, View } from '../components/Themed';
 import Layout from '../constants/Layout';
 
 const StatsCard = (props: any) => {
     const { title, phrase, icon, onPress } = props;
     return (
-        <View style={styles.card}>
+        <View themed style={styles.card}>
             <TouchableOpacity activeOpacity={0.4} onPress={onPress} style={{ alignItems: 'center', flexDirection: 'row' }}>
-                <View style={styles.icon}>
-                    <Ionicons size={35} name={icon} />
+                <View themed light="#FFFFFF" dark="#000000" style={styles.icon}>
+                    <Icon size={35} name={icon} module="Ionicons"/>
                 </View>
-                <View themed={true} style={{ flex: 1, marginLeft: 10 }}>
+                <View style={{ flex: 1, marginLeft: 10 }}>
                     <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>{title}</Text>
                     <Text style={{ fontSize: 14 }}>{phrase}</Text>
                 </View>
@@ -28,7 +27,6 @@ const styles = StyleSheet.create({
         borderRadius: Math.round(Layout.window.width + Layout.window.height) / 2,
         width: Layout.window.width * 0.15,
         height: Layout.window.width * 0.15,
-        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10

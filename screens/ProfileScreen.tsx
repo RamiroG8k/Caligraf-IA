@@ -4,7 +4,7 @@ import { StyleSheet, Image, ScrollView, TouchableHighlight, ActivityIndicator } 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiInstance } from '../services/instances';
 // Components
-import { Text, View } from '../components/Themed';
+import { Button, Text, View } from '../components/Themed';
 import StatsCard from '../components/StatsCard';
 import { Modalize } from 'react-native-modalize';
 // Util
@@ -45,7 +45,7 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
     if (loading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" color="#BCDCC8"></ActivityIndicator>
+                <ActivityIndicator size="large" color="#FFAA49"></ActivityIndicator>
             </View>
         );
     }
@@ -88,40 +88,35 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
     };
 
     return (
-        <View themed={true}>
+        <View>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-                <View themed={true} style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'center' }}>
                     <View style={[styles.picture, { marginTop: '10%' }]}>
                         <View style={styles.pictureBorder}>
                             <Image style={styles.picture} source={require('../assets/images/profile.jpg')} />
                         </View>
                     </View>
-                    <View themed={true} style={{ alignItems: 'center', margin: '10%' }}>
-                        <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>{Util.toTitleCase(userInfo.name)}</Text>
-                        <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>{userInfo.email}</Text>
-                        <View themed={true} style={styles.buttonGroup}>
-                            <TouchableHighlight underlayColor="#CCCCCC" onPress={Logout} style={styles.button}>
-                                <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Log Out</Text>
-                            </TouchableHighlight>
-                            <TouchableHighlight underlayColor="#94C7A7" onPress={() => alert('Edit')} style={[styles.button, { backgroundColor: '#BCDCC8' }]}>
-                                <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Edit</Text>
-                            </TouchableHighlight>
+                    <View style={{ alignItems: 'center', margin: '10%' }}>
+                        <Text bold style={{ fontSize: 26, marginBottom: 4 }}>{Util.toTitleCase(userInfo.name)}</Text>
+                        <Text style={{ fontSize: 18 }}>{userInfo.email}</Text>
+                        <View style={styles.buttonGroup}>
+                            <Button text="Log Out" onPress={Logout} style={{ margin: 10, padding: 12, width: '45%' }} />
+                            <Button secondary text="Edit" onPress={() => alert('Edit')} style={{ margin: 10, padding: 12, width: '45%' }} />
                         </View>
                     </View>
                 </View>
-                <View themed={true}>
-                    <View themed={true} style={{ marginVertical: '5%' }}>
-                        <Text style={styles.title}>Stats</Text>
+                <View>
+                    <View style={{ marginVertical: '5%' }}>
+                        <Text primary bold style={styles.title}>Stats</Text>
                         <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
                     </View>
                     {metrics.length ? availableMetrics : nullMetrics()}
                 </View>
-                <View themed={true} style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
+                <View style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
-            <Modalize modalStyle={[styles.modal, { backgroundColor: '#F3F3F3' }]}
-                modalHeight={Layout.window.height * 0.7} ref={modalizeRef}
+            <Modalize modalStyle={[styles.modal, { backgroundColor: '#F3F3F3' }]} modalHeight={Layout.window.height * 0.7} ref={modalizeRef}
                 overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
                 {modalContent}
             </Modalize>
@@ -154,8 +149,6 @@ const styles = StyleSheet.create({
         fontSize: 32,
         marginLeft: 10,
         marginBottom: 12,
-        fontFamily: 'Montserrat-Bold',
-        color: '#6CB286',
     },
     info: {
         fontSize: 14,
@@ -166,14 +159,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         flexDirection: 'row',
         width: '90%'
-    },
-    button: {
-        backgroundColor: '#E6E6E6',
-        alignItems: 'center',
-        borderRadius: 15,
-        padding: 12,
-        margin: 10,
-        width: '45%',
     },
     modal: {
         borderTopLeftRadius: 25,
