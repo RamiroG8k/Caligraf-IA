@@ -11,7 +11,7 @@ const BackButton = ({ onPress }: { onPress: any }): any => {
     return (
         <View themed style={styles.container}>
             <TouchableOpacity onPress={onPress} style={styles.icon}>
-                <Icon name="back" size={30}/>
+                <Icon name="back" module="AntDesign" size={30}/>
             </TouchableOpacity>
         </View>
     );

@@ -33,6 +33,13 @@ export type ThemeProps = {
     secondary?: boolean;
 };
 
+export type IconProps = {
+    name: any;
+    size: number;
+    color?: string;
+    module?: string;
+};
+
 export type FormData = {
     name: string;
     lastName: string;

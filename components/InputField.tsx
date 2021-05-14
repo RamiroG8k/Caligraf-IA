@@ -1,11 +1,10 @@
 // Common
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { View, Text, TextInput, InputProps } from './Themed';
+import { View, Text, Icon, TextInput, InputProps } from './Themed';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // Util
 import { FieldError } from 'react-hook-form';
-import { Ionicons } from '@expo/vector-icons';
 
 interface Props extends InputProps {
     label?: string;
@@ -29,7 +28,7 @@ export function InputField(props: Props): any {
                 {label && <Text style={styles.label}>{label}</Text>}
                 {secureTextEntry && <TouchableOpacity onPress={toggleVisibility} style={styles.touchable}>
                     <Text>{ secret ? 'show ' : 'hide ' }</Text>
-                    <Ionicons size={20} name={icon} />
+                    <Icon module="Ionicons" size={20} name={icon} />
                 </TouchableOpacity>}
             </View>
             <TextInput onChangeText={change} autoCapitalize="none" secureTextEntry={secret} style={styles.input} {...otherProps} />

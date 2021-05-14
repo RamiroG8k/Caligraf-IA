@@ -6,12 +6,11 @@ import {
     TouchableOpacity as DefaultTouchable
 } from 'react-native';
 
-import { AntDesign as DefaultIcon } from '@expo/vector-icons';
-
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import { ThemeProps } from '../types';
+import { ThemeProps, IconProps } from '../types';
 
 export function useThemeColor(
     props: { light?: string; dark?: string },
@@ -46,7 +45,7 @@ export function TextInput(props: InputProps) {
 
 export function Button(props: TouchableProps) {
     const { style, light, dark, onPress, text, ...otherProps } = props;
-    const backgroundColor = useThemeColor({ light, dark }, 
+    const backgroundColor = useThemeColor({ light, dark },
         otherProps.primary ? 'primary' : otherProps.secondary ? 'secondary' : 'background');
 
     return (
@@ -61,11 +60,19 @@ export function Button(props: TouchableProps) {
     );
 }
 
-export function Icon(props: any) {
-    // const { name, size, color, ...otherProps } = props;
-    const icolor = useThemeColor({ light: '#383838', dark: '#FFFFFF' }, 'background');
+export function Icon(props: IconProps) {
+    const { name, size, color, module, ...otherProps } = props;
+    const icolor = color ? color : useThemeColor({ light: '#383838', dark: '#FFFFFF' }, 'background');
 
-    return <DefaultIcon {...props} color={icolor} />
+    switch (module) {
+        case 'AntDesign':
+            return <AntDesign name={name} size={size} color={icolor} />
+        case 'Ionicons':
+            return <Ionicons name={name} size={size} color={icolor} />
+        default:
+            return <Ionicons name={name} size={size} color={icolor} />
+            break;
+    }
 }
 
 export function View(props: ViewProps) {
