@@ -28,7 +28,7 @@ export type TabProfileParamList = {
 export type ThemeProps = {
     light?: string;
     dark?: string;
-    transparent?: boolean;
+    themed?: boolean;
     primary?: boolean;
     secondary?: boolean;
 };

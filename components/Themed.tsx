@@ -59,8 +59,8 @@ export function Button(props: TouchableProps) {
 }
 
 export function View(props: ViewProps) {
-    const { style, light, dark, transparent, ...otherProps } = props;
-    const backgroundColor = transparent ? 'transparent' : useThemeColor({ light, dark }, 'background')
+    const { style, light, dark, themed, ...otherProps } = props;
+    const backgroundColor = themed ? useThemeColor({ light, dark }, 'background') : 'transparent';
 
     return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }

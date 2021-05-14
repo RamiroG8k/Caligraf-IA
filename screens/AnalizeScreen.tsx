@@ -23,17 +23,17 @@ export default function AnalizeScreen({ navigation }: { navigation: any }, props
     });
 
     return (
-        <View transparent={true} style={styles.container}>
-            <View transparent={true} style={{ marginVertical: '5%' }}>
+        <View themed={true} style={styles.container}>
+            <View themed={true} style={{ marginVertical: '5%' }}>
                 <Text style={[styles.strongText, styles.title, { color: Colors[colorScheme].primary }]}>Getting Started</Text>
                 <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
             </View>
-            <View transparent={true} style={styles.tipsContainer}>
+            <View themed={true} style={styles.tipsContainer}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {tipsToShot}
                 </ScrollView>
             </View>
-            <View transparent={true} style={{ marginVertical: '5%' }}>
+            <View themed={true} style={{ marginVertical: '5%' }}>
                 <Text style={[styles.strongText, styles.subtitle, { color: Colors[colorScheme].secondary }]}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>

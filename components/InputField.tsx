@@ -14,7 +14,7 @@ interface Props extends InputProps {
 }
 
 export function InputField(props: Props): any {
-    const { label, change, error, secureTextEntry, ...inputProps } = props;
+    const { label, change, error, secureTextEntry, ...otherProps } = props;
     const [secret, setSecret] = useState<boolean>(secureTextEntry ? true : false);
     const [icon, setIcon] = useState<string | any>('eye-outline');
 
@@ -24,15 +24,15 @@ export function InputField(props: Props): any {
     };
 
     return (
-        <View transparent={true} style={{ zIndex: 0 }}>
-            <View transparent={true} style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{ zIndex: 0 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                 {label && <Text style={styles.label}>{label}</Text>}
                 {secureTextEntry && <TouchableOpacity onPress={toggleVisibility} style={styles.touchable}>
                     <Text>{ secret ? 'show ' : 'hide ' }</Text>
                     <Ionicons size={20} name={icon} />
                 </TouchableOpacity>}
             </View>
-            <TextInput onChangeText={change} autoCapitalize="none" secureTextEntry={secret} style={styles.input} {...inputProps} />
+            <TextInput onChangeText={change} autoCapitalize="none" secureTextEntry={secret} style={styles.input} {...otherProps} />
         </View>
     );
 }

@@ -26,7 +26,7 @@ const MetricDetails = ({ id }: { id: any}) => {
 
     if (loading) {
         return (
-            <View transparent={true} style={{ height: 100, justifyContent: 'center', alignItems: 'center' }}>
+            <View themed={true} style={{ height: 100, justifyContent: 'center', alignItems: 'center' }}>
                 <ActivityIndicator size="large" color="#BCDCC8"></ActivityIndicator>
             </View>
         );
@@ -34,7 +34,7 @@ const MetricDetails = ({ id }: { id: any}) => {
     
     return (
         <ScrollView>
-            <View transparent={true} style={styles.modalContent}>
+            <View themed={true} style={styles.modalContent}>
                 <Text>{JSON.stringify(data)}</Text>
             </View>
         </ScrollView>

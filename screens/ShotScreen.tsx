@@ -24,8 +24,8 @@ const ShotScreen = ({ navigation }: { navigation: any }, props: any) => {
     }
     if (hasPermission === false) {
         return (
-            <View transparent={true} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <View transparent={true} style={{ alignItems: 'center' }}>
+            <View themed={true} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <View themed={true} style={{ alignItems: 'center' }}>
                     <Text style={{ fontSize: 26, marginVertical: 14 }}>No access to camera</Text>
                     <Ionicons name="alert-circle-outline" size={74} />
                 </View>
@@ -44,12 +44,12 @@ const ShotScreen = ({ navigation }: { navigation: any }, props: any) => {
 
 
     return (
-        <View transparent={true} style={styles.container}>
+        <View themed={true} style={styles.container}>
             <Text style={styles.title}>Capture Phrase</Text>
             <View style={styles.containerCamera}>
                 <Camera ref={ref} style={styles.camera} />
             </View>
-            <View transparent={true} style={{ alignItems: 'center' }}>
+            <View themed={true} style={{ alignItems: 'center' }}>
                 <Text style={styles.subtitle}>
                     Try to center the phrase in frame
                 </Text>

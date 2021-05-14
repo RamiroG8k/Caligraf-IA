@@ -10,7 +10,7 @@ import Layout from '../../constants/Layout';
 
 const BackButton = ({ onPress }: { onPress: any }): any => {
     return (
-        <View style={styles.container}>
+        <View themed style={styles.container}>
             <TouchableOpacity onPress={onPress} style={styles.icon}>
                 <AntDesign name="back" size={30} color="black" />
             </TouchableOpacity>

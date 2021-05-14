@@ -11,7 +11,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { apiInstance } from '../services/instances';
 import { FormData } from '../types';
 
-const RegisterScreen = ({ navigation }: { navigation: any }) => {
+const RegisterScreen = (props: any) => {
+    const { navigation } = props;
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
     const [loading, setLoading] = useState(false);
 
@@ -33,13 +34,13 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
     };
 
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined} keyboardVerticalOffset={0}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined } keyboardVerticalOffset={0}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ padding: '10%' }}>
                 {/* Title Section */}
-                <View transparent={true} style={{ justifyContent: 'flex-end' }}>
-                    <View transparent={true} style={{ marginBottom: 20 }}>
+                <View style={{ justifyContent: 'flex-end' }}>
+                    <View style={{ marginBottom: 20 }}>
                         <BackButton onPress={() => navigation.goBack()} />
-                        <View transparent={true} >
+                        <View >
                             <Text secondary bold style={styles.title}>Create Account</Text>
                             <Text style={styles.subtitle}>{`Sign up to get \nStarted`}</Text>
                         </View>
@@ -47,42 +48,42 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                     {/* END: Title Section */}
 
                     {/* Form Section */}
-                    <View transparent={true} style={{ height: '45%' }}>
-                        <View transparent={true} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View transparent={true} style={{ marginBottom: 15, width: '48%' }}>
+                    <View style={{ height: '45%' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View style={{ marginBottom: 15, width: '48%' }}>
                                 <Controller control={control} name="name" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
                                     <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Name *" />)} />
                                 {errors.name && <Text style={styles.error}>Required.</Text>}
                             </View>
-                            <View transparent={true} style={{ marginBottom: 15, width: '48%' }}>
+                            <View style={{ marginBottom: 15, width: '48%' }}>
                                 <Controller control={control} name="lastName" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
                                     <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Last Name *" />)} />
                                 {errors.lastName && <Text style={styles.error}>Required.</Text>}
                             </View>
                         </View>
-                        <View transparent={true} style={{ marginBottom: 15 }}>
+                        <View style={{ marginBottom: 15 }}>
                             <Controller control={control} name="email" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
                                 <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your email *" placeholder="username@example.com" />)} />
                             {errors.email && <Text style={styles.error}>Email is required.</Text>}
                         </View>
-                        <View transparent={true} style={{ marginBottom: 15 }}>
+                        <View style={{ marginBottom: 15 }}>
                             <Controller control={control} name="password" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
                                 <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Password *" secureTextEntry={true} placeholder="* * * * * * * *" />)} />
                             {errors.password && <Text style={styles.error}>Password is required.</Text>}
                         </View>
-                        <View transparent={true}>
+                        <View>
                             <Text style={{ fontSize: 12, textAlign: 'center' }}>
                                 Creating an account means you're okay with our
                                 <Text secondary bold> Terms of Service</Text> and our
                                 <Text secondary bold> Privacy Policy</Text>
                             </Text>
                         </View>
-                        {loading && <ActivityIndicator size="large" color="#2B478B"></ActivityIndicator>}
+                        {loading && <ActivityIndicator size="large" color="#FFAA49"></ActivityIndicator>}
                     </View>
                     {/* END: Form Section */}
 
                     {/* Footer */}
-                    <View transparent={true} style={{ marginTop: '10%' }}>
+                    <View style={{ marginTop: '10%' }}>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.info}>
                             <Text style={{ fontSize: 16, textAlign: 'center' }}>Already have an account?<Text secondary bold> Log In.</Text></Text>
                         </TouchableOpacity>

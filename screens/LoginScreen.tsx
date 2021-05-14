@@ -1,7 +1,7 @@
 // Common Modules
 import React, { useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, TouchableWithoutFeedback, SafeAreaView, Keyboard } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 // Components
 import { Text, View, Button } from '../components/Themed';
 import { InputField } from '../components/InputField';
@@ -16,7 +16,8 @@ import { LoginFormData } from '../types';
 import { Platform } from 'react-native';
 
 
-const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
+const LoginScreen = (props: any) => {
+    const { navigation } = props;
     const { control, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
     const [userFlag, setUserFlag] = useState(false);
 
@@ -39,44 +40,48 @@ const LoginScreen = ({ navigation }: { navigation: any }, props: any) => {
     };
 
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined} keyboardVerticalOffset={0}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{ padding: '10%' }} >
-                {/* Title Section */}
-                <View transparent={true} style={{ marginBottom: 20 }}>
-                    <BackButton onPress={() => navigation.goBack()} />
-                    <View transparent={true}>
-                        <Text primary bold style={styles.title}>Let's sign you in</Text>
-                        <Text style={styles.subtitle}>{`Welcome back,\nYou've been missed!`}</Text>
-                    </View>
-                </View>
-                {/* END: Title Section */}
+        <KeyboardAvoidingView style={{ flex: 1 }} {...(Platform.OS === 'ios' && { behavior: 'padding' })}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={{ flex: 1, padding: '10%' }}>
+                        {/* Title Section */}
+                        <View style={{ marginBottom: 20 }}>
+                            <BackButton onPress={() => navigation.goBack()} />
+                            <View>
+                                <Text primary bold style={styles.title}>Let's sign you in</Text>
+                                <Text style={styles.subtitle}>{`Welcome back,\nYou've been missed!`}</Text>
+                            </View>
+                        </View>
+                        {/* END: Title Section */}
 
-                {/* Form Section */}
-                <View transparent={true} style={{ height: '45%' }}>
-                    <View transparent={true} style={{marginBottom: 15}}>
-                        <Controller control={control} name="email" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                            <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your Email" placeholder="email@example.com" />)} />
-                        {errors.email && <Text style={styles.error}>Email is required.</Text>}
-                    </View>
-                    <View transparent={true} style={{marginBottom: 15}}>
-                        <Controller control={control} name="password" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
-                            <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Password" secureTextEntry={true} placeholder="* * * * * * * *" />)} />
-                        {errors.password && <Text style={styles.error}>Password is required.</Text>}
-                    </View>
-                    {userFlag && <ActivityIndicator size="large" color="#869EDB" style={{ marginVertical: '15%' }}></ActivityIndicator>}
-                </View>
-                {/* END: Form Section */}
+                        {/* Form Section */}
+                        <View style={{ height: '40%' }}>
+                            <View style={{ marginBottom: 15 }}>
+                                <Controller control={control} name="email" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                                    <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Your Email" placeholder="email@example.com" />)} />
+                                {errors.email && <Text style={styles.error}>Email is required.</Text>}
+                            </View>
+                            <View style={{ marginBottom: 15 }}>
+                                <Controller control={control} name="password" rules={{ required: true }} render={({ field: { onChange, onBlur, value } }) => (
+                                    <InputField change={(value: string) => onChange(value)} value={value} onBlur={onBlur} label="Password" secureTextEntry={true} placeholder="* * * * * * * *" />)} />
+                                {errors.password && <Text style={styles.error}>Password is required.</Text>}
+                            </View>
+                            {userFlag && <ActivityIndicator size="large" color="#FFAA49" style={{ marginVertical: '15%' }}></ActivityIndicator>}
+                        </View>
+                        {/* END: Form Section */}
 
-                {/* Footer */}
-                <View transparent={true} style={{ marginTop: '20%' }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                        <Text style={styles.info}>¿Don't have an account? <Text primary bold> Register.</Text></Text>
-                    </TouchableOpacity>
-                    <Button primary onPress={handleSubmit(onSubmit)} text="Log In" />
-                </View>
-                {/* END: Footer */}
-            </ScrollView>
-        </KeyboardAvoidingView>
+                        {/* Footer */}
+                        <View style={{ marginTop: '10%' }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                                <Text style={styles.info}>¿Don't have an account? <Text primary bold> Register.</Text></Text>
+                            </TouchableOpacity>
+                            <Button primary onPress={handleSubmit(onSubmit)} text="Log In" />
+                        </View>
+                    </View  >
+                    {/* END: Footer */}
+                </TouchableWithoutFeedback>
+            </SafeAreaView>
+        </KeyboardAvoidingView >
     );
 };
 

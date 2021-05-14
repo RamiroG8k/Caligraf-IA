@@ -14,7 +14,7 @@ const StatsCard = (props: any) => {
                 <View style={styles.icon}>
                     <Ionicons size={35} name={icon} />
                 </View>
-                <View transparent={true} style={{ flex: 1, marginLeft: 10 }}>
+                <View themed={true} style={{ flex: 1, marginLeft: 10 }}>
                     <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>{title}</Text>
                     <Text style={{ fontSize: 14 }}>{phrase}</Text>
                 </View>

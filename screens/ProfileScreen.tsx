@@ -88,18 +88,18 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
     };
 
     return (
-        <View transparent={true}>
+        <View themed={true}>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-                <View transparent={true} style={{ alignItems: 'center' }}>
+                <View themed={true} style={{ alignItems: 'center' }}>
                     <View style={[styles.picture, { marginTop: '10%' }]}>
                         <View style={styles.pictureBorder}>
                             <Image style={styles.picture} source={require('../assets/images/profile.jpg')} />
                         </View>
                     </View>
-                    <View transparent={true} style={{ alignItems: 'center', margin: '10%' }}>
+                    <View themed={true} style={{ alignItems: 'center', margin: '10%' }}>
                         <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 22, marginBottom: 5, color: '#707070' }}>{Util.toTitleCase(userInfo.name)}</Text>
                         <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#A9AAAA' }}>{userInfo.email}</Text>
-                        <View transparent={true} style={styles.buttonGroup}>
+                        <View themed={true} style={styles.buttonGroup}>
                             <TouchableHighlight underlayColor="#CCCCCC" onPress={Logout} style={styles.button}>
                                 <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>Log Out</Text>
                             </TouchableHighlight>
@@ -109,14 +109,14 @@ export default function ProfileScreen({ navigation }: { navigation: any }) {
                         </View>
                     </View>
                 </View>
-                <View transparent={true}>
-                    <View transparent={true} style={{ marginVertical: '5%' }}>
+                <View themed={true}>
+                    <View themed={true} style={{ marginVertical: '5%' }}>
                         <Text style={styles.title}>Stats</Text>
                         <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
                     </View>
                     {metrics.length ? availableMetrics : nullMetrics()}
                 </View>
-                <View transparent={true} style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
+                <View themed={true} style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
