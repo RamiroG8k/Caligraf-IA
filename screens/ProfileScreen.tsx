@@ -93,7 +93,7 @@ export default function ProfileScreen(props: any) {
             <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
                 <View style={{ alignItems: 'center' }}>
                     <View style={[styles.picture, { marginTop: '10%' }]}>
-                        <View style={styles.pictureBorder}>
+                        <View themed style={styles.pictureBorder}>
                             <Image style={styles.picture} source={require('../assets/images/profile.jpg')} />
                         </View>
                     </View>
@@ -117,7 +117,7 @@ export default function ProfileScreen(props: any) {
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
-            <Modalize modalStyle={[styles.modal, { backgroundColor: '#F3F3F3' }]} modalHeight={Layout.window.height * 0.7} ref={modalizeRef}
+            <Modalize modalStyle={[styles.modal, { backgroundColor: '#FFF'}]} modalHeight={Layout.window.height * 0.6} ref={modalizeRef}
                 overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
                 {modalContent}
             </Modalize>

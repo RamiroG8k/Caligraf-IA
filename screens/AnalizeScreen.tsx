@@ -25,7 +25,7 @@ export default function AnalizeScreen(props: any) {
                 <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
             </View>
             <View style={{ height: '20%' }}>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ overflow: 'visible' }}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ overflow: 'visible' }}>
                     {tipsToShot}
                 </ScrollView>
             </View>

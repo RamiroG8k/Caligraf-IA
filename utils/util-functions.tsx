@@ -18,7 +18,7 @@ export const toLocalDate = (date: Date): string => {
     const options: object = {
         weekday: 'long',
         year: 'numeric',
-        month: 'short', 
+        month: 'long', 
         day: '2-digit'
     };
 
