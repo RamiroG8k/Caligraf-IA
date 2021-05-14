@@ -10,7 +10,7 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import { ThemeProps, IconProps } from '../types';
+import { ThemeProps, IconProps as DefaultIconProps } from '../types';
 
 export function useThemeColor(
     props: { light?: string; dark?: string },
@@ -26,6 +26,7 @@ export type TextProps = ThemeProps & DefaultText['props'] & { bold?: boolean };
 export type ViewProps = ThemeProps & DefaultView['props'];
 export type InputProps = ThemeProps & DefaultTextInput['props'];
 export type TouchableProps = ThemeProps & DefaultTouchable['props'] & { text: string; };
+export type IconProps = ThemeProps & DefaultIconProps;
 
 export function Text(props: TextProps) {
     const { style, light, dark, bold, ...otherProps } = props;
@@ -62,15 +63,21 @@ export function Button(props: TouchableProps) {
 
 export function Icon(props: IconProps) {
     const { name, size, color, module, ...otherProps } = props;
-    const icolor = color ? color : useThemeColor({ light: '#383838', dark: '#FFFFFF' }, 'background');
+    const icolor = color ? color : useThemeColor(
+        {
+            light: otherProps.primary || otherProps.secondary ? '' : '#383838',
+            dark: otherProps.primary || otherProps.secondary ? '' : '#FFFFFF'
+        },
+        otherProps.primary ? 'primary' : otherProps.secondary ? 'secondary' : 'background'
+    );
 
     switch (module) {
         case 'AntDesign':
-            return <AntDesign name={name} size={size} color={icolor} />
+            return <AntDesign name={name} size={size} color={icolor} {...otherProps} />
         case 'Ionicons':
-            return <Ionicons name={name} size={size} color={icolor} />
+            return <Ionicons name={name} size={size} color={icolor} {...otherProps} />
         default:
-            return <Ionicons name={name} size={size} color={icolor} />
+            return <Ionicons name={name} size={size} color={icolor} {...otherProps} />
             break;
     }
 }

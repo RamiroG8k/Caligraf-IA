@@ -14,7 +14,7 @@ const Card = (props: any) => {
             <View style={styles.imgContainer}>
                 <Image style={styles.img} source={{uri: image }} />
             </View>
-            <View style={styles.infoContainer}>
+            <View themed style={styles.infoContainer}>
                 <View style={styles.tagsContainer}>
                     <View style={[styles.tag, { backgroundColor: Colors[colorScheme].tint}]}>
                         <Text style={{ fontSize: 10 }}>{time} %</Text>

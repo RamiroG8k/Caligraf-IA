@@ -1,15 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
-import { Ionicons } from '@expo/vector-icons';
-
+import { Icon, Text, View } from '../components/Themed';
 
 const InfoCard = (props: any) => {
     const { icon, phrase } = props;
     return (
-        <View style={styles.tip}>
+        <View themed style={styles.tip}>
             <View style={styles.icon}>
-                <Ionicons size={45} name={icon}/>
+                <Icon size={45} name={icon}/>
             </View>
             <View style={styles.info}>
                 <Text style={{ width: '100%', }}>{phrase}</Text>
@@ -25,7 +23,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         flexDirection: 'row',
         borderRadius: 25,
-        marginLeft: 20,
+        marginHorizontal: 10,
         padding: 10,
     },
     icon: {

@@ -2,20 +2,16 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
 // Components
-import { Text, View } from '../components/Themed';
+import { Icon, Text, View } from '../components/Themed';
 import InfoCard from '../components/InfoCard';
 import Layout from '../constants/Layout';
 // Others
 import { DummyTips } from '../utils/dummy-data';
 
-import useColorScheme from '../hooks/useColorScheme';
-import Colors from '../constants/Colors';
-
-export default function AnalizeScreen({ navigation }: { navigation: any }, props: any) {
-    const colorScheme = useColorScheme();
-
+export default function AnalizeScreen(props: any) {
+    const { navigation } = props;
+    
     const tipsToShot: any = DummyTips.map((item: any) => {
         return (
             <InfoCard key={item.id} icon={item.icon} phrase={item.text} />
@@ -23,24 +19,24 @@ export default function AnalizeScreen({ navigation }: { navigation: any }, props
     });
 
     return (
-        <View themed={true} style={styles.container}>
-            <View themed={true} style={{ marginVertical: '5%' }}>
-                <Text style={[styles.strongText, styles.title, { color: Colors[colorScheme].primary }]}>Getting Started</Text>
+        <View style={styles.container}>
+            <View style={{ marginVertical: '5%' }}>
+                <Text primary bold style={styles.title}>Getting Started</Text>
                 <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
             </View>
-            <View themed={true} style={styles.tipsContainer}>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={{ height: '20%' }}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ overflow: 'visible' }}>
                     {tipsToShot}
                 </ScrollView>
             </View>
-            <View themed={true} style={{ marginVertical: '5%' }}>
-                <Text style={[styles.strongText, styles.subtitle, { color: Colors[colorScheme].secondary }]}>Let's get into it!</Text>
+            <View style={{ marginVertical: '5%' }}>
+                <Text secondary bold style={styles.subtitle}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>
-            <View style={styles.buttonContainer}>
+            <View themed style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen')}>
-                        <Ionicons size={150} name="camera-outline" color={ Colors[colorScheme].secondary } />
-                    <Text style={[styles.strongText, styles.subtitle, { color: Colors[colorScheme].secondary }]}>¡Tap Here!</Text>
+                    <Icon secondary name="camera-outline" size={150} />
+                    <Text secondary bold style={styles.subtitle}>¡Tap Here!</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -53,19 +49,14 @@ const styles = StyleSheet.create({
         paddingTop: '20%',
         paddingBottom: 0,
     },
-    tipsContainer: {
-        marginHorizontal: '-7%',
-        height: '20%',
-    },
-    strongText: {
+    title: {
         marginLeft: 10,
         marginBottom: 12,
-        fontFamily: 'Montserrat-Bold',
-    },
-    title: {
         fontSize: 32,
     },
     subtitle: {
+        marginLeft: 10,
+        marginBottom: 12,
         fontSize: 28,
     },
     info: {

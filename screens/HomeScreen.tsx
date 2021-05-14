@@ -26,7 +26,7 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
 
     const emptyCard = (key: number): any => {
         return (
-            <View themed={true} key={key} style={{ width: '48%', marginVertical: 7 }}>
+            <View key={key} style={{ width: '48%', marginVertical: 7 }}>
                 <TouchableOpacity onPress={() => navigation.navigate('Analyze')} style={{ aspectRatio: 1 }}>
                     <Image style={{ flex: 1, width: '100%', borderRadius: 25, opacity: 0.5 }}
                         source={require('../assets/images/Plus2.jpg')} />
@@ -44,7 +44,7 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
             return emptyCard(0);
         } else {
             return (
-                <View key={item.id} themed={true} style={{ width: '48%', marginVertical: 7 }}>
+                <View key={item.id} style={{ width: '48%', marginVertical: 7 }}>
                     <Card onPress={() => renderContent(item.id)} {...item} />
                 </View>
             );
@@ -52,32 +52,32 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
     });
 
     return (
-        <View themed={true}>
+        <View>
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-                <View themed={true}>
-                    <View themed={true} style={{ marginVertical: '5%' }}>
+                <View>
+                    <View style={{ marginVertical: '5%' }}>
                         <Text style={styles.title}>Week Info</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
                     </View>
                     <View style={styles.separator} />
                 </View>
-                <View themed={true}>
-                    <View themed={true} style={{ marginVertical: '5%' }}>
+                <View>
+                    <View style={{ marginVertical: '5%' }}>
                         <Text style={styles.subtitle}>Reminder</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
                     </View>
                     <Banner />
                 </View>
-                <View themed={true}>
-                    <View themed={true} style={{ marginVertical: '5%' }}>
+                <View>
+                    <View style={{ marginVertical: '5%' }}>
                         <Text style={styles.subtitle}>Last Analyses</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
                     </View>
-                    <View themed={true} style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                         {metrics ? lastMetrics : emptyCard(0)}
                     </View>
                 </View>
-                <View themed={true} style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
+                <View style={{ alignItems: 'center', marginTop: '15%', marginBottom: '40%' }}>
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>

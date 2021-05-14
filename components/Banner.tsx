@@ -4,7 +4,7 @@ import { Text, View } from '../components/Themed';
 
 const Banner = (props: any) => {
     return (
-        <View style={styles.container}>
+        <View themed style={styles.container}>
             <View style={[styles.infoContainer, { justifyContent: 'space-between' } ]}>
                 <Text style={{ fontFamily: 'Montserrat-Bold', marginBottom: 5 }}>Title Example</Text>
                 <Text style={[{ fontSize: 12 }, styles.subtitle]}>Lorem ipsum dolor sit, sed do eiusmod tempor etsed do </Text>
