@@ -3,16 +3,15 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // Components
-import { View } from '../Themed';
+import { Icon, View } from '../Themed';
 // Others
-import { AntDesign } from '@expo/vector-icons';
 import Layout from '../../constants/Layout';
 
 const BackButton = ({ onPress }: { onPress: any }): any => {
     return (
         <View themed style={styles.container}>
             <TouchableOpacity onPress={onPress} style={styles.icon}>
-                <AntDesign name="back" size={30} color="black" />
+                <Icon name="back" size={30}/>
             </TouchableOpacity>
         </View>
     );

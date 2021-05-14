@@ -13,7 +13,7 @@ export default {
         background: '#1F1F1F',
         tint: '#7482A8',
         primary: '#FFAA49',
-        secondary: '#4B4D69',
+        secondary: '#6476A6',
         tabIconDefault: '#525252',
         tabIconSelected: '#FFAA49',
     },

@@ -6,6 +6,9 @@ import {
     TouchableOpacity as DefaultTouchable
 } from 'react-native';
 
+import { AntDesign as DefaultIcon } from '@expo/vector-icons';
+
+
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { ThemeProps } from '../types';
@@ -56,6 +59,13 @@ export function Button(props: TouchableProps) {
             </Text>
         </DefaultTouchable>
     );
+}
+
+export function Icon(props: any) {
+    // const { name, size, color, ...otherProps } = props;
+    const icolor = useThemeColor({ light: '#383838', dark: '#FFFFFF' }, 'background');
+
+    return <DefaultIcon {...props} color={icolor} />
 }
 
 export function View(props: ViewProps) {
