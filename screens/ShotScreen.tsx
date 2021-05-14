@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { Modal, StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Button, Text, View } from '../components/Themed';
 import Layout from '../constants/Layout';
 import { Ionicons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 // import { BarCodeScanner } from 'expo-barcode-scanner';
 
-const ShotScreen = ({ navigation }: { navigation: any }, props: any) => {
+const ShotScreen = (props: any) => {
+    const { navigation } = props;
     // REQUEST PERMISSIONS FOR ACCESS TO CAMERA
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const ref = useRef<any | null>(null);
@@ -34,29 +35,23 @@ const ShotScreen = ({ navigation }: { navigation: any }, props: any) => {
         );
     }
 
-    // const handlePhraseScanned = async (picture: any) => {
-    // };
-
     const takeShot = async () => {
         const photo = await ref.current.takePictureAsync()
         console.debug(photo)
     }
 
-
     return (
-        <View themed={true} style={styles.container}>
-            <Text style={styles.title}>Capture Phrase</Text>
+        <View style={styles.container}>
+            <Text bold style={styles.title}>Capture Phrase</Text>
             <View style={styles.containerCamera}>
                 <Camera ref={ref} style={styles.camera} />
             </View>
-            <View themed={true} style={{ alignItems: 'center' }}>
+            <View style={{ alignItems: 'center' }}>
                 <Text style={styles.subtitle}>
                     Try to center the phrase in frame
                 </Text>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity onPress={takeShot} style={styles.button}>
-                        <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 18 }}>SNAP!</Text>
-                    </TouchableOpacity>
+                    <Button text="SNAP!" onPress={takeShot}/>
                 </View>
             </View>
         </View>
@@ -71,12 +66,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontFamily: 'Montserrat-Bold',
         fontSize: 26,
         marginTop: '15%',
     },
     subtitle: {
-        fontFamily: 'Montserrat',
         fontSize: 18,
     },
     containerCamera: {
@@ -98,11 +91,6 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginVertical: '5%',
     },
-    button : {
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 15,
-    }
 });
 
 export default ShotScreen;

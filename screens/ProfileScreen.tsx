@@ -1,6 +1,6 @@
 // Common
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Image, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native';
+import { StyleSheet, Image, ScrollView, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiInstance } from '../services/instances';
 // Components
@@ -17,7 +17,8 @@ type User = {
     email: string;
 };
 
-export default function ProfileScreen({ navigation }: { navigation: any }) {
+export default function ProfileScreen(props: any) {
+    const { navigation } = props;
     const modalizeRef = useRef<Modalize>(null);
     const [modalContent, setModalContent] = useState<any | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
