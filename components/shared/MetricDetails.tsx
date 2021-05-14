@@ -1,11 +1,12 @@
 // Common
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import Layout from '../../constants/Layout';
 // Others
 import { apiInstance } from '../../services/instances';
 import * as Util from '../../utils/util-functions';
+import { GRADING } from '../../utils/dummy-data'; 
 
 const MetricDetails = ({ id }: { id: any }) => {
     const [data, setData] = useState<Object | any>({ id });
@@ -38,8 +39,8 @@ const MetricDetails = ({ id }: { id: any }) => {
         (item: any, index: number): any => {
             return (
                 <View themed light="#FFF" dark="#000" key={index} style={{ borderRadius: 15, marginRight: 15, width: 70, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>{item.letter}</Text>
-                    <Text>{item.average}</Text>
+                    <Text bold style={{ fontSize: 30 }}>{item.letter}</Text>
+                    <Text style={{ fontSize: 16 }}>{item.average}</Text>
                 </View>
             );
         }
@@ -52,9 +53,11 @@ const MetricDetails = ({ id }: { id: any }) => {
                     <Text style={{ fontSize: 16, marginBottom: 5 }}>{Util.toLocalDate(data.date)}</Text>
                     <Text bold style={{ fontSize: 22 }}>{JSON.stringify(data.phrase.data)}</Text>
                 </View>
-                <View themed style={styles.icon}>
-                    <Text style={{ fontSize: 16 }}>{Math.round(data.general_average)}%</Text>
-                </View>
+                <TouchableOpacity style={styles.icon}>
+                    <View themed style={styles.icon}>
+                        <Text style={{ fontSize: 16 }}>{Math.round(data.general_average)}</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
 
             <View themed style={{ height: 175, width: '100%', padding: 10, borderRadius: 15 }}>
@@ -81,7 +84,6 @@ const styles = StyleSheet.create({
         height: Layout.window.width * 0.15,
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 10
     }
 });
 
