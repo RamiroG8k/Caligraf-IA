@@ -6,7 +6,7 @@ import Layout from '../../constants/Layout';
 // Others
 import { apiInstance } from '../../services/instances';
 import * as Util from '../../utils/util-functions';
-import { GRADING } from '../../utils/dummy-data'; 
+import { GRADING } from '../../utils/dummy-data';
 
 const MetricDetails = ({ id }: { id: any }) => {
     const [data, setData] = useState<Object | any>({ id });
@@ -17,13 +17,13 @@ const MetricDetails = ({ id }: { id: any }) => {
     }, []);
 
     async function fetchData(id: number) {
-        await apiInstance.get(`/metric/${id}`).then(
-            (response: any) => {
+        await apiInstance.get(`/metric/${id}`)
+            .then((response: any) => {
                 response.data ? setData(response.data) : setData({ data: 'NO DATA' });
-            }
-        ).catch((error: any) => {
-            console.warn('ERROR: ', error);
-        });
+            }).catch((error: any) => {
+                setData({ data: 'NO DATA' });
+                console.warn('ERROR: ', error);
+            });
         setLoading(false);
     };
 

@@ -82,7 +82,7 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
                 </View>
             </ScrollView>
             <Modalize modalStyle={[styles.modal, { backgroundColor: useThemeColor({}, 'background') }]}
-                modalHeight={Layout.window.height * 0.7} ref={modalizeRef}
+                modalHeight={Layout.window.height * 0.6} ref={modalizeRef}
                 overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
                 {modalContent}
             </Modalize>

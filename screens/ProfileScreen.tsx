@@ -4,7 +4,7 @@ import { StyleSheet, Image, ScrollView, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiInstance } from '../services/instances';
 // Components
-import { Button, Text, View } from '../components/Themed';
+import { Button, Text, useThemeColor, View } from '../components/Themed';
 import StatsCard from '../components/StatsCard';
 import { Modalize } from 'react-native-modalize';
 // Util
@@ -17,7 +17,7 @@ type User = {
     email: string;
 };
 
-export default function ProfileScreen(props: any) {
+const ProfileScreen = (props: any) => {
     const { navigation } = props;
     const modalizeRef = useRef<Modalize>(null);
     const [modalContent, setModalContent] = useState<any | null>(null);
@@ -117,8 +117,8 @@ export default function ProfileScreen(props: any) {
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
-            <Modalize modalStyle={[styles.modal, { backgroundColor: '#FFF'}]} modalHeight={Layout.window.height * 0.6} ref={modalizeRef}
-                overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
+            <Modalize modalStyle={[styles.modal, { backgroundColor: useThemeColor({}, 'tint') }]} 
+                modalHeight={Layout.window.height * 0.6} ref={modalizeRef} overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
                 {modalContent}
             </Modalize>
         </View>
@@ -166,3 +166,5 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 25
     },
 });
+
+export default ProfileScreen;
