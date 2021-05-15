@@ -17,7 +17,7 @@ type User = {
     email: string;
 };
 
-const ProfileScreen = (props: any) => {
+export default function ProfileScreen(props: any) {
     const { navigation } = props;
     const modalizeRef = useRef<Modalize>(null);
     const [modalContent, setModalContent] = useState<any | null>(null);
@@ -117,7 +117,7 @@ const ProfileScreen = (props: any) => {
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
-            <Modalize modalStyle={[styles.modal, { backgroundColor: useThemeColor({}, 'tint') }]} 
+            <Modalize modalStyle={[styles.modal, { backgroundColor: '#FFF' }]} 
                 modalHeight={Layout.window.height * 0.6} ref={modalizeRef} overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
                 {modalContent}
             </Modalize>
@@ -166,5 +166,3 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 25
     },
 });
-
-export default ProfileScreen;
