@@ -38,9 +38,11 @@ const MetricDetails = ({ id }: { id: any }) => {
     const details = data.metrics_data.map(
         (item: any, index: number): any => {
             return (
-                <View themed light="#FFF" dark="#000" key={index} style={{ borderRadius: 15, marginRight: 15, width: 70, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text bold style={{ fontSize: 30 }}>{item.letter}</Text>
-                    <Text style={{ fontSize: 16 }}>{item.average}</Text>
+                <View themed light="#FFF" dark="#000" key={index} style={{ flex: 1, justifyContent: 'flex-end', borderRadius: 15, marginRight: 15, width: 70, alignItems: 'center', padding: 5 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#D0D9F1', width: '100%', height: `${item.average}%`, borderRadius: 15}}>
+                        <Text bold style={{ fontSize: 30 }}>{item.letter}</Text>
+                        <Text style={{ fontSize: 16 }}>{item.average}</Text>
+                    </View>
                 </View>
             );
         }
