@@ -7,6 +7,7 @@ import Layout from '../../constants/Layout';
 import { apiInstance } from '../../services/instances';
 import * as Util from '../../utils/util-functions';
 import { GRADING } from '../../utils/dummy-data';
+import Stat from '../Stat';
 
 const MetricDetails = ({ id }: { id: any }) => {
     const [data, setData] = useState<Object | any>({ id });
@@ -38,18 +39,13 @@ const MetricDetails = ({ id }: { id: any }) => {
     const details = data.metrics_data.map(
         (item: any, index: number): any => {
             return (
-                <View themed light="#FFF" dark="#000" key={index} style={{ flex: 1, justifyContent: 'flex-end', borderRadius: 15, marginRight: 15, width: 70, alignItems: 'center', padding: 5 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#D0D9F1', width: '100%', height: `${item.average}%`, borderRadius: 15}}>
-                        <Text bold style={{ fontSize: 30 }}>{item.letter}</Text>
-                        <Text style={{ fontSize: 16 }}>{item.average}</Text>
-                    </View>
-                </View>
+                <Stat key={index} average={item.average} letter={item.letter} />
             );
         }
     );
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, padding: '5%', height: Layout.window.height * 0.8 }}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <View style={styles.header}>
                 <View style={{ width: '80%', }}>
                     <Text style={{ fontSize: 16, marginBottom: 5 }}>{Util.toLocalDate(data.date)}</Text>
@@ -62,7 +58,7 @@ const MetricDetails = ({ id }: { id: any }) => {
                 </TouchableOpacity>
             </View>
 
-            <View themed style={{ height: 175, width: '100%', padding: 10, borderRadius: 15 }}>
+            <View themed style={styles.content}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ overflow: 'hidden' }}>
                     {details}
                 </ScrollView>
@@ -72,6 +68,11 @@ const MetricDetails = ({ id }: { id: any }) => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: '5%',
+        height: Layout.window.height * 0.8
+    },
     header: {
         flex: 1,
         paddingVertical: 15,
@@ -79,6 +80,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
+    },
+    content: {
+        height: 190,
+        width: '100%',
+        padding: 10,
+        borderRadius: 15
     },
     icon: {
         borderRadius: Math.round(Layout.window.width + Layout.window.height) / 2,
