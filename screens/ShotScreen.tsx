@@ -1,11 +1,9 @@
-import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { Button, Text, View } from '../components/Themed';
 import Layout from '../constants/Layout';
 import { Ionicons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
-// import { BarCodeScanner } from 'expo-barcode-scanner';
 
 const ShotScreen = (props: any) => {
     const { navigation } = props;
