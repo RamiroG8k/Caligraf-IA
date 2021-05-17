@@ -36,13 +36,12 @@ const MetricDetails = ({ id }: { id: any }) => {
         );
     }
 
-    const details = data.metrics_data.map(
-        (item: any, index: number): any => {
-            return (
-                <Stat key={index} average={item.average} letter={item.letter} />
-            );
-        }
-    );
+    const details = data.metrics_data.map((item: any, index: number, { length }: { length: number }): any => {
+        return (
+            <Stat key={index} average={item.average} letter={item.letter}
+                style={{ marginRight: index === length - 1 ? 0 : 12 }} />
+        );
+    });
 
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
