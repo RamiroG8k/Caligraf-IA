@@ -21,10 +21,9 @@ const MetricDetails = ({ id }: { id: any }) => {
     async function fetchData(id: number) {
         await apiInstance.get(`/metric/${id}`)
             .then((response: any) => {
-                response.data ? setData(response.data) : setData({ data: 'NO DATA' });
-
-                setGrade(findGrade(Math.round(response.data.general_average)));
-
+                const { data } = response;
+                data ? setData(data) : setData({ data: 'NO DATA' });
+                setGrade(findGrade(Math.round(data.general_average)));
             }).catch((error: any) => {
                 setData({ data: 'NO DATA' });
                 console.warn('ERROR: ', error);
