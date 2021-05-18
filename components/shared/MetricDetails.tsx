@@ -12,6 +12,7 @@ import Stat from '../Stat';
 const MetricDetails = ({ id }: { id: any }) => {
     const [data, setData] = useState<Object | any>({ id });
     const [loading, setLoading] = useState<boolean>(true);
+    const [grade, setGrade] = useState<Array<string | number>>([0, '', 0]);
 
     useEffect(() => {
         fetchData(id);
@@ -21,12 +22,27 @@ const MetricDetails = ({ id }: { id: any }) => {
         await apiInstance.get(`/metric/${id}`)
             .then((response: any) => {
                 response.data ? setData(response.data) : setData({ data: 'NO DATA' });
+
+                setGrade(findGrade(response.data.general_average));
+
             }).catch((error: any) => {
                 setData({ data: 'NO DATA' });
                 console.warn('ERROR: ', error);
             });
         setLoading(false);
     };
+    
+    const findGrade: any = (grade: number) => {
+        // Find value in GRADES
+        return [Math.round(grade), 'A+', 1.6];
+    }
+
+    const toggleGradeState: any = () => {
+        let newGrades: Array<any> = grade;
+        newGrades.unshift(grade[2]);
+        newGrades.pop();
+        setGrade(newGrades);
+    }
 
     if (loading) {
         return (
@@ -50,9 +66,9 @@ const MetricDetails = ({ id }: { id: any }) => {
                     <Text style={{ fontSize: 16, marginBottom: 5 }}>{Util.toLocalDate(data.date)}</Text>
                     <Text bold style={{ fontSize: 22 }}>{JSON.stringify(data.phrase.data)}</Text>
                 </View>
-                <TouchableOpacity style={styles.icon}>
+                <TouchableOpacity style={styles.icon} onPress={toggleGradeState}>
                     <View themed style={styles.icon}>
-                        <Text style={{ fontSize: 16 }}>{Math.round(data.general_average)}</Text>
+                        <Text style={{ fontSize: 18 }}>{grade[0]}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
