@@ -12,7 +12,7 @@ import Stat from '../Stat';
 const MetricDetails = ({ id }: { id: any }) => {
     const [data, setData] = useState<Object | any>({ id });
     const [loading, setLoading] = useState<boolean>(true);
-    const [grade, setGrade] = useState<Array<string | number>>([0, '', 0]);
+    const [grade, setGrade] = useState<Array<any>>([0, '', 0]);
 
     useEffect(() => {
         fetchData(id);
@@ -23,7 +23,7 @@ const MetricDetails = ({ id }: { id: any }) => {
             .then((response: any) => {
                 response.data ? setData(response.data) : setData({ data: 'NO DATA' });
 
-                setGrade(findGrade(response.data.general_average));
+                setGrade(findGrade(Math.round(response.data.general_average)));
 
             }).catch((error: any) => {
                 setData({ data: 'NO DATA' });
@@ -33,15 +33,17 @@ const MetricDetails = ({ id }: { id: any }) => {
     };
     
     const findGrade: any = (grade: number) => {
-        // Find value in GRADES
-        return [Math.round(grade), 'A+', 1.6];
+        const OBJ: any = GRADING.filter((e: any) => {
+            let range = e.percentage.split('-').map((x: any) => parseInt(x));
+            if (grade >= range[0] && grade <= range[1]) return e;
+        })[0];
+        return [grade, OBJ.letter, OBJ.gpa];
     }
 
     const toggleGradeState: any = () => {
-        let newGrades: Array<any> = grade;
-        newGrades.unshift(grade[2]);
-        newGrades.pop();
-        setGrade(newGrades);
+        grade.unshift(grade[2]);
+        grade.pop();
+        setGrade([...grade]);
     }
 
     if (loading) {
