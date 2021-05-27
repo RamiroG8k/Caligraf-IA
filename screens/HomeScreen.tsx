@@ -10,7 +10,6 @@ import Colors from '../constants/Colors';
 import { Modalize } from 'react-native-modalize';
 import Layout from '../constants/Layout';
 import MetricDetails from '../components/shared/MetricDetails';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { DummyMetrics } from '../utils/dummy-data';
 
