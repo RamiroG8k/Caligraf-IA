@@ -1,4 +1,4 @@
-// Common Modules
+// Common
 import React, { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, TouchableWithoutFeedback, SafeAreaView, Keyboard } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -6,18 +6,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text, View, Button } from '../components/shared/Themed';
 import { InputField } from '../components/shared/InputField';
 import BackButton from '../components/shared/BackButton';
-// Instances
-import { apiInstance } from '../services/instances';
-// Hooks
-import { useForm, Controller } from 'react-hook-form';
 // Others
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useForm, Controller } from 'react-hook-form';
+import { apiInstance } from '../services/instances';
 import { LoginFormData } from '../types';
 import { Platform } from 'react-native';
 
-
 const LoginScreen: React.FunctionComponent = (props: any) => {
-    const { navigation } = props;
+    const { navigation: go } = props;
     const { control, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
     const [userFlag, setUserFlag] = useState(false);
 
@@ -32,7 +29,7 @@ const LoginScreen: React.FunctionComponent = (props: any) => {
             .then(async (response: any) => {
                 await AsyncStorage.setItem('token', response.data.token);
                 await AsyncStorage.setItem('info', JSON.stringify(response.data.user));
-                navigation.navigate('Root');
+                go.navigate('Root');
             }).catch((error: any) => {
                 alert(error.response.data.message);
             });
@@ -46,7 +43,7 @@ const LoginScreen: React.FunctionComponent = (props: any) => {
                     <View style={{ flex: 1, padding: '10%' }}>
                         {/* Title Section */}
                         <View style={{ marginBottom: 20 }}>
-                            <BackButton onPress={() => navigation.goBack()} />
+                            <BackButton onPress={() => go.goBack()} />
                             <View>
                                 <Text primary bold style={styles.title}>Let's sign you in</Text>
                                 <Text style={styles.subtitle}>{`Welcome back,\nYou've been missed!`}</Text>
@@ -72,13 +69,13 @@ const LoginScreen: React.FunctionComponent = (props: any) => {
 
                         {/* Footer */}
                         <View style={{ marginTop: '10%' }}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                                <Text style={styles.info}>¿Don't have an account? <Text primary bold> Register.</Text></Text>
+                            <TouchableOpacity onPress={() => go.navigate('Register')}>
+                                <Text style={styles.info}>¿Don't have an account?<Text primary bold> Register.</Text></Text>
                             </TouchableOpacity>
                             <Button primary onPress={handleSubmit(onSubmit)} text="Log In" />
                         </View>
+                        {/* END: Footer */}
                     </View  >
-                    {/* END: Footer */}
                 </TouchableWithoutFeedback>
             </SafeAreaView>
         </KeyboardAvoidingView >

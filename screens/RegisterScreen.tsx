@@ -12,7 +12,7 @@ import { apiInstance } from '../services/instances';
 import { FormData } from '../types';
 
 const RegisterScreen: React.FunctionComponent = (props: any) => {
-    const { navigation } = props;
+    const { navigation: go } = props;
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
     const [loading, setLoading] = useState(false);
 
@@ -25,7 +25,7 @@ const RegisterScreen: React.FunctionComponent = (props: any) => {
     const setCredentials = async (form: FormData) => {
         await apiInstance.post('/user', form)
             .then((response: any) => {
-                navigation.navigate('Login');
+                go.navigate('Login');
                 alert(`Account created ${response.data.name}!\n Now log in using your new Credentials`)
             }).catch((error: any) => {
                 alert(error.response.data.message);
@@ -34,12 +34,12 @@ const RegisterScreen: React.FunctionComponent = (props: any) => {
     };
 
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined } keyboardVerticalOffset={0}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined} keyboardVerticalOffset={0}>
             <ScrollView showsVerticalScrollIndicator={false} style={{ padding: '10%' }}>
                 {/* Title Section */}
                 <View style={{ justifyContent: 'flex-end' }}>
                     <View style={{ marginBottom: 20 }}>
-                        <BackButton onPress={() => navigation.goBack()} />
+                        <BackButton onPress={() => go.goBack()} />
                         <View >
                             <Text secondary bold style={styles.title}>Create Account</Text>
                             <Text style={styles.subtitle}>{`Sign up to get \nStarted`}</Text>
@@ -84,13 +84,13 @@ const RegisterScreen: React.FunctionComponent = (props: any) => {
 
                     {/* Footer */}
                     <View style={{ marginTop: '10%' }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.info}>
+                        <TouchableOpacity onPress={() => go.navigate('Login')} style={styles.info}>
                             <Text style={{ fontSize: 16, textAlign: 'center' }}>Already have an account?<Text secondary bold> Log In.</Text></Text>
                         </TouchableOpacity>
-                        <Button secondary onPress={handleSubmit(onSubmit)} text="Sign Up"/>
+                        <Button secondary onPress={handleSubmit(onSubmit)} text="Sign Up" />
                     </View>
+                    {/* END: Footer */}
                 </View>
-                {/* END: Footer */}
             </ScrollView>
         </KeyboardAvoidingView>
     );
