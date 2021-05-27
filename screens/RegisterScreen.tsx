@@ -11,7 +11,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { apiInstance } from '../services/instances';
 import { FormData } from '../types';
 
-const RegisterScreen = (props: any) => {
+const RegisterScreen: React.FunctionComponent = (props: any) => {
     const { navigation } = props;
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
     const [loading, setLoading] = useState(false);

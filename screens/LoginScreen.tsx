@@ -16,7 +16,7 @@ import { LoginFormData } from '../types';
 import { Platform } from 'react-native';
 
 
-const LoginScreen = (props: any) => {
+const LoginScreen: React.FunctionComponent = (props: any) => {
     const { navigation } = props;
     const { control, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
     const [userFlag, setUserFlag] = useState(false);
