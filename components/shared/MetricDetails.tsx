@@ -1,7 +1,7 @@
 // Common
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Text, View } from '../../components/Themed';
+import { Text, View } from './Themed';
 import Layout from '../../constants/Layout';
 // Others
 import { apiInstance } from '../../services/instances';
@@ -68,13 +68,13 @@ const MetricDetails = ({ id }: { id: any }) => {
                     <Text bold style={{ fontSize: 22 }}>{JSON.stringify(data.phrase.data)}</Text>
                 </View>
                 <TouchableOpacity style={styles.icon} onPress={toggleGradeState}>
-                    <View themed style={styles.icon}>
+                    <View themed dark="#000" style={styles.icon}>
                         <Text style={{ fontSize: 18 }}>{grade[0]}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
 
-            <View themed style={styles.content}>
+            <View themed dark="#000" style={styles.content}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ overflow: 'hidden' }}>
                     {details}
                 </ScrollView>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: '5%',
-        height: Layout.window.height * 0.8
+        height: Layout.window.height * 0.7
     },
     header: {
         flex: 1,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         height: 190,
         width: '100%',
         padding: 10,
-        borderRadius: 15
+        borderRadius: 15,
     },
     icon: {
         borderRadius: Math.round(Layout.window.width + Layout.window.height) / 2,

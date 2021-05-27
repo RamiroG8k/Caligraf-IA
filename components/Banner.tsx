@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { Text, View } from './shared/Themed';
 
 const Banner = (props: any) => {
     return (

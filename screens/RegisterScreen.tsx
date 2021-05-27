@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, ScrollView, Platform } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // Components
-import { Text, View, Button } from '../components/Themed';
-import { InputField } from '../components/InputField';
+import { Text, View, Button } from '../components/shared/Themed';
+import { InputField } from '../components/shared/InputField';
 import BackButton from '../components/shared/BackButton';
 // Others
 import { useForm, Controller } from 'react-hook-form';

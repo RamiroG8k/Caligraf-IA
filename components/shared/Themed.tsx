@@ -8,9 +8,9 @@ import {
 
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import { ThemeProps, IconProps as DefaultIconProps } from '../types';
+import Colors from '../../constants/Colors';
+import useColorScheme from '../../hooks/useColorScheme';
+import { ThemeProps, IconProps as DefaultIconProps } from '../../types';
 
 export function useThemeColor(
     props: { light?: string; dark?: string },

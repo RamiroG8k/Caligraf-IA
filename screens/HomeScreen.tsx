@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 // Components
-import { Text, useThemeColor, View } from '../components/Themed';
+import { Text, useThemeColor, View } from '../components/shared/Themed';
 import Card from '../components/Card';
 import Banner from '../components/Banner';
 // Others

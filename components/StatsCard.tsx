@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 // Others
-import { Icon, Text, View } from '../components/Themed';
+import { Icon, Text, View } from './shared/Themed';
 import Layout from '../constants/Layout';
 
 const StatsCard = (props: any) => {

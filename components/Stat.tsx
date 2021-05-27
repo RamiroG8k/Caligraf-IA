@@ -1,15 +1,15 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { View, Text } from './Themed';
+import { View, Text } from './shared/Themed';
 
 const Stat = (props: any) => {
     const { style, letter, average } = props;
 
     return (
         <View style={[styles.container, {...style}]}>
-            <View themed light="#FFF" dark="#000" style={styles.graph}>
+            <View themed light="#FFF" style={styles.graph}>
                 <View style={[styles.stat, { height: `${average}%` }]}>
-                    <Text bold style={{ fontSize: 30 }}>{letter}</Text>
+                    <Text bold light="#383838" dark="#383838" style={{ fontSize: 30 }}>{letter}</Text>
                 </View>
             </View>
             <Text style={{ fontSize: 16, marginTop: 5 }}>{Math.round(average)}</Text>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { Text, View, Button } from '../components/Themed';
+import { Text, View, Button } from '../components/shared/Themed';
 
 const WelcomeScreen: React.FunctionComponent = (props: any) => {
     const { navigation } = props;

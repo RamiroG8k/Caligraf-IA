@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Text, View } from '../components/Themed';
+import { Button, Text, View } from '../components/shared/Themed';
 import Layout from '../constants/Layout';
 import { Ionicons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';

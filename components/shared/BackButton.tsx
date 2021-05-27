@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // Components
-import { Icon, View } from '../Themed';
+import { Icon, View } from './Themed';
 // Others
 import Layout from '../../constants/Layout';
 

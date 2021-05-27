@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Icon, Text, View } from '../components/Themed';
+import { Icon, Text, View } from './shared/Themed';
 
 const InfoCard = (props: any) => {
     const { icon, phrase } = props;

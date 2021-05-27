@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // Components
-import { Icon, Text, View } from '../components/Themed';
+import { Icon, Text, View } from '../components/shared/Themed';
 import InfoCard from '../components/InfoCard';
 import Layout from '../constants/Layout';
 // Others
