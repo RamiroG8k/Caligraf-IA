@@ -35,12 +35,12 @@ export default function BottomTabNavigator() {
     };
 
     return (
-        <BottomTab.Navigator initialRouteName="Home" tabBarOptions={options}>
+        <BottomTab.Navigator initialRouteName="Home" tabBarOptions={options} >
             <BottomTab.Screen name="Home" component={TabHomeNavigator}
                 options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "home" : "home-outline" } color={color} /> }}
             />
             <BottomTab.Screen name="Analyze" component={TabAnalizeNavigator}
-                options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "camera" : "camera-outline" } color={color} /> }}
+                options={{ tabBarVisible: false, tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "camera" : "camera-outline" } color={color} /> }}
             />
             <BottomTab.Screen name="Profile" component={TabProfileNavigator}
                 options={{ tabBarIcon: ({ color, focused }) => <TabBarIcon name={ focused ? "bar-chart" : "bar-chart-outline"} color={color} /> }}
@@ -57,8 +57,8 @@ const HomeStack = createStackNavigator<TabHomeParamList>();
 
 function TabHomeNavigator() {
     return (
-        <HomeStack.Navigator>
-            <HomeStack.Screen name="TabHomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+        <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+            <HomeStack.Screen name="TabHomeScreen" component={HomeScreen} />
         </HomeStack.Navigator>
     );
 }
@@ -78,9 +78,8 @@ const ProfileStack = createStackNavigator<TabProfileParamList>();
 
 function TabProfileNavigator() {
     return (
-        <ProfileStack.Navigator>
-            <ProfileStack.Screen name="TabProfileScreen"
-                component={ProfileScreen} options={{ headerShown: false }} />
+        <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
+            <ProfileStack.Screen name="TabProfileScreen" component={ProfileScreen} />
         </ProfileStack.Navigator>
     );
 }

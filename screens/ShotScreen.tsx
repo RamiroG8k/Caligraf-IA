@@ -1,9 +1,13 @@
+// Common
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
+// Components
 import { Button, Text, View } from '../components/shared/Themed';
-import Layout from '../constants/Layout';
 import { Ionicons } from '@expo/vector-icons';
+// Others
+import * as ScreenOrientation from 'expo-screen-orientation';
 import { Camera } from 'expo-camera';
+import Layout from '../constants/Layout';
 
 const ShotScreen = (props: any) => {
     const { navigation } = props;
@@ -13,6 +17,8 @@ const ShotScreen = (props: any) => {
 
     useEffect(() => {
         (async () => {
+            // navigation.setOptions({ tabBarVisible: false });
+            await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
             const { status } = await Camera.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
@@ -34,23 +40,29 @@ const ShotScreen = (props: any) => {
     }
 
     const takeShot = async () => {
-        const photo = await ref.current.takePictureAsync()
-        console.debug(photo)
+        const photo = await ref.current.takePictureAsync({ quality: 0.8, base64: true });
+        await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+
+        console.log(photo);
+
+        let image = new Image();
+        let base64Img = `data:image/jpg;base64,${photo.base64}`;
+        image.src = base64Img;
+        
+        // navigation.goBack();
     }
 
     return (
         <View style={styles.container}>
-            <Text bold style={styles.title}>Capture Phrase</Text>
+            <View style={styles.header}>
+                <Text bold style={styles.title}>Capture Phrase</Text>
+                <Text style={styles.subtitle}>Try to center the phrase in frame</Text>
+            </View>
             <View style={styles.containerCamera}>
                 <Camera ref={ref} style={styles.camera} />
             </View>
-            <View style={{ alignItems: 'center' }}>
-                <Text style={styles.subtitle}>
-                    Try to center the phrase in frame
-                </Text>
-                <View style={styles.buttonContainer}>
-                    <Button text="SNAP!" onPress={takeShot}/>
-                </View>
+            <View style={styles.buttonContainer}>
+                <Button text="SNAP!" onPress={takeShot} />
             </View>
         </View>
     );
@@ -60,34 +72,36 @@ const ShotScreen = (props: any) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    header: {
         alignItems: 'center',
     },
     title: {
         fontSize: 26,
-        marginTop: '15%',
+        marginTop: 10,
     },
     subtitle: {
         fontSize: 18,
     },
     containerCamera: {
-        width: Layout.window.width * 0.65,
-        height: Layout.window.height * 0.6,
-        marginVertical: '5%',
+        width: Layout.window.height * 0.9,
+        height: Layout.window.width * 0.4,
+        marginVertical: 25,
         borderRadius: 25,
         borderWidth: 5,
         borderColor: '#383838',
         overflow: 'hidden',
     },
     camera: {
-        width: (Layout.window.width * 0.65) - 10,
-        height: (Layout.window.height * 0.6) - 10,
+        width: (Layout.window.height * 0.9) - 10,
+        height: (Layout.window.width * 0.4) - 10,
         borderRadius: 20,
         overflow: 'hidden',
     },
     buttonContainer: {
         borderRadius: 15,
-        marginVertical: '5%',
+        marginVertical: 10,
     },
 });
 
