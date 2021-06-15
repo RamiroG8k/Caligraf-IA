@@ -49,15 +49,15 @@ export default function AnalizeScreen(props: any) {
                 <Text secondary bold style={styles.subtitle}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>
+            <View themed style={{ marginVertical: '5%', padding: 15, borderRadius: 15 }}>
+                <Text secondary style={{ textAlign: 'center' }}>Your phrase is:</Text>
+                <Text bold primary style={{ textAlign: 'center' }}>{phrase.data}</Text>
+            </View>
             <View themed style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen', phrase)}>
                     <Icon secondary name="camera-outline" size={150} />
                     <Text secondary bold style={styles.subtitle}>¡Tap Here!</Text>
                 </TouchableOpacity>
-            </View>
-            <View themed style={{ marginVertical: '5%', padding: 15, borderRadius: 15 }}>
-                <Text secondary style={{ textAlign: 'center' }}>Your phrase is:</Text>
-                <Text bold primary style={{ textAlign: 'center' }}>{phrase.data}</Text>
             </View>
         </View>
     );

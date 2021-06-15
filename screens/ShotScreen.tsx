@@ -11,8 +11,6 @@ import Layout from '../constants/Layout';
 
 const ShotScreen = (props: any) => {
     const { navigation, route } = props;
-    console.log(route.params);
-    
     // REQUEST PERMISSIONS FOR ACCESS TO CAMERA
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const ref = useRef<any | null>(null);
@@ -42,13 +40,13 @@ const ShotScreen = (props: any) => {
 
     const takeShot = async () => {
         const photo = await ref.current.takePictureAsync({ quality: 0.8, base64: true });
-        
+
         console.log(photo);
-        
+
         let image = new Image();
         let base64Img = `data:image/jpg;base64,${photo.base64}`;
         image.src = base64Img;
-        
+
         // await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
         // navigation.goBack();
     }
@@ -56,14 +54,16 @@ const ShotScreen = (props: any) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text bold style={styles.title}>Capture Phrase</Text>
-                <Text style={styles.subtitle}>Try to center the phrase in frame</Text>
+                <Text bold primary style={styles.title}>Capture Phrase</Text>
+                <Text bold secondary style={styles.subtitle}>"{route.params.data}"</Text>
             </View>
             <View style={styles.containerCamera}>
                 <Camera ref={ref} style={styles.camera} />
             </View>
+            <Text style={{ fontSize: 16, marginVertical: 10 }}>Try to center the phrase in frame</Text>
             <View style={styles.buttonContainer}>
-                <Button text="SNAP!" onPress={takeShot} />
+                <Button text="Cancel" onPress={() => navigation.goBack()} />
+                <Button primary text="SNAP!" onPress={takeShot} />
             </View>
         </View>
     );
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 26,
-        marginTop: 10,
+        marginTop: 15,
     },
     subtitle: {
         fontSize: 18,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     containerCamera: {
         width: Layout.window.height * 0.9,
         height: Layout.window.width * 0.4,
-        marginVertical: 25,
+        marginVertical: 15,
         borderRadius: 25,
         borderWidth: 5,
         borderColor: '#383838',
@@ -101,8 +101,11 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     buttonContainer: {
+        width: '25%',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
         borderRadius: 15,
-        marginVertical: 10,
+        // marginVertical: 10,
     },
 });
 
