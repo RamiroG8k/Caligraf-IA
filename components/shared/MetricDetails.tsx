@@ -68,7 +68,7 @@ const MetricDetails = ({ id }: { id: any }) => {
     const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item, i): any => {
         return (
             <Button key={i} text={`Open '${item.letter}' pdf`} style={{ marginTop: 15 }} 
-            onPress={() => OpenAnything.Pdf(`../../assets/letters/${item.path}`)} />
+            onPress={() => OpenAnything.Pdf(item.path)} />
         );
     });
 

@@ -10,7 +10,9 @@ import { Camera } from 'expo-camera';
 import Layout from '../constants/Layout';
 
 const ShotScreen = (props: any) => {
-    const { navigation } = props;
+    const { navigation, route } = props;
+    console.log(route.params);
+    
     // REQUEST PERMISSIONS FOR ACCESS TO CAMERA
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const ref = useRef<any | null>(null);
@@ -34,21 +36,20 @@ const ShotScreen = (props: any) => {
                     <Text style={{ fontSize: 26, marginVertical: 14 }}>No access to camera</Text>
                     <Ionicons name="alert-circle-outline" size={74} />
                 </View>
-                {/* TODO: Retry permissions Button */}
             </View>
         );
     }
 
     const takeShot = async () => {
-        const photo = await ref.current.takePictureAsync({ quality: 0.8 });
-        await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-
+        const photo = await ref.current.takePictureAsync({ quality: 0.8, base64: true });
+        
         console.log(photo);
-
+        
         let image = new Image();
         let base64Img = `data:image/jpg;base64,${photo.base64}`;
         image.src = base64Img;
         
+        // await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
         // navigation.goBack();
     }
 

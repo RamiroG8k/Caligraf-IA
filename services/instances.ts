@@ -13,8 +13,28 @@ export const apiInstance = Axios.create(
 
 apiInstance.interceptors.request.use(
     async config => {
-        const token = await AsyncStorage.getItem('token')
-        if (token) { 
+        const token = await AsyncStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = token;
+        }
+        return config;
+    },
+    error => { return Promise.reject(error); }
+)
+
+export const ocrInstance = Axios.create(
+    {
+        baseURL: 'http://127.0.0.1:5000',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    }
+);
+
+ocrInstance.interceptors.request.use(
+    async config => {
+        const token = await AsyncStorage.getItem('token');
+        if (token) {
             config.headers.Authorization = token;
         }
         return config;

@@ -1,5 +1,5 @@
 // Common
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // Components
@@ -8,15 +8,31 @@ import InfoCard from '../components/InfoCard';
 import Layout from '../constants/Layout';
 // Others
 import { DummyTips } from '../utils/dummy-data';
+import { apiInstance } from '../services/instances';
 
 export default function AnalizeScreen(props: any) {
+    const [phrase, setPhrase] = useState({ id: 0, data: 'RANDOM'});
     const { navigation } = props;
-    
+
     const tipsToShot: any = DummyTips.map((item: any) => {
         return (
             <InfoCard key={item.id} icon={item.icon} phrase={item.text} />
         );
     });
+
+    useEffect(() => {
+        fetchPhrases();
+    }, []);
+
+    const fetchPhrases = async () => {
+        await apiInstance.get('/phrase/all')
+            .then((response: any) => {
+                let randomItem = response.data[Math.floor(Math.random()*response.data.length)];
+                setPhrase(randomItem);
+            }).catch((error: any) => {
+                console.warn('ERROR: ', error);
+            });
+    };
 
     return (
         <View style={styles.container}>
@@ -34,10 +50,14 @@ export default function AnalizeScreen(props: any) {
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>
             <View themed style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen')}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen', phrase)}>
                     <Icon secondary name="camera-outline" size={150} />
                     <Text secondary bold style={styles.subtitle}>¡Tap Here!</Text>
                 </TouchableOpacity>
+            </View>
+            <View themed style={{ marginVertical: '5%', padding: 15, borderRadius: 15 }}>
+                <Text secondary style={{ textAlign: 'center' }}>Your phrase is:</Text>
+                <Text bold primary>{phrase.data}</Text>
             </View>
         </View>
     );
@@ -66,7 +86,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         borderRadius: 25,
         // width: Layout.window.width * 0.75,
-        height: Layout.window.width * 0.75,
+        height: Layout.window.width * 0.6,
     },
     button: {
         alignItems: 'center',
