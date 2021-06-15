@@ -1,7 +1,7 @@
 // Common
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Text, View } from './Themed';
+import { Button, Text, View } from './Themed';
 import Layout from '../../constants/Layout';
 // Others
 import { apiInstance } from '../../services/instances';
@@ -9,6 +9,8 @@ import * as Util from '../../utils/util-functions';
 import { GRADING } from '../../utils/dummy-data';
 import Stat from '../Stat';
 import { LETTERS } from '../../utils/dummy-data';
+
+const OpenAnything = require('react-native-openanything');
 
 const MetricDetails = ({ id }: { id: any }) => {
     const [data, setData] = useState<Object | any>({ id });
@@ -63,9 +65,10 @@ const MetricDetails = ({ id }: { id: any }) => {
         );
     });
 
-    const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item): any => {
+    const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item, i): any => {
         return (
-            <Text>{item.path}</Text>
+            <Button key={i} text={`Open '${item.letter}' pdf`} style={{ marginTop: 15 }} 
+            onPress={() => OpenAnything.Pdf(`../../assets/letters/${item.path}`)} />
         );
     });
 
