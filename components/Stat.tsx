@@ -6,7 +6,7 @@ const Stat = (props: any) => {
     const { style, letter, average } = props;
 
     return (
-        <View style={[styles.container, {...style}]}>
+        <View style={[styles.container, { ...style }]}>
             <View themed light="#FFF" style={styles.graph}>
                 <View style={[styles.stat, { height: `${average}%` }]}>
                     <Text bold light="#383838" dark="#383838" style={{ fontSize: 30 }}>{letter}</Text>

@@ -8,11 +8,13 @@ import { apiInstance } from '../../services/instances';
 import * as Util from '../../utils/util-functions';
 import { GRADING } from '../../utils/dummy-data';
 import Stat from '../Stat';
+import { LETTERS } from '../../utils/dummy-data';
 
 const MetricDetails = ({ id }: { id: any }) => {
     const [data, setData] = useState<Object | any>({ id });
     const [loading, setLoading] = useState<boolean>(true);
     const [grade, setGrade] = useState<Array<any>>([0, '', 0]);
+    const exercises: Array<any> = [];
 
     useEffect(() => {
         fetchData(id);
@@ -30,7 +32,7 @@ const MetricDetails = ({ id }: { id: any }) => {
             });
         setLoading(false);
     };
-    
+
     const findGrade: any = (grade: number) => {
         const OBJ: any = GRADING.filter((e: any) => {
             let range = e.percentage.split('-').map((x: any) => parseInt(x));
@@ -54,9 +56,16 @@ const MetricDetails = ({ id }: { id: any }) => {
     }
 
     const details = data.metrics_data.map((item: any, index: number, { length }: { length: number }): any => {
+        item.average < 70 ? exercises.push(item.letter) : null;
         return (
             <Stat key={index} average={item.average} letter={item.letter}
                 style={{ marginRight: index === length - 1 ? 0 : 12 }} />
+        );
+    });
+
+    const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item): any => {
+        return (
+            <Text>{item.path}</Text>
         );
     });
 
@@ -79,6 +88,7 @@ const MetricDetails = ({ id }: { id: any }) => {
                     {details}
                 </ScrollView>
             </View>
+            {retro}
         </ScrollView>
     );
 };

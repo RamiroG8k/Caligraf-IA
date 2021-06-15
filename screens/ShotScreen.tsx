@@ -40,7 +40,7 @@ const ShotScreen = (props: any) => {
     }
 
     const takeShot = async () => {
-        const photo = await ref.current.takePictureAsync({ quality: 0.8, base64: true });
+        const photo = await ref.current.takePictureAsync({ quality: 0.8 });
         await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
 
         console.log(photo);
