@@ -57,7 +57,7 @@ export default function AnalizeScreen(props: any) {
             </View>
             <View themed style={{ marginVertical: '5%', padding: 15, borderRadius: 15 }}>
                 <Text secondary style={{ textAlign: 'center' }}>Your phrase is:</Text>
-                <Text bold primary>{phrase.data}</Text>
+                <Text bold primary style={{ textAlign: 'center' }}>{phrase.data}</Text>
             </View>
         </View>
     );
