@@ -42,47 +42,16 @@ const ShotScreen = (props: any) => {
         );
     }
 
-    function dataURItoBlob(dataURI: any) {
-        // convert base64/URLEncoded data component to raw binary data held in a string
-        let byteString;
-        if (dataURI.split(',')[0].indexOf('base64') >= 0)
-            byteString = decode(dataURI.split(',')[1]);
-        else
-            byteString = unescape(dataURI.split(',')[1]);
-
-        // separate out the mime component
-        let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-        // write the bytes of the string to a typed array
-        let ia = new Uint8Array(byteString.length);
-        for (let i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-        }
-
-        return new Blob([ia], { type: mimeString });
-    }
-
     const takeShot = async () => {
         const photo = await ref.current
             .takePictureAsync({
                 quality: 0.8,
                 base64: true
             }).then((res: any) => {
-                // console.log(res);
-                let base64Img = `data:image/jpg;base64,${res.base64}`;
-                getFile(base64Img);
-                // getFile(res.base64);
+                getFile(res.base64);
             }).catch((err: any) => {
                 console.log(err);
             });
-        // console.log(photo);
-
-        // let image = new Image(photo.width, photo.height);
-        // image.src = base64Img;
-
-        // console.log(typeof image);
-        // console.log(image);
-
         // await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
         // navigation.goBack();
     }
@@ -112,38 +81,17 @@ const ShotScreen = (props: any) => {
     }
 
     const getFile = async (base64: string) => {
-        let blob = dataURItoBlob(base64);
-        // let blob = b64toBlob(base64);
+        let blob = b64toBlob(base64);
         let IMG = new File([blob], 'imagen_try.jpg', { type: 'image/jpg' });
 
-        postFile();
-
         async function postFile() {
-
-            let user: any;
-            AsyncStorage.getItem('info').then(
-                (response: any) => {
-                    if (response !== null) {
-                        user = (JSON.parse(response)._id);
-                        console.log(user);
-                        
-                        return;
-                    }
-                }
-            ).catch(
-                (error: any) => {
-                    console.warn('ERROR IN ASYNC STORAGE: ', error);
-                }
-            );
-
-
             let formData = new FormData();
             formData.append('image', IMG);
-            formData.append('phraseId', route.params.phrase._id);
-            // formData.append('userId', user);
-            // console.log(formData);
-            
-            await ocrInstance.post('/image', formData)
+            // formData.append('phraseId', route.params.phrase._id);
+            formData.append('phraseId', '6095f19b3309a8859139f158');
+            formData.append('userId', '608766008755ab00ccb2212f');
+
+            await ocrInstance.post('/image', 'formData')
                 .then((response: any) => {
                     console.log(response);
                 }).catch((error: any) => {
@@ -151,6 +99,7 @@ const ShotScreen = (props: any) => {
                 });
         }
 
+        postFile();
     }
 
     const goBack = async () => {
