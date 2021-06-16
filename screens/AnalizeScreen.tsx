@@ -12,7 +12,8 @@ import { apiInstance } from '../services/instances';
 
 export default function AnalizeScreen(props: any) {
     const [phrase, setPhrase] = useState({ id: 0, data: 'RANDOM'});
-    const { navigation } = props;
+    const [taken, setTaken] = useState({ analized: false, backward: false });
+    const { navigation, route } = props;
 
     const tipsToShot: any = DummyTips.map((item: any) => {
         return (
@@ -22,7 +23,8 @@ export default function AnalizeScreen(props: any) {
 
     useEffect(() => {
         fetchPhrases();
-    }, []);
+        setTaken(route.params);
+    }, [route.params]);
 
     const fetchPhrases = async () => {
         await apiInstance.get('/phrase/all')
@@ -54,7 +56,7 @@ export default function AnalizeScreen(props: any) {
                 <Text bold primary style={{ textAlign: 'center' }}>{phrase.data}</Text>
             </View>
             <View themed style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen', phrase)}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen', {phrase, taken} )}>
                     <Icon secondary name="camera-outline" size={150} />
                     <Text secondary bold style={styles.subtitle}>¡Tap Here!</Text>
                 </TouchableOpacity>

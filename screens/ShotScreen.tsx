@@ -11,6 +11,7 @@ import Layout from '../constants/Layout';
 
 const ShotScreen = (props: any) => {
     const { navigation, route } = props;
+
     // REQUEST PERMISSIONS FOR ACCESS TO CAMERA
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const ref = useRef<any | null>(null);
@@ -38,31 +39,69 @@ const ShotScreen = (props: any) => {
         );
     }
 
+    function dataURItoBlob(dataURI: string) {
+        // convert base64/URLEncoded data component to raw binary data held in a string
+        var byteString;
+        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+            byteString = atob(dataURI.split(',')[1]);
+        else
+            byteString = unescape(dataURI.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+        // write the bytes of the string to a typed array
+        var ia = new Uint8Array(byteString.length);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ia], { type: mimeString });
+    }
+
     const takeShot = async () => {
         const photo = await ref.current.takePictureAsync({ quality: 0.8, base64: true });
 
-        console.log(photo);
+        async () => {
+            var blob = dataURItoBlob(photo.base64);
+            var IMG = new File([blob], 'imagen_try.jpg', { type: 'image/jpg' });
+    
+            console.log(typeof IMG);
+            console.log(IMG);
+        }
+        // console.log(photo);
 
-        let image = new Image();
-        let base64Img = `data:image/jpg;base64,${photo.base64}`;
-        image.src = base64Img;
+        // let image = new Image(photo.width, photo.height);
+        // let base64Img = `data:image/jpg;base64,${photo.base64}`;
+        // image.src = base64Img;
+
+        
+
+        // console.log(typeof image);
+        // console.log(image);
+
 
         // await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
         // navigation.goBack();
+    }
+    
+    const goBack = async () => {
+        await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+        navigation.navigate('AnalizeScreen', { analized: false, backward: true });
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text bold primary style={styles.title}>Capture Phrase</Text>
-                <Text bold secondary style={styles.subtitle}>"{route.params.data}"</Text>
+                <Text bold secondary style={styles.subtitle}>"{route.params.phrase.data}"</Text>
             </View>
             <View style={styles.containerCamera}>
                 <Camera ref={ref} style={styles.camera} />
             </View>
             <Text style={{ fontSize: 16, marginVertical: 10 }}>Try to center the phrase in frame</Text>
             <View style={styles.buttonContainer}>
-                <Button text="Cancel" onPress={() => navigation.goBack()} />
+                <Button text="Cancel" onPress={() => goBack()} />
                 <Button primary text="SNAP!" onPress={takeShot} />
             </View>
         </View>
