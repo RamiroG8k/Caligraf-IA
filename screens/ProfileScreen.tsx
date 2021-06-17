@@ -8,7 +8,7 @@ import { Button, Text, View } from '../components/shared/Themed';
 import StatsCard from '../components/StatsCard';
 import { Modalize } from 'react-native-modalize';
 // Util
-import * as Util from '../utils/util-functions';
+import { toMinString, toLocalDate, toTitleCase } from '../utils';
 import Layout from '../constants/Layout';
 import MetricDetails from '../components/shared/MetricDetails';
 import Modal from '../components/shared/Modal';
@@ -64,8 +64,8 @@ export default function ProfileScreen(props: any) {
 
     const availableMetrics = metrics.map((item: any): any => {
         return (
-            <StatsCard key={item._id} title={Util.toMinString(item.phrase.data)} icon="attach-outline"
-                onPress={() => renderContent(item._id)} phrase={Util.toLocalDate(item.date)} />
+            <StatsCard key={item._id} title={toMinString(item.phrase.data)} icon="attach-outline"
+                onPress={() => renderContent(item._id)} phrase={toLocalDate(item.date)} />
         );
     });
 
@@ -99,7 +99,7 @@ export default function ProfileScreen(props: any) {
                         </View>
                     </View>
                     <View style={{ alignItems: 'center', margin: '10%' }}>
-                        <Text bold style={{ fontSize: 26, marginBottom: 4 }}>{Util.toTitleCase(userInfo.name)}</Text>
+                        <Text bold style={{ fontSize: 26, marginBottom: 4 }}>{toTitleCase(userInfo.name)}</Text>
                         <Text style={{ fontSize: 18 }}>{userInfo.email}</Text>
                         <View style={styles.buttonGroup}>
                             <Button text="Log Out" onPress={Logout} style={{ margin: 10, padding: 12, width: '45%' }} />

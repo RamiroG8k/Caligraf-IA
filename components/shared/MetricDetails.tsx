@@ -5,10 +5,9 @@ import { Button, Text, View } from './Themed';
 import Layout from '../../constants/Layout';
 // Others
 import { apiInstance } from '../../services/instances';
-import * as Util from '../../utils/util-functions';
-import { GRADING } from '../../utils/dummy-data';
+import { toLocalDate } from '../../utils';
+import { GRADING, LETTERS } from '../../utils/dummy-data';
 import Stat from '../Stat';
-import { LETTERS } from '../../utils/dummy-data';
 
 const OpenAnything = require('react-native-openanything');
 
@@ -67,7 +66,7 @@ const MetricDetails = ({ id }: { id: any }) => {
 
     const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item, i): any => {
         return (
-            <Button key={i} text={`Open '${item.letter}' pdf`} style={{ marginTop: 15 }} 
+            <Button dark="#000" key={i} text={`Open '${item.letter}' pdf`} style={{ marginTop: 15 }} 
             onPress={() => OpenAnything.Pdf(item.path)} />
         );
     });
@@ -76,7 +75,7 @@ const MetricDetails = ({ id }: { id: any }) => {
         <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <View style={styles.header}>
                 <View style={{ width: '80%', }}>
-                    <Text style={{ fontSize: 16, marginBottom: 5 }}>{Util.toLocalDate(data.date)}</Text>
+                    <Text style={{ fontSize: 16, marginBottom: 5 }}>{toLocalDate(data.date)}</Text>
                     <Text bold style={{ fontSize: 22 }}>{JSON.stringify(data.phrase.data)}</Text>
                 </View>
                 <TouchableOpacity style={styles.icon} onPress={toggleGradeState}>

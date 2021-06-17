@@ -9,7 +9,7 @@ import Layout from '../constants/Layout';
 // Others
 import { DummyTips } from '../utils/dummy-data';
 import { apiInstance } from '../services/instances';
-import { getRandomObject } from '../utils/util-functions';
+import { getRandomObject } from '../utils';
 
 export default function AnalizeScreen(props: any) {
     const [randPhrase, setRandPhrase] = useState({ id: 0, data: 'RANDOM'});
