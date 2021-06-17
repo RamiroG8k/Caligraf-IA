@@ -1,4 +1,3 @@
-import { decode, encode } from 'base-64';
 // Common
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
@@ -45,10 +44,9 @@ const ShotScreen = (props: any) => {
     const takeShot = async () => {
         const photo = await ref.current
             .takePictureAsync({
-                quality: 0.8,
-                base64: true
+                quality: 0.9,
             }).then((res: any) => {
-                getFile(res.base64);
+                postFile(res);
             }).catch((err: any) => {
                 console.log(err);
             });
@@ -56,50 +54,21 @@ const ShotScreen = (props: any) => {
         // navigation.goBack();
     }
 
-    function b64toBlob(b64Data: string, contentType: string = 'image/jpg', sliceSize?: any) {
-        contentType = contentType || '';
-        sliceSize = sliceSize || 512;
-
-        var byteCharacters = decode(b64Data);
-        var byteArrays = [];
-
-        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            var byteNumbers = new Array(slice.length);
-            for (var i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            var byteArray = new Uint8Array(byteNumbers);
-
-            byteArrays.push(byteArray);
-        }
-
-        var blob = new Blob(byteArrays, { type: contentType });
-        return blob;
-    }
-
-    const getFile = async (base64: string) => {
-        let blob = b64toBlob(base64);
-        let IMG = new File([blob], 'imagen_try.jpg', { type: 'image/jpg' });
-
-        async function postFile() {
-            let formData = new FormData();
-            formData.append('image', IMG);
-            formData.append('phraseId', route.params.phrase._id);
-            //formData.append('phraseId', '6095f19b3309a8859139f158');
-            formData.append('userId', '608766008755ab00ccb2212f');
-
-            await ocrInstance.post('/image', 'formData')
-                .then((response: any) => {
-                    console.log(response);
-                }).catch((error: any) => {
-                    console.warn(error);
-                });
-        }
-
-        postFile();
+    async function postFile(img: any) {
+        let formData = new FormData();
+        formData.append('image', JSON.parse(JSON.stringify({
+            uri: img.uri,
+            type: 'image/jpeg',
+            name: 'testPhotoName'
+        })));
+        formData.append('phraseId', route.params.phrase._id);
+        formData.append('userId', '608766008755ab00ccb2212f');
+        await ocrInstance.post('/image', formData)
+            .then((response: any) => {
+                console.log(response.data);
+            }).catch((error: any) => {
+                console.warn(error);
+            });
     }
 
     const goBack = async () => {
