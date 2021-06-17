@@ -87,8 +87,8 @@ const ShotScreen = (props: any) => {
         async function postFile() {
             let formData = new FormData();
             formData.append('image', IMG);
-            // formData.append('phraseId', route.params.phrase._id);
-            formData.append('phraseId', '6095f19b3309a8859139f158');
+            formData.append('phraseId', route.params.phrase._id);
+            //formData.append('phraseId', '6095f19b3309a8859139f158');
             formData.append('userId', '608766008755ab00ccb2212f');
 
             await ocrInstance.post('/image', 'formData')
@@ -99,17 +99,7 @@ const ShotScreen = (props: any) => {
                 });
         }
 
-        async function tryToGet() {
-            await ocrInstance.get('/hello')
-                .then((response: any) => {
-                    console.log(response);
-                }).catch((error: any) => {
-                    console.warn(error);
-                });
-        }
-
-        // postFile();
-        tryToGet();
+        postFile();
     }
 
     const goBack = async () => {

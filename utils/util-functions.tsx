@@ -25,3 +25,7 @@ export const toLocalDate = (date: Date): string => {
     return new Date(date)
         .toLocaleString('es-MX', options);
 }
+
+export const getRandomObject = (array: Array<any>): any => {
+    return array[Math.floor(Math.random()*array.length)];
+};

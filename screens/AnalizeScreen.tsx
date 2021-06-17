@@ -9,10 +9,12 @@ import Layout from '../constants/Layout';
 // Others
 import { DummyTips } from '../utils/dummy-data';
 import { apiInstance } from '../services/instances';
+import { getRandomObject } from '../utils/util-functions';
 
 export default function AnalizeScreen(props: any) {
-    const [phrase, setPhrase] = useState({ id: 0, data: 'RANDOM'});
+    const [randPhrase, setRandPhrase] = useState({ id: 0, data: 'RANDOM'});
     const [taken, setTaken] = useState({ analized: false, backward: false });
+    const [phrases, setPhrases] = useState([]);
     const { navigation, route } = props;
 
     const tipsToShot: any = DummyTips.map((item: any) => {
@@ -29,12 +31,13 @@ export default function AnalizeScreen(props: any) {
     const fetchPhrases = async () => {
         await apiInstance.get('/phrase/all')
             .then((response: any) => {
-                let randomItem = response.data[Math.floor(Math.random()*response.data.length)];
-                setPhrase(randomItem);
+                setPhrases(response.data);
+                setRandPhrase(getRandomObject(response.data));
             }).catch((error: any) => {
                 console.warn('ERROR: ', error);
             });
     };
+
 
     return (
         <View style={styles.container}>
@@ -51,12 +54,12 @@ export default function AnalizeScreen(props: any) {
                 <Text secondary bold style={styles.subtitle}>Let's get into it!</Text>
                 <Text style={styles.info}>Now that you're ready, let's Begin Analyzing.</Text>
             </View>
-            <View themed style={{ marginVertical: '5%', padding: 15, borderRadius: 15 }}>
+            <TouchableOpacity onPress={() => setRandPhrase(getRandomObject(phrases))} style={{ marginVertical: '5%', padding: 15, borderRadius: 15 }}>
                 <Text secondary style={{ textAlign: 'center' }}>Your phrase is:</Text>
-                <Text bold primary style={{ textAlign: 'center' }}>{phrase.data}</Text>
-            </View>
+                <Text bold primary style={{ textAlign: 'center' }}>{randPhrase.data}</Text>
+            </TouchableOpacity>
             <View themed style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen', {phrase, taken} )}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CameraScreen', {phrase: randPhrase, taken} )}>
                     <Icon secondary name="camera-outline" size={150} />
                     <Text secondary bold style={styles.subtitle}>¡Tap Here!</Text>
                 </TouchableOpacity>
