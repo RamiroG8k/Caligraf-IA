@@ -24,7 +24,7 @@ apiInstance.interceptors.request.use(
 
 export const ocrInstance = Axios.create(
     {
-        baseURL: 'http://localhost:5000',
+        baseURL: 'http://127.0.0.1:5000',
         headers: {
             'Content-Type': 'multipart/form-data',
         }

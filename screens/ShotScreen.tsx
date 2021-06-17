@@ -99,7 +99,17 @@ const ShotScreen = (props: any) => {
                 });
         }
 
-        postFile();
+        async function tryToGet() {
+            await ocrInstance.get('/hello')
+                .then((response: any) => {
+                    console.log(response);
+                }).catch((error: any) => {
+                    console.warn(error);
+                });
+        }
+
+        // postFile();
+        tryToGet();
     }
 
     const goBack = async () => {
