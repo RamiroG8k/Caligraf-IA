@@ -56,7 +56,7 @@ export default function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ color, focused }) =>
                         <TabBarIcon name={focused ? "bar-chart" : "bar-chart-outline"} color={color} />
-                }}|
+                }}
             />
         </BottomTab.Navigator>
     );
