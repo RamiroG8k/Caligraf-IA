@@ -29,3 +29,18 @@ export const toLocalDate = (date: Date): string => {
 export const getRandomObject = (array: Array<any>): any => {
     return array[Math.floor(Math.random()*array.length)];
 };
+
+export function actualWeek() {
+    let current = new Date();
+    let week= new Array(); 
+    
+    // Starting Monday not Sunday
+    current.setDate((current.getDate() - current.getDay() +1));
+    for (let i = 0; i < 7; i++) {
+        week.push(
+            new Date(current)
+        ); 
+        current.setDate(current.getDate() + 1);
+    }
+    return week; 
+}

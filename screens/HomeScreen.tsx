@@ -10,17 +10,16 @@ import Colors from '../constants/Colors';
 import { Modalize } from 'react-native-modalize';
 import Layout from '../constants/Layout';
 import MetricDetails from '../components/shared/MetricDetails';
-
-import { DummyMetrics } from '../utils/dummy-data';
+// Utils
+import { DummyMetrics } from '../util/dummy-data';
+import { actualWeek } from '../util';
 
 export default function HomeScreen({ navigation }: { navigation: any }, props: any) {
-    const modalizeRef = useRef<Modalize>(null);
     const [modalContent, setModalContent] = useState<any | null>(null);
     const [metrics, setMetrics] = useState<Array<Object>>(DummyMetrics);
 
     const renderContent = (index: number) => {
         setModalContent(<MetricDetails id={index} />);
-        modalizeRef.current?.open();
     };
 
     const emptyCard = (key: number): any => {
@@ -50,27 +49,44 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
         }
     });
 
+    const week = actualWeek().map((item: any, index: number) => {
+        const bgColor = new Date(item).getDate() === new Date().getDate() ? true : false;
+
+        return (
+            <View key={index} themed primary={bgColor} style={{ width: '12%', height: 75, borderRadius: 15 }}>
+                <Text style={{ textAlign: 'center', marginTop: 6, fontSize: 12 }}>{new Date(item).toLocaleString('en-us', { weekday: 'short' }).substring(0, 2)}</Text>
+                <View style={{ flex: 1, alignItems: 'center', marginTop: '30%' }}>
+                    <Text bold style={{ fontSize: 18 }}>{new Date(item).getDate()}</Text>
+                </View>
+            </View>
+        );
+    });
+
     return (
         <View>
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                 <View>
                     <View style={{ marginVertical: '5%' }}>
-                        <Text style={styles.title}>Week Info</Text>
+                        <Text primary bold style={styles.title}>Week Info</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
                     </View>
                     <View style={styles.separator} />
                 </View>
                 <View>
                     <View style={{ marginVertical: '5%' }}>
-                        <Text style={styles.subtitle}>Reminder</Text>
+                        <Text secondary bold style={styles.subtitle}>Reminder</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
                     </View>
                     <Banner />
                 </View>
+
                 <View>
                     <View style={{ marginVertical: '5%' }}>
-                        <Text style={styles.subtitle}>Last Analyses</Text>
+                        <Text secondary bold style={styles.subtitle}>Last Analyses</Text>
                         <Text style={styles.info}>General stats, Tips & Tricks</Text>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginVertical: 15 }}>
+                            {week}
+                        </View>
                     </View>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                         {metrics ? lastMetrics : emptyCard(0)}
@@ -80,11 +96,6 @@ export default function HomeScreen({ navigation }: { navigation: any }, props: a
                     <Text style={{ fontSize: 18 }}>Coming Soon...</Text>
                 </View>
             </ScrollView>
-            <Modalize modalStyle={[styles.modal, { backgroundColor: useThemeColor({}, 'background') }]}
-                modalHeight={Layout.window.height * 0.6} ref={modalizeRef}
-                overlayStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.55)' }}>
-                {modalContent}
-            </Modalize>
         </View>
     );
 }
@@ -99,15 +110,11 @@ const styles = StyleSheet.create({
         fontSize: 32,
         marginLeft: 10,
         marginBottom: 12,
-        fontFamily: 'Montserrat-Bold',
-        color: Colors.light.primary,
     },
     subtitle: {
         fontSize: 26,
         marginLeft: 10,
         marginBottom: 12,
-        fontFamily: 'Montserrat-Bold',
-        color: Colors.light.secondary,
     },
     info: {
         fontSize: 14,
@@ -117,10 +124,6 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         width: '80%',
         height: 2,
-    },
-    modal: {
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25
     },
     emptyCard: {
         flex: 1,

@@ -5,8 +5,8 @@ import { Button, Text, View } from './Themed';
 import Layout from '../../constants/Layout';
 // Others
 import { apiInstance } from '../../services/instances';
-import { toLocalDate } from '../../utils';
-import { GRADING, LETTERS } from '../../utils/dummy-data';
+import { toLocalDate } from '../../util';
+import { GRADING, LETTERS } from '../../util/dummy-data';
 import Stat from '../Stat';
 
 const OpenAnything = require('react-native-openanything');

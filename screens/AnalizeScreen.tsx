@@ -7,9 +7,9 @@ import { Icon, Text, View } from '../components/shared/Themed';
 import InfoCard from '../components/InfoCard';
 import Layout from '../constants/Layout';
 // Others
-import { DummyTips } from '../utils/dummy-data';
+import { DummyTips } from '../util/dummy-data';
 import { apiInstance } from '../services/instances';
-import { getRandomObject } from '../utils';
+import { getRandomObject } from '../util';
 
 export default function AnalizeScreen(props: any) {
     const [randPhrase, setRandPhrase] = useState({ id: 0, data: 'RANDOM'});

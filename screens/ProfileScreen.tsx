@@ -8,7 +8,7 @@ import { Button, Text, View } from '../components/shared/Themed';
 import StatsCard from '../components/StatsCard';
 import { Modalize } from 'react-native-modalize';
 // Util
-import { toMinString, toLocalDate, toTitleCase } from '../utils';
+import { toMinString, toLocalDate, toTitleCase } from '../util';
 import Layout from '../constants/Layout';
 import MetricDetails from '../components/shared/MetricDetails';
 import Modal from '../components/shared/Modal';

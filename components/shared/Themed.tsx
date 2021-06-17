@@ -51,7 +51,7 @@ export function Button(props: TouchableProps) {
 
     return (
         <DefaultTouchable onPress={onPress} {...otherProps} activeOpacity={0.4}
-            style={[{ borderRadius: 15, backgroundColor, padding: 14, justifyContent: 'center'}, style]} >
+            style={[{ borderRadius: 15, backgroundColor, padding: 14, justifyContent: 'center' }, style]} >
             <Text light={otherProps.primary || otherProps.secondary ? '#FFFFFF' : ''}
                 dark={otherProps.primary || otherProps.secondary ? '#383838' : ''}
                 style={{ fontSize: 18, textAlign: 'center', fontFamily: 'Montserrat-Bold' }}>
@@ -83,7 +83,9 @@ export function Icon(props: IconProps) {
 
 export function View(props: ViewProps) {
     const { style, light, dark, themed, ...otherProps } = props;
-    const backgroundColor = themed ? useThemeColor({ light, dark }, 'background') : 'transparent';
+    const backgroundColor = themed ?
+        useThemeColor({ light, dark }, otherProps.primary ? 'primary' :
+            otherProps.secondary ? 'secondary' : 'background') : 'transparent';
 
     return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
