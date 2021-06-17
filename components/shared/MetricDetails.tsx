@@ -1,7 +1,7 @@
 // Common
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Button, Text, View } from './Themed';
+import { Text, View } from './Themed';
 import Layout from '../../constants/Layout';
 // Others
 import { apiInstance } from '../../services/instances';
@@ -64,10 +64,19 @@ const MetricDetails = ({ id }: { id: any }) => {
         );
     });
 
-    const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item, i): any => {
+    const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item: any, i: number, { length }: { length: number }): any => {
         return (
-            <Button dark="#000" key={i} text={`Open '${item.letter}' pdf`} style={{ marginTop: 15 }} 
-            onPress={() => OpenAnything.Pdf(item.path)} />
+            <View key={i} themed style={{ marginRight: i === length - 1 ? 0 : 15, width: 90, height: 110, overflow: 'hidden', borderRadius: 15 }}>
+                <TouchableOpacity style={{ flex: 1, backgroundColor: 'tomato' }} onPress={() => alert(item.letter)}>
+                    <Text>OPEN</Text>
+                </TouchableOpacity>
+                <Text bold style={{ fontSize: 120, position: 'absolute', right: -10, bottom: -30 }}>
+                    {item.letter}
+                </Text>
+            </View>
+
+            // <Button dark="#000" key={i} text={`Open '${item.letter}' pdf`} style={{ marginRight: i === length - 1 ? 0 : 15, width: 90, height: 110 }}
+            //     onPress={() => OpenAnything.Pdf(item.path)} />
         );
     });
 
@@ -76,7 +85,7 @@ const MetricDetails = ({ id }: { id: any }) => {
             <View style={styles.header}>
                 <View style={{ width: '80%', }}>
                     <Text style={{ fontSize: 16, marginBottom: 5 }}>{toLocalDate(data.date)}</Text>
-                    <Text bold style={{ fontSize: 22 }}>{JSON.stringify(data.phrase.data)}</Text>
+                    <Text primary bold style={{ fontSize: 22 }}>{JSON.stringify(data.phrase.data)}</Text>
                 </View>
                 <TouchableOpacity style={styles.icon} onPress={toggleGradeState}>
                     <View themed dark="#000" style={styles.icon}>
@@ -90,7 +99,15 @@ const MetricDetails = ({ id }: { id: any }) => {
                     {details}
                 </ScrollView>
             </View>
-            {retro}
+            <View>
+                <View style={{ marginVertical: 25 }}>
+                    <Text secondary bold style={styles.title}>Stats</Text>
+                    <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
+                </View>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ overflow: 'hidden' }}>
+                    {retro}
+                </ScrollView>
+            </View>
         </ScrollView>
     );
 };
@@ -121,7 +138,16 @@ const styles = StyleSheet.create({
         height: Layout.window.width * 0.15,
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    title: {
+        fontSize: 22,
+        marginLeft: 10,
+        marginBottom: 8,
+    },
+    info: {
+        fontSize: 14,
+        marginLeft: 10,
+    },
 });
 
 export default MetricDetails;
