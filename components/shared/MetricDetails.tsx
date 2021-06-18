@@ -67,16 +67,13 @@ const MetricDetails = ({ id }: { id: any }) => {
     const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item: any, i: number, { length }: { length: number }): any => {
         return (
             <View key={i} themed style={{ marginRight: i === length - 1 ? 0 : 15, width: 90, height: 110, overflow: 'hidden', borderRadius: 15 }}>
-                <TouchableOpacity style={{ flex: 1, backgroundColor: 'tomato' }} onPress={() => alert(item.letter)}>
+                <TouchableOpacity onPress={() => OpenAnything.Pdf(item.path)} style={{ flex: 1, backgroundColor: 'tomato' }} >
                     <Text>OPEN</Text>
                 </TouchableOpacity>
                 <Text bold style={{ fontSize: 120, position: 'absolute', right: -10, bottom: -30 }}>
                     {item.letter}
                 </Text>
             </View>
-
-            // <Button dark="#000" key={i} text={`Open '${item.letter}' pdf`} style={{ marginRight: i === length - 1 ? 0 : 15, width: 90, height: 110 }}
-            //     onPress={() => OpenAnything.Pdf(item.path)} />
         );
     });
 

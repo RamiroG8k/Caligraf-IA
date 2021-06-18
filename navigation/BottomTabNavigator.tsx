@@ -13,7 +13,7 @@ import ShotScreen from '../screens/ShotScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import AnalizeScreen from '../screens/AnalizeScreen';
 // ParamsList
-import { BottomTabParamList, TabProfileParamList, TabHomeParamList, TabAnallizeNavigator } from '../types';
+import { BottomTabParamList, TabProfile, TabHome, TabAnallize } from '../types';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/core';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -66,17 +66,17 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
     return <Ionicons size={35} {...props} />;
 }
 
-const HomeStack = createStackNavigator<TabHomeParamList>();
+const HomeStack = createStackNavigator<TabHome>();
 
 function TabHomeNavigator() {
     return (
         <HomeStack.Navigator screenOptions={{ headerShown: false }} >
-            <HomeStack.Screen name="TabHomeScreen" component={HomeScreen} />
+            <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
         </HomeStack.Navigator>
     );
 }
 
-const AnalizeStack = createStackNavigator<TabAnallizeNavigator>();
+const AnalizeStack = createStackNavigator<TabAnallize>();
 
 function TabAnalizeNavigator() {
     return (
@@ -87,12 +87,12 @@ function TabAnalizeNavigator() {
     );
 }
 
-const ProfileStack = createStackNavigator<TabProfileParamList>();
+const ProfileStack = createStackNavigator<TabProfile>();
 
 function TabProfileNavigator() {
     return (
         <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
-            <ProfileStack.Screen name="TabProfileScreen" component={ProfileScreen} />
+            <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
         </ProfileStack.Navigator>
     );
 }

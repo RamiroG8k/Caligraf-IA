@@ -1,19 +1,44 @@
 // Common
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import { Text, View, Button } from '../components/shared/Themed';
+
+interface Info {
+    imgPath: any,
+    title: string,
+    info: string
+};
+
+const pages: Array<Info> = [
+    { imgPath: require('../assets/images/illustrations/1.png'), title: 'Caligraf IA analysis Assessment.', info: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+    { imgPath: require('../assets/images/illustrations/2.png'), title: 'Parenting helper.', info: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+    { imgPath: require('../assets/images/illustrations/3.png'), title: 'Caligraf IA analysis Assessment.', info: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+];
 
 const WelcomeScreen: React.FunctionComponent = (props: any) => {
     const { navigation: go } = props;
 
+    const infoCards = pages.map((e: Info, i: number, { length }: { length: number }) => {
+        return (
+            <View key={i} style={{ width: 300, alignItems: 'center' }}>
+                <View style={styles.imgContainer}>
+                    <Image style={styles.img} source={e.imgPath} />
+                </View>
+                <View>
+                    <Text secondary bold style={styles.title}>{e.title}</Text>
+                    <Text style={styles.subtitle}>{e.info}</Text>
+                </View>
+            </View>
+        );
+    });
+
     return (
         <View style={styles.container}>
-            <View style={styles.imgContainer}>
-                <Image style={styles.img} source={require('../assets/images/illustrations/1.png')} />
-            </View>
-            <View style={{ height: '30%' }}>
-                <Text secondary bold style={styles.title}>Caligraf IA analysis Assessment.</Text>
-                <Text style={styles.subtitle}>Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+            <View style={{ height: '90%' }}>
+                <ScrollView horizontal decelerationRate={0} pagingEnabled
+                    showsHorizontalScrollIndicator={false} style={{ overflow: 'visible' }}>
+                    {infoCards}
+                </ScrollView>
             </View>
             <View>
                 <View style={styles.buttonGroup}>

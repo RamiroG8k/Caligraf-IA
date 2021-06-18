@@ -1,3 +1,4 @@
+// Principal routes stack
 export type RootStackParamList = {
     Welcome: undefined;
     Login: undefined;
@@ -6,23 +7,24 @@ export type RootStackParamList = {
     NotFound: undefined;
 };
 
+// BottomTab routes stack
 export type BottomTabParamList = {
     Home: undefined;
     Analyze: undefined;
     Profile: undefined;
 };
 
-export type TabHomeParamList = {
-    TabHomeScreen: undefined;
+export type TabHome = {
+    HomeScreen: undefined;
 };
 
-export type TabAnallizeNavigator = {
+export type TabAnallize = {
     AnalizeScreen: undefined;
     CameraScreen: undefined;
 };
 
-export type TabProfileParamList = {
-    TabProfileScreen: undefined;
+export type TabProfile = {
+    ProfileScreen: undefined;
 };
 
 export type ThemeProps = {
