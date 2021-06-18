@@ -1,6 +1,6 @@
 // Common
 import React from 'react';
-import { Image, ScrollView, StyleSheet } from 'react-native';
+import { Image, ScrollView, StyleSheet, Animated, FlatList } from 'react-native';
 import { Text, View, Button } from '../components/shared/Themed';
 
 interface Info {
@@ -32,13 +32,25 @@ const WelcomeScreen: React.FunctionComponent = (props: any) => {
         );
     });
 
+    function InfoCard({ data }: { data: Info }) {
+        return (
+            <View style={{ width: 300, alignItems: 'center', marginHorizontal: 30 }}>
+                <View style={styles.imgContainer}>
+                    <Image style={styles.img} source={data.imgPath} />
+                </View>
+                <View>
+                    <Text secondary bold style={styles.title}>{data.title}</Text>
+                    <Text style={styles.subtitle}>{data.info}</Text>
+                </View>
+            </View>
+        );
+    }
+
     return (
         <View style={styles.container}>
-            <View style={{ height: '90%', flex: 1 }}>
-                <ScrollView horizontal decelerationRate={0} pagingEnabled
-                    showsHorizontalScrollIndicator={false} style={{ flex: 1, overflow: 'visible', width: 1000 }}>
-                    {infoCards}
-                </ScrollView>
+            <View style={{ height: '90%' }}>
+                <FlatList pagingEnabled horizontal data={pages} style={{ backgroundColor: 'tomato', overflow: 'visible' }}
+                    renderItem={({ item }) => <InfoCard data={item} />} keyExtractor={(_, index) => index.toString()} />
             </View>
             <View>
                 <View style={styles.buttonGroup}>
