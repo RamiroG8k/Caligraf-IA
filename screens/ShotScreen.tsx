@@ -14,13 +14,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const ShotScreen = (props: any) => {
     const { navigation, route } = props;
 
-    // REQUEST PERMISSIONS FOR ACCESS TO CAMERA
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const ref = useRef<any | null>(null);
 
     useEffect(() => {
         (async () => {
-            // navigation.setOptions({ tabBarVisible: false });
             await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
             const { status } = await Camera.requestPermissionsAsync();
             setHasPermission(status === 'granted');
@@ -50,30 +48,33 @@ const ShotScreen = (props: any) => {
             }).catch((err: any) => {
                 console.log(err);
             });
-        // await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-        // navigation.goBack();
-    }
-
-    async function postFile(img: any) {
-        let formData = new FormData();
-        formData.append('image', JSON.parse(JSON.stringify({
-            uri: img.uri,
-            type: 'image/jpeg',
-            name: 'testPhotoName'
-        })));
-        formData.append('phraseId', route.params.phrase._id);
-        formData.append('userId', '608766008755ab00ccb2212f');
-        await ocrInstance.post('/image', formData)
+        }
+        
+        async function postFile(img: any) {
+            let formData = new FormData();
+            formData.append('image', JSON.parse(JSON.stringify({
+                uri: img.uri,
+                type: 'image/jpeg',
+                name: 'testPhotoName'
+            })));
+            formData.append('phraseId', route.params.phrase._id);
+            formData.append('userId', '608766008755ab00ccb2212f');
+            await ocrInstance.post('/image', formData)
             .then((response: any) => {
                 console.log(response.data);
+                goBack(response.data);
             }).catch((error: any) => {
                 console.warn(error);
             });
     }
 
-    const goBack = async () => {
+    const goBack = async (data?: any) => {
         await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-        navigation.navigate('AnalizeScreen', { analized: false, backward: true });
+        if (data) {
+            navigation.navigate('AnalizeScreen', { analized: true, data: data });
+            return;
+        }
+        navigation.navigate('AnalizeScreen', { analized: false, data: undefined });
     }
 
     return (

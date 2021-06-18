@@ -1,6 +1,6 @@
 // Common
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Animated, FlatList } from 'react-native';
+import { Image, StyleSheet, FlatList } from 'react-native';
 import { Text, View, Button } from '../components/shared/Themed';
 
 interface Info {
@@ -10,31 +10,17 @@ interface Info {
 };
 
 const pages: Array<Info> = [
-    { imgPath: require('../assets/images/illustrations/1.png'), title: 'Caligraf IA analysis Assessment.', info: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-    { imgPath: require('../assets/images/illustrations/2.png'), title: 'Parenting helper.', info: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-    { imgPath: require('../assets/images/illustrations/3.png'), title: 'Caligraf IA analysis Assessment.', info: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+    { imgPath: require('../assets/images/illustrations/1.png'), title: 'Caligraf IA analysis Assessment.', info: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+    { imgPath: require('../assets/images/illustrations/2.png'), title: 'Parenting helper.', info: 'Lorem ipsum dolor sit amet, sed do ut labore et dolore magna aliqua.' },
+    { imgPath: require('../assets/images/illustrations/3.png'), title: 'Analysis Assessment.', info: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
 ];
 
 const WelcomeScreen: React.FunctionComponent = (props: any) => {
     const { navigation: go } = props;
 
-    const infoCards = pages.map((e: Info, i: number, { length }: { length: number }) => {
-        return (
-            <View key={i} style={{ width: 300, alignItems: 'center' }}>
-                <View style={styles.imgContainer}>
-                    <Image style={styles.img} source={e.imgPath} />
-                </View>
-                <View>
-                    <Text secondary bold style={styles.title}>{e.title}</Text>
-                    <Text style={styles.subtitle}>{e.info}</Text>
-                </View>
-            </View>
-        );
-    });
-
     function InfoCard({ data }: { data: Info }) {
         return (
-            <View style={{ width: 300, alignItems: 'center', marginHorizontal: 30 }}>
+            <View style={{ width: 300, alignItems: 'center' }}>
                 <View style={styles.imgContainer}>
                     <Image style={styles.img} source={data.imgPath} />
                 </View>
@@ -49,7 +35,7 @@ const WelcomeScreen: React.FunctionComponent = (props: any) => {
     return (
         <View style={styles.container}>
             <View style={{ height: '90%' }}>
-                <FlatList pagingEnabled horizontal data={pages} style={{ backgroundColor: 'tomato', overflow: 'visible' }}
+                <FlatList pagingEnabled horizontal data={pages} style={{ overflow: 'visible' }}
                     renderItem={({ item }) => <InfoCard data={item} />} keyExtractor={(_, index) => index.toString()} />
             </View>
             <View>

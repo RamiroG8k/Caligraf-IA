@@ -66,14 +66,14 @@ const MetricDetails = ({ id }: { id: any }) => {
 
     const retro = LETTERS.filter((e) => exercises.includes(e.letter)).map((item: any, i: number, { length }: { length: number }): any => {
         return (
-            <View key={i} themed style={{ marginRight: i === length - 1 ? 0 : 15, width: 90, height: 110, overflow: 'hidden', borderRadius: 15 }}>
-                <TouchableOpacity onPress={() => OpenAnything.Pdf(item.path)} style={{ flex: 1, backgroundColor: 'tomato' }} >
-                    <Text>OPEN</Text>
-                </TouchableOpacity>
-                <Text bold style={{ fontSize: 120, position: 'absolute', right: -10, bottom: -30 }}>
-                    {item.letter}
-                </Text>
-            </View>
+            <TouchableOpacity key={i} onPress={() => OpenAnything.Pdf(item.path)} style={{ flex: 1 }} >
+                <View key={i} themed dark="#000" style={{ marginRight: i === length - 1 ? 0 : 15, width: 90, height: 110, overflow: 'hidden', borderRadius: 15 }}>
+                    <Text style={{ marginLeft: 10, marginTop: 5 }}>TRAIN</Text>
+                    <Text bold style={{ fontSize: 120, position: 'absolute', right: -10, bottom: -30 }}>
+                        {item.letter}
+                    </Text>
+                </View>
+            </TouchableOpacity>
         );
     });
 
@@ -96,7 +96,7 @@ const MetricDetails = ({ id }: { id: any }) => {
                     {details}
                 </ScrollView>
             </View>
-            
+
             <View>
                 <View style={{ marginVertical: 25 }}>
                     <Text secondary bold style={styles.title}>Stats</Text>

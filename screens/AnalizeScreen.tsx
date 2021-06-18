@@ -13,7 +13,7 @@ import { getRandomObject } from '../util';
 
 export default function AnalizeScreen(props: any) {
     const [randPhrase, setRandPhrase] = useState({ id: 0, data: 'RANDOM'});
-    const [taken, setTaken] = useState({ analized: false, backward: false });
+    const [taken, setTaken] = useState({ analized: false, backward: false, data: undefined });
     const [phrases, setPhrases] = useState([]);
     const { navigation, route } = props;
 
@@ -26,6 +26,9 @@ export default function AnalizeScreen(props: any) {
     useEffect(() => {
         fetchPhrases();
         setTaken(route.params);
+        if (route.params.analized === true) {
+            alert(route.params.data);
+        }
     }, [route.params]);
 
     const fetchPhrases = async () => {
@@ -45,7 +48,7 @@ export default function AnalizeScreen(props: any) {
                 <Text primary bold style={styles.title}>Getting Started</Text>
                 <Text style={styles.info}>Before taking a shot, you must know some tips.</Text>
             </View>
-            <View style={{ height: '20%' }}>
+            <View style={{ height: '18%' }}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ overflow: 'visible' }}>
                     {tipsToShot}
                 </ScrollView>
