@@ -96,6 +96,7 @@ const MetricDetails = ({ id }: { id: any }) => {
                     {details}
                 </ScrollView>
             </View>
+            
             <View>
                 <View style={{ marginVertical: 25 }}>
                     <Text secondary bold style={styles.title}>Stats</Text>

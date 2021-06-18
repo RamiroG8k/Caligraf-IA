@@ -34,9 +34,9 @@ const WelcomeScreen: React.FunctionComponent = (props: any) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ height: '90%' }}>
+            <View style={{ height: '90%', flex: 1 }}>
                 <ScrollView horizontal decelerationRate={0} pagingEnabled
-                    showsHorizontalScrollIndicator={false} style={{ overflow: 'visible' }}>
+                    showsHorizontalScrollIndicator={false} style={{ flex: 1, overflow: 'visible', width: 1000 }}>
                     {infoCards}
                 </ScrollView>
             </View>
