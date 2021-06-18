@@ -13,7 +13,7 @@ import { getRandomObject } from '../util';
 
 export default function AnalizeScreen(props: any) {
     const [randPhrase, setRandPhrase] = useState({ id: 0, data: 'RANDOM'});
-    const [taken, setTaken] = useState({ analized: false, backward: false, data: undefined });
+    const [taken, setTaken] = useState({ analized: false, data: undefined });
     const [phrases, setPhrases] = useState([]);
     const { navigation, route } = props;
 
